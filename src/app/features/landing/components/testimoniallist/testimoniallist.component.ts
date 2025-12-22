@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TestimonialCardComponent } from '../testimonialcard/testimonialcard.component';
-import { Testimonial } from '../../../../shared/types/types';
+import { Testimonial } from '../../../../types/types';
 import { SubheadingComponent } from "../subheading/subheading.component";
 
 @Component({

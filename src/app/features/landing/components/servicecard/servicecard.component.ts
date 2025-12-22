@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Service } from '../../../../shared/types/types';
+import { Service } from '../../../../types/types';
 
 @Component({
   selector: 'app-servicecard',

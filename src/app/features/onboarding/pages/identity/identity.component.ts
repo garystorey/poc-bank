@@ -121,9 +121,9 @@ export class IdentityComponent {
     }
     const identity = this.form.getRawValue();
     console.log('Identiy', identity);
-    // this.signupService.createUser(payload).subscribe({
+    // this.signupService.createUser(identity).subscribe({
     //   next: () => {
-    //     this.router.navigate(['/signup/success']);
+    //     this.router.navigate(['/onboarding/funding']);
     //   },
     //   error: () => {
     //     // stay on page, show error

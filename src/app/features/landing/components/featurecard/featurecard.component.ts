@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Feature } from '../../../../shared/types/types';
+import { Feature } from '../../../../types/types';
 
 @Component({
   selector: 'app-featurecard',
