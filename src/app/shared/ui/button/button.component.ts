@@ -1,14 +1,11 @@
 import {
-  ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   HostBinding,
-  Output,
   input,
+  output,
 } from '@angular/core';
 
-type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost' | 'link';
-type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonVariant = 'primary' | 'secondary';
 type ButtonType = 'button' | 'submit' | 'reset';
 
 @Component({
@@ -20,19 +17,19 @@ type ButtonType = 'button' | 'submit' | 'reset';
 
 export class ButtonComponent {
   variant = input<ButtonVariant>('primary');
-  size = input<ButtonSize>('md');
   type = input<ButtonType>('button');
   disabled = input<boolean>(false);
 
-  @Output() clicked = new EventEmitter<void>();
+  clicked = output<void>();
 
   @HostBinding('class') get hostClass() {
-    return `btn btn-${this.variant()} btn-${this.size()}`;
+    return `btn btn-${this.variant()}`;
   }
 
   onClick(event: MouseEvent) {
     event.stopPropagation();
     event.preventDefault();
     this.clicked.emit();
+
   }
 }

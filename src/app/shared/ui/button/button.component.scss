@@ -1,0 +1,35 @@
+
+/* TODO Move to Button styles */
+
+.btn {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: var(--body-font-size);
+  text-align: center;
+}
+
+.btn.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn.btn-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.btn.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--black);
+}
+
+.btn.btn-secondary:hover {
+  background-color: var(--secondary-dark);
+  transform: translateY(-2px);
+}

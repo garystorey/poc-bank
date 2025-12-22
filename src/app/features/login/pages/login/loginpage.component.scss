@@ -1,0 +1,110 @@
+
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-sm);
+  background-color: var(--light-gray);
+}
+
+
+.login-form {
+  background-color: var(--white);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 400px;
+}
+
+
+.login-wrapper {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-dark)
+  );
+  color: var(--black);
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  display: flex;
+  background-color: var(--white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.brand-section {
+  flex: 1;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-dark)
+  );
+  color: var(--white);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+.brand-section h1 {
+  font-family: var(--font-heading);
+  font-size: var(--heading-font-size);
+  margin-bottom: var(--spacing-sm);
+}
+
+.brand-section p {
+  font-size: var(--body-font-size);
+  opacity: 0.9;
+  max-width: 350px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.features {
+  list-style: none;
+  text-align: left;
+  margin-top: var(--spacing-md);
+}
+
+.features li {
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+}
+
+.features li i {
+  color: var(--secondary-color);
+  margin-right: var(--spacing-xs);
+}
+
+.login-section {
+  flex: 1;
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.login-header h2 {
+  font-family: var(--font-heading);
+  font-size: var(--subheading-font-size);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.login-header p {
+  color: var(--dark-gray);
+}

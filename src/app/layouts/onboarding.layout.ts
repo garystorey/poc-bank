@@ -11,12 +11,14 @@ import { WizardheaderComponent } from "./components/wizardheader/wizardheader.co
   imports: [OnboardingheaderComponent, FooterComponent, RouterOutlet, StepperComponent],
   template: `
     <app-onboardingheader/>
-    <div class="wizard-container">
-      <app-stepper/>
-      <div class="form-container">
-        <router-outlet/>
+    <main>
+      <div class="wizard-container">
+        <app-stepper/>
+        <div class="form-container">
+          <router-outlet/>
+        </div>
       </div>
-    </div>
+    </main>
     <app-footer/>
   `,
   styles: [
