@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { StepComponent } from "../step/step.component";
 
 @Component({
@@ -9,17 +9,9 @@ import { StepComponent } from "../step/step.component";
   styleUrl: './stepper.component.scss'
 })
 export class StepperComponent {
+  currentStep = input<number>(1)  ;
+  steps = input([{number:0, label: "None"}]);
 
-  currentStep = 1;
-  steps = [
-    { number: 1, label: 'Personal Information' },
-    { number: 2, label: 'Funding' },
-    { number: 3, label: 'Review' },
-    { number: 4, label: 'Confirmation' },
-  ];
-
-  setCurrentStep(step: number) {
-    this.currentStep = step;
-  }
+  setCurrentStep = input((val: number)=>{})
 
 }

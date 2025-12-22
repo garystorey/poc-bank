@@ -13,3 +13,8 @@ export interface Testimonial {
     position: string;
     feedback: string;
 }
+
+export interface UsState {
+  code: string
+  name: string
+}

@@ -2,11 +2,13 @@ import { Component, computed, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { digitsOnly, moneyValidator } from '../../validators/money.validator';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES } from '../../../../shared/utils/onboarding.utils';
 
 @Component({
   selector: 'app-funding',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './funding.component.html',
   styleUrl: './funding.component.scss'
 })
@@ -14,29 +16,11 @@ import { Router } from '@angular/router';
 
 export class FundingComponent {
 
-  readonly depositMethods = [
-    { value: '', label: 'Select Method' },
-    { value: 'check', label: 'Check' },
-    { value: 'ach', label: 'ACH' },
-    { value: 'wire', label: 'Wire' },
-    { value: 'cash', label: 'Cash' },
-  ] as const;
-
-  readonly fundingSources = [
-    { value: '', label: 'Select Source' },
-    { value: 'payroll', label: 'Payroll' },
-    { value: 'savings', label: 'Savings' },
-    { value: 'external', label: 'External Account' },
-    { value: 'other', label: 'Other' },
-  ] as const;
-
-  readonly accountTypes = [
-    { value: '', label: 'Select Type' },
-    { value: 'checking', label: 'Checking' },
-    { value: 'savings', label: 'Savings' },
-  ] as const;
-
   readonly submitted = signal(false);
+
+  readonly depositMethods = DEPOSIT_METHODS
+  readonly fundingSources = FUNDING_SOURCES
+  readonly accountTypes = ACCOUNT_TYPES
 
   readonly form = this.fb.group({
     initialDepositAmount: this.fb.nonNullable.control('', [
@@ -90,7 +74,7 @@ export class FundingComponent {
     const deposit = this.form.getRawValue();
     console.log('Deposit', deposit);
 
-    // this.signupService.fundAccount(deposit).subscribe({
+    // this.onboardingService.fundAccount(deposit).subscribe({
     //   next: () => {
     //     this.router.navigate(['/onboarding/review']);
     //   },
@@ -99,7 +83,6 @@ export class FundingComponent {
     //   }
     // });
 
-    // Update to your real route
     this.router.navigate(['/onboarding/review']);
   }
 }

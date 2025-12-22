@@ -3,7 +3,6 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { RouterOutlet } from "@angular/router";
 import { OnboardingheaderComponent } from "./components/onboardingheader/onboardingheader.component";
 import { StepperComponent } from "../features/onboarding/components/stepper/stepper.component";
-import { WizardheaderComponent } from "./components/wizardheader/wizardheader.component";
 
 @Component({
   selector: "app-onboarding-layout",
@@ -13,7 +12,7 @@ import { WizardheaderComponent } from "./components/wizardheader/wizardheader.co
     <app-onboardingheader/>
     <main>
       <div class="wizard-container">
-        <app-stepper/>
+        <app-stepper [steps]="this.steps" [currentStep]="this.currentStep"/>
         <div class="form-container">
           <router-outlet/>
         </div>
@@ -38,5 +37,18 @@ import { WizardheaderComponent } from "./components/wizardheader/wizardheader.co
   ]
 })
 export class OnboardingLayoutComponent {
+
+  currentStep = 1
+
+  steps =[
+    { number: 1, label: 'Personal Information' },
+    { number: 2, label: 'Funding' },
+    { number: 3, label: 'Review' },
+    { number: 4, label: 'Confirmation' },
+  ]
+
+  setCurrentStep(step: number) {
+    this.currentStep = step;
+  }
 
 }
