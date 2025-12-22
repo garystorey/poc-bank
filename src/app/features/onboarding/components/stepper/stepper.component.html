@@ -1,0 +1,13 @@
+<section class="stepper">
+
+  <div class="progress-bar">
+    <div class="progress-fill"></div>
+  </div>
+
+  <div class="step-indicator">
+    @for (step of steps; track step.number) {
+      <app-step [stepNumber]="step.number" [stepLabel]="step.label" [class]="step.number === currentStep ? 'active':''"/>
+    }
+  </div>
+
+</section>

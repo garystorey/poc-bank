@@ -1,15 +1,43 @@
-export const ONBOARDING_ROUTES = [
+import { Routes } from '@angular/router';
+
+export const ONBOARDING_ROUTES: Routes = [
+  {
+    path: '',
+    redirectTo: 'onboarding/identity',
+    pathMatch: 'full',
+  },
   {
     path: 'onboarding',
     loadComponent: () =>
       import('../../layouts/onboarding.layout').then(m => m.OnboardingLayoutComponent),
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'step/step1' },
-      // { path: 'step/:stepId',
-      //   loadComponent: () =>
-      //     import('./pages/onboarding-step/onboarding-step.component').then(m => m.OnboardingStepComponent)
-      // }
+      {
+        path: 'identity',
+        loadComponent: () =>
+          import('./pages/identity/identity.component').then(m => m.IdentityComponent),
+      },
+      {
+        path: 'funding',
+        loadComponent: () =>
+          import('./pages/funding/funding.component').then(m => m.FundingComponent),
+      },
+      {
+        path: 'review',
+        loadComponent: () =>
+          import('./pages/review/review.component').then(m => m.ReviewComponent),
+      },
+      {
+        path: 'confirmation',
+        loadComponent: () =>
+          import('./pages/confirmation/confirmation.component').then(m => m.ConfirmationComponent),
+      },
 
-    ]
-  }
+      // Optional: default child redirect when someone hits /onboarding
+      {
+        path: '',
+        redirectTo: 'identity',
+        pathMatch: 'full',
+      },
+    ],
+  },
 ];

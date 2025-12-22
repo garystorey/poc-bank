@@ -14,19 +14,25 @@ header {
   padding: var(--spacing-sm) 0;
 }
 
-.logo {
+.logo-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: var(--spacing-xs);
+  justify-content: center;
+  gap: var(--spacing-sm);
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary-color);
   text-decoration: none;
 }
 
-.logo i {
+.logo-container .logo {
+  display: flex;
+  align-items: center;
   color: var(--secondary-color);
 }
+
+
 
 .nav-links {
   display: flex;
