@@ -1,0 +1,13 @@
+<section class="features">
+  <div class="container">
+    <app-subheading
+      title="Why Choose POC Bank?"
+      description="We provide innovative banking solutions tailored to meet your financial needs"
+    />
+    <div class="features-grid">
+      @for (feature of features; track feature.title) {
+        <app-featurecard [feature]="feature" />
+      }
+    </div>
+  </div>
+</section>

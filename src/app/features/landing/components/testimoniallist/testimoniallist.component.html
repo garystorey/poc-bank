@@ -1,0 +1,13 @@
+<section class="testimonials">
+  <div class="container">
+    <app-subheading
+      title="What Our Customers Say"
+      description="Hear from satisfied customers about their experience with POC Bank"
+    />
+    <div class="testimonial-grid">
+      @for (testimonial of testimonials; track testimonial.name) {
+        <app-testimonialcard [testimonial]="testimonial" />
+      }
+    </div>
+  </div>
+</section>

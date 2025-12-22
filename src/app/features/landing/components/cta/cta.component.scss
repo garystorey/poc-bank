@@ -1,0 +1,21 @@
+/* CTA Section */
+.cta {
+  background: linear-gradient(
+    135deg,
+    var(--secondary-color) 0%,
+    var(--secondary-dark) 100%
+  );
+  color: var(--black);
+  padding: var(--spacing-lg) 0;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: var(--subheading-font-size);
+  margin-bottom: var(--spacing-sm);
+}
+
+.cta p {
+  max-width: 600px;
+  margin: 0 auto var(--spacing-md);
+}

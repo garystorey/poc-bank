@@ -1,0 +1,11 @@
+<section class="services">
+  <div class="container">
+    <app-subheading title="Our Services"
+      description="Comprehensive financial solutions for individuals and businesses" />
+    <div class="services-grid">
+      @for (service of services; track service.title) {
+      <app-servicecard [service]="service" />
+      }
+    </div>
+  </div>
+</section>
