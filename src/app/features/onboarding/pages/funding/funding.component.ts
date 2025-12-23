@@ -1,14 +1,16 @@
 import { Component, computed, signal } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { digitsOnly, moneyValidator } from '../../validators/money.validator';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES } from '../../../../shared/utils/onboarding.utils';
+import { InputComponent } from "../../../../shared/ui/input/input.component";
+import { SelectComponent } from "../../../../shared/ui/select/select.component";
 
 @Component({
   selector: 'app-funding',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent, SelectComponent],
   templateUrl: './funding.component.html',
   styleUrl: './funding.component.scss'
 })
@@ -23,7 +25,7 @@ export class FundingComponent {
   readonly accountTypes = ACCOUNT_TYPES
 
   readonly form = this.fb.group({
-    initialDepositAmount: this.fb.nonNullable.control('', [
+    initialAmount: this.fb.nonNullable.control('', [
       Validators.required,
       moneyValidator,
       Validators.minLength(1),
@@ -63,7 +65,7 @@ export class FundingComponent {
     this.router.navigate(['/onboarding']);
   }
 
-  onNext(): void {
+  onSubmit(): void {
     this.submitted.set(true);
 
     if (this.form.invalid) {

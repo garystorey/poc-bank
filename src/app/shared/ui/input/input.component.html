@@ -1,0 +1,30 @@
+<!-- input.component.html -->
+<div class="form-group" [ngClass]="groupClass">
+  <label [for]="resolvedId" [class.required]="required">
+    {{ label }}
+  </label>
+
+  <input
+    appApplyAttrs
+    [appAttrs]="inputAttrs"
+    [type]="type"
+    [id]="resolvedId"
+    [name]="resolvedName"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="handleInput(($any($event.target)).value)"
+    (blur)="handleBlur()"
+    [attr.required]="required ? '' : null"
+    [attr.aria-invalid]="showError ? 'true' : null"
+    [attr.aria-describedby]="describedBy"
+    [attr.aria-errormessage]="showError ? errorId : null"
+  />
+
+  <p *ngIf="helpText && !showError" [id]="helpId" class="form-description">
+    {{ helpText }}
+  </p>
+
+  <p *ngIf="errorText && showError" class="form-error" [id]="errorId">
+    {{ errorText }}
+  </p>
+</div>

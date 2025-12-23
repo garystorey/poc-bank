@@ -113,6 +113,27 @@ body {
   margin-bottom: var(--spacing-lg);
 }
 
+.error-summary {
+  border: 1px solid var(--error);
+  background-color: #ffe6e6;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-lg);
+}
+.error-summary-title {
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.error-summary-list {
+  list-style-type: disc;
+  padding-left: var(--spacing-md);
+}
+
+.error-summary-list li {
+  margin-bottom: var(--spacing-xs);
+}
+
 .form-section-title {
   font-family: var(--font-heading);
   font-size: var(--subheading-font-size);
@@ -126,6 +147,8 @@ body {
   display: flex;
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
+  justify-content: space-between;
+  align-self: stretch;
 }
 
 .form-group {
@@ -133,11 +156,11 @@ body {
   margin-bottom: var(--spacing-sm);
 }
 
-.form-group.full-width {
+form .full-width {
   flex: 1 0 100%;
 }
 
-label {
+.form-group label {
   display: block;
   margin-bottom: var(--spacing-xs);
   font-weight: 500;
@@ -149,9 +172,10 @@ label {
   color: var(--error);
 }
 
-input,
-select {
+.form-group input,
+.form-group select {
   width: 100%;
+  min-width: 20ch;
   padding: var(--spacing-sm);
   border: 1px solid var(--medium-gray);
   border-radius: var(--border-radius-md);
@@ -160,8 +184,8 @@ select {
   transition: border-color 0.3s ease;
 }
 
-input:focus,
-select:focus {
+.form-group input:focus,
+.form-group select:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(37, 99, 165, 0.1);
@@ -181,7 +205,14 @@ select:focus {
   margin-block: var(--spacing-md);
 }
 
+.form-description {
+  font-size: var(--small-font-size);
+  color: var(--dark-gray);
+  margin-top: var(--spacing-xs);
+}
+
 .form-error {
+  font-size: var(--small-font-size);
   color: var(--error);
   text-decoration: none;
 }
@@ -193,18 +224,12 @@ select:focus {
   }
 }
 
-
-
 .input-icon {
   position: absolute;
   right: var(--spacing-sm);
   top: 50%;
   transform: translateY(-50%);
   color: var(--dark-gray);
-}
-
-.password-toggle {
-  cursor: pointer;
 }
 
 .requirements {

@@ -14,7 +14,8 @@ export interface Testimonial {
     feedback: string;
 }
 
-export interface UsState {
-  code: string
-  name: string
+export interface SelectOption {
+  value: string | number;
+  label: string;
+  disabled?: boolean;
 }

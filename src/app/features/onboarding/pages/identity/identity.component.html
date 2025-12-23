@@ -1,160 +1,113 @@
-<form
-  class="form"
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()"
-  novalidate
-  aria-describedby="required-text"
->
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate aria-describedby="required-text">
 
 
-    <div class="form-section">
-      <div>
-        <h2 class="form-section-title">Personal Information</h2>
-        <p class="required-text">* Required fields</p>
-      </div>
+  <div class="form-section">
+    <div>
+      <h2 class="form-section-title">Personal Information</h2>
+      <p class="required-text">* Required fields</p>
+    </div>
 
-  <div
-    *ngIf="showSummary()"
-    class="form__summary"
-    role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
-  >
-    <p class="form__summary-title">Please fix the following errors:</p>
-    <ul class="form__summary-list">
-      <li *ngIf="form.controls.firstName.invalid"><a href="#firstName">First Name is required.</a></li>
-      <li *ngIf="form.controls.lastName.invalid"><a href="#lastName">Last Name is required.</a></li>
-      <li *ngIf="form.controls.dateOfBirth.invalid"><a href="#dateOfBirth">Date of Birth is required and must be in the past.</a></li>
-      <li *ngIf="form.controls.socialSecurityNumber.invalid"><a href="#socialSecurityNumber">SSN is required (format: XXX-XX-XXXX).</a></li>
-      <li *ngIf="form.controls.streetAddress.invalid"><a href="#streetAddress">Street Address is required.</a></li>
-      <li *ngIf="form.controls.city.invalid"><a href="#city">City is required.</a></li>
-      <li *ngIf="form.controls.state.invalid"><a href="#state">State is required.</a></li>
-      <li *ngIf="form.controls.zipCode.invalid"><a href="#zipCode">ZIP Code is required (format: 12345 or 12345-6789).</a></li>
-    </ul>
+    <div *ngIf="showSummary()" class="error-summary" role="alert" aria-live="assertive" aria-atomic="true">
+      <p class="error-summary-title">Please fix the following errors:</p>
+      <ul class="error-summary-list">
+        <li *ngIf="form.controls.firstName.invalid">First Name is required.</li>
+        <li *ngIf="form.controls.lastName.invalid">Last Name is required.</li>
+        <li *ngIf="form.controls.dateOfBirth.invalid">Date of Birth is required and must be in the past.</li>
+        <li *ngIf="form.controls.socialSecurityNumber.invalid">SSN is required (format: XXX-XX-XXXX).</li>
+        <li *ngIf="form.controls.streetAddress.invalid">Street Address is required.</li>
+        <li *ngIf="form.controls.city.invalid">City is required.</li>
+        <li *ngIf="form.controls.state.invalid">State is required.</li>
+        <li *ngIf="form.controls.zipCode.invalid">ZIP Code is required (format: 12345 or 12345-6789).</li>
+      </ul>
+    </div>
+
+    <div class="form-row">
+      <app-input label="First Name"
+        formControlName="firstName" inputId="firstName" name="firstName" type="text"
+        [attr.autocomplete]="'given-name'" [required]="true"
+        [submitted]="submitted()"
+        helpText="Enter your First Name"
+        errorText="First Name is required."
+      />
+      <app-input label="Last Name"
+        formControlName="lastName" inputId="lastName" name="lastName" type="text"
+        [attr.autocomplete]="'family-name'" [required]="true"
+        [submitted]="submitted()"
+        helpText="Enter your Last Name"
+        errorText="Last Name is required."
+      />
+
+    </div>
+
+    <div class="form-row">
+
+      <app-input label="Date of Birth"
+        formControlName="dateOfBirth" inputId="dateOfBirth" name="dateOfBirth" type="date"
+        [attr.autocomplete]="'bday'" [required]="true"
+        [submitted]="submitted()"
+        helpText="Enter your Date of Birth"
+        errorText="Date of Birth is required"
+      />
+      <app-input label="Social Security Number"
+        formControlName="socialSecurityNumber" inputId="ssn" name="ssn" type="text"
+        [attr.inputmode]="'numeric'" [required]="true"
+        [submitted]="submitted()"
+        helpText="Enter your SSN in the format XXX-XX-XXXX"
+        errorText="SSN is required"
+      />
+    </div>
   </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="firstName" class="required">First Name</label>
-          <input id="firstName" name="firstName" type="text" formControlName="firstName" autocomplete="given-name"
-            [attr.aria-invalid]="shouldShowError('firstName')"
-            [attr.aria-describedby]="shouldShowError('firstName') ? 'firstName-error' : null"
-            required
-          />
-          <p *ngIf="shouldShowError('firstName')" class="form-error" id="firstName-error">
-            First Name is required.
-          </p>
-        </div>
-        <div class="form-group">
-          <label for="lastName" class="required">Last Name</label>
-          <input id="lastName" name="lastName" type="text" formControlName="lastName" autocomplete="family-name"
-            [attr.aria-invalid]="shouldShowError('lastName')"
-            [attr.aria-describedby]="shouldShowError('lastName') ? 'lastName-error' : null"
-            required
-          />
-          <p *ngIf="shouldShowError('lastName')" class="form-error" id="lastName-error">
-            Last Name is required.
-          </p>
-        </div>
-      </div>
+  <div class="form-section">
+    <h2 class="form-section-title">Address Information</h2>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="dateOfBirth" class="required">Date of Birth</label>
-          <input type="date" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth" autocomplete="bday"
-            [attr.aria-invalid]="shouldShowError('dateOfBirth')"
-            [attr.aria-describedby]="shouldShowError('dateOfBirth') ? 'dateOfBirth-error' :null"
-            required
-          />
-          <p *ngIf="shouldShowError('dateOfBirth')" class="form-error" id="dateOfBirth-error">
-            Date of Birth is required.
-          </p>
-        </div>
-        <div class="form-group">
-          <label for="ssn" class="required">Social Security Number</label>
-          <input type="text" id="ssn" name="ssn" formControlName="socialSecurityNumber"
-            inputmode="numeric"
-            autocomplete="off"
-            [attr.aria-invalid]="shouldShowError('socialSecurityNumber')"
-            [attr.aria-describedby]="shouldShowError('socialSecurityNumber') ? 'ssn-error' : null"
-            required
-          />
-          <p *ngIf="shouldShowError('socialSecurityNumber')" class="form-error" id="ssn-error">
-            Social Security Number is required.
-          </p>
-        </div>
-      </div>
+    <div class="form-row">
+      <app-input label="Street Address"
+        formControlName="streetAddress" inputId="streetAddress" name="streetAddress" type="text"
+        [attr.autocomplete]="'street-address'" [required]="true"
+        [submitted]="submitted()"
+        class="full-width"
+        helpText="Enter your Street Address"
+        errorText="Street Address is required."
+      />
     </div>
 
-    <div class="form-section">
-      <h2 class="form-section-title">Address Information</h2>
+    <div class="form-row">
 
-      <div class="form-row">
-        <div class="form-group full-width">
-          <label for="streetAddress" class="required">Street Address</label>
-          <input type="text" id="streetAddress" name="streetAddress" formControlName="streetAddress"
-            autocomplete="street-address"
-            [attr.aria-invalid]="shouldShowError('streetAddress')"
-            [attr.aria-describedby]="shouldShowError('streetAddress') ? 'streetAddress-error' : null"
-            required
-          />
-          <p *ngIf="shouldShowError('streetAddress')" class="form-error" id="streetAddress-error">
-            Street Address is required.
-          </p>
-        </div>
-      </div>
+      <app-input label="City"
+        formControlName="city" inputId="city" name="city" type="text"
+        [attr.autocomplete]="'address-level2'" [required]="true"
+        [submitted]="submitted()"
+        helpText="Enter your City"
+        errorText="City is required."
+      />
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="city" class="required">City</label>
-          <input type="text" id="city" name="city" formControlName="city"
-              autocomplete="address-level2"
-              [attr.aria-invalid]="shouldShowError('city')"
-              [attr.aria-describedby]="shouldShowError('city') ? 'city-error' : null"
-              required
-          />
-          <p *ngIf="shouldShowError('city')" class="form-error" id="city-error" >
-            City is required.
-          </p>
-        </div>
-        <div class="form-group">
-          <label for="state" class="required">State</label>
-          <select id="state" name="state" formControlName="state"
-            autocomplete="address-level1"
-            [attr.aria-invalid]="shouldShowError('state')"
-            [attr.aria-describedby]="shouldShowError('state') ? 'state-error' : null"
-            required
-          >
-            <option *ngFor="let s of states" [value]="s.code" [disabled]="s.code === ''">
-            {{ s.name }}
-            </option>
-          </select>
-          <p *ngIf="shouldShowError('state')" class="form-error" id="state-error" >
-            State is required.
-          </p>
-        </div>
-      </div>
+      <app-select label="State" [required]="true" id="state" name="state"
+        formControlName="state"
+        [options]="states"
+        helpText="Select your State."
+        errorText="State is required."
+      />
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="zipCode" class="required">ZIP Code</label>
-          <input type="text" id="zipCode" name="zipCode" formControlName="zipCode"
-            inputmode="numeric"
-            autocomplete="postal-code"
-            [attr.aria-invalid]="shouldShowError('zipCode')"
-            [attr.aria-describedby]="shouldShowError('zipCode') ? 'zip-error' : 'zip-help'"
-            required
-          />
-        </div>
-        <div class="form-group">
-        </div>
-      </div>
     </div>
 
-    <div class="form-actions">
-      <div style="width:100%">&nbsp;</div>
-      <button type="submit" class="btn btn-primary">Next Step</button>
+    <div class="form-row">
+
+      <app-input label="ZIP Code"
+        formControlName="zipCode" inputId="zipCode" name="zipCode" type="text"
+        [attr.inputmode]="'numeric'" [attr.autocomplete]="'postal-code'" [required]="true"
+        [submitted]="submitted()"
+        helpText="Enter your ZIP Code"
+        errorText="ZIP Code is required."
+      />
+      <div class="form-group">
+      </div>
     </div>
+  </div>
 
-  </form>
+  <div class="form-actions">
+    <div style="width:100%">&nbsp;</div>
+    <button type="submit" class="btn btn-primary">Next Step</button>
+  </div>
 
+</form>

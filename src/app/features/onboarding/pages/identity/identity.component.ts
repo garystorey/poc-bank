@@ -3,13 +3,15 @@ import { Component, computed, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dateInPastValidator } from '../../validators/date-past.validator';
 import { Router } from '@angular/router';
-import { UsState } from '../../../../types/types';
 import { US_STATES } from '../../../../shared/utils/usstates';
+import { InputComponent } from "../../../../shared/ui/input/input.component";
+import { SelectComponent } from "../../../../shared/ui/select/select.component";
+import { SelectOption } from '../../../../types/types';
 
 @Component({
   selector: 'app-identity',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent, SelectComponent],
   templateUrl: './identity.component.html',
   styleUrl: './identity.component.scss'
 })
@@ -20,7 +22,7 @@ export class IdentityComponent {
 
   readonly submitted = signal(false);
   readonly showSummary = computed(() => this.submitted() && this.form.invalid);
-  readonly states: UsState[] = US_STATES
+  readonly states: SelectOption[] = US_STATES
 
   readonly form = this.fb.group({
     firstName: this.fb.nonNullable.control('', [
