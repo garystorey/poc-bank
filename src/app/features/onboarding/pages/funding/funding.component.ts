@@ -6,11 +6,15 @@ import { CommonModule } from '@angular/common';
 import { ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES } from '../../../../shared/utils/onboarding.utils';
 import { InputComponent } from "../../../../shared/ui/input/input.component";
 import { SelectComponent } from "../../../../shared/ui/select/select.component";
+import { ButtonComponent } from "../../../../shared/ui/button/button.component";
+import { StepperComponent } from '../../components/stepper/stepper.component';
+import { ErrorSummaryComponent } from '../../../../shared/ui/errorsummary/errorsummary.component';
+import { ErrorSummaryMessages } from '../../../../types/types';
 
 @Component({
   selector: 'app-funding',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, SelectComponent],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent, SelectComponent, ButtonComponent,StepperComponent,ErrorSummaryComponent],
   templateUrl: './funding.component.html',
   styleUrl: './funding.component.scss'
 })
@@ -48,6 +52,35 @@ export class FundingComponent {
       Validators.maxLength(80),
     ]),
   });
+
+   readonly errorMessages: ErrorSummaryMessages = {
+    initialAmount: {
+      required: 'Initial Deposit Amount is required.',
+      money: 'Initial Deposit Amount must be a valid amount.',
+      minlength: 'Initial Deposit Amount is required.',
+      _default: 'Initial Deposit Amount is invalid.',
+    },
+    depositMethod: { required: 'Deposit Method is required.' },
+    fundingSource: { required: 'Funding Source is required.' },
+    routingNumber: {
+      required: 'Routing Number is required.',
+      digitsOnly: 'Routing Number must be 9 digits.',
+      _default: 'Routing Number is invalid.',
+    },
+    accountNumber: {
+      required: 'Account Number is required.',
+      minlength: 'Account Number must be at least 4 digits.',
+      maxlength: 'Account Number must be 17 digits or fewer.',
+      pattern: 'Account Number must contain digits only.',
+      _default: 'Account Number is invalid.',
+    },
+    accountType: { required: 'Account Type is required.' },
+    bankName: {
+      required: 'Bank Name is required.',
+      maxlength: 'Bank Name must be 80 characters or fewer.',
+      _default: 'Bank Name is invalid.',
+    },
+  };
 
   readonly showSummary = computed(() => this.submitted() && this.form.invalid);
 

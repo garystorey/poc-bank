@@ -1,0 +1,26 @@
+
+.error-summary {
+  border: 1px solid var(--error);
+  background-color: #ffe6e6;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-lg);
+}
+.error-summary-title {
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.error-summary-list {
+  list-style-type: disc;
+  padding-left: var(--spacing-md);
+}
+
+.error-summary-list li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.error-summary-list li a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,35 +1,60 @@
-import {
-  Component,
-  HostBinding,
-  input,
-  output,
-} from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
-type ButtonVariant = 'primary' | 'secondary';
-type ButtonType = 'button' | 'submit' | 'reset';
+export type ButtonVariant = 'primary' | 'secondary' | 'standard' | 'link';
+export type ButtonSize = 'fixed' | 'standard' | 'full';
 
 @Component({
-  selector: 'ui-button',
+  selector: 'app-button',
   standalone: true,
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss',
+  styleUrls: ['./button.component.scss'],
 })
-
 export class ButtonComponent {
-  variant = input<ButtonVariant>('primary');
-  type = input<ButtonType>('button');
-  disabled = input<boolean>(false);
+  @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Input() disabled = false;
 
-  clicked = output<void>();
+  @Input() variant: ButtonVariant = 'standard';
+  @Input() size: ButtonSize = 'standard';
 
-  @HostBinding('class') get hostClass() {
-    return `btn btn-${this.variant()}`;
+  /** Optional extra classes applied to the inner <button> */
+  @Input() class?: string;
+
+  /** Host sizing flags (do NOT bind the whole class attribute) */
+  @HostBinding('class.btn-full')
+  get hostIsFull(): boolean {
+    return this.size === 'full';
   }
 
-  onClick(event: MouseEvent) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.clicked.emit();
+  @HostBinding('class.btn-fixed')
+  get hostIsFixed(): boolean {
+    return this.size === 'fixed';
+  }
 
+  get variantClass(): string {
+    switch (this.variant) {
+      case 'primary':
+        return 'btn-primary';
+      case 'secondary':
+        return 'btn-secondary';
+      case 'link':
+        return 'btn-link';
+      default:
+        return 'btn-standard';
+    }
+  }
+
+  get sizeClass(): string | null {
+    switch (this.size) {
+      case 'fixed':
+        return 'btn-fixed';
+      case 'full':
+        return 'btn-full';
+      default:
+        return null;
+    }
+  }
+
+  get buttonClassString(): string {
+    return ['btn', this.variantClass, this.sizeClass, this.class].filter(Boolean).join(' ');
   }
 }

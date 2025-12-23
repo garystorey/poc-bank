@@ -1,3 +1,4 @@
+<app-stepper [currentStep]="2" />
 <form id="fundingInfoForm" class="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate
   aria-describedby="required-text">
   <div class="form-section">
@@ -5,86 +6,48 @@
     <p class="required-text">* Required fields</p>
   </div>
 
-  <div *ngIf="showSummary()" class="error-summary" role="alert" aria-live="assertive" aria-atomic="true">
-    <p class="error-summary-title">Please fix the following errors:</p>
-    <ul class="error-summary-list">
-      <li *ngIf="form.controls.initialAmount.invalid">
-        Initial Deposit Amount is required.
-      </li>
-      <li *ngIf="form.controls.depositMethod.invalid">
-        Deposit Method is required.
-      </li>
-      <li *ngIf="form.controls.fundingSource.invalid">
-        Funding Source is required.
-      </li>
-      <li *ngIf="form.controls.routingNumber.invalid">
-        Routing Number is required (9 digits).
-      </li>
-      <li *ngIf="form.controls.accountNumber.invalid">
-        Account Number is required (digits only).
-      </li>
-      <li *ngIf="form.controls.accountType.invalid">
-        Account Type is required.
-      </li>
-      <li *ngIf="form.controls.bankName.invalid">
-        Bank Name is required.
-      </li>
-    </ul>
-  </div>
+  <app-error-summary [control]="form" [show]="showSummary()" [messages]="errorMessages" [focusOnShow]="true" />
 
   <div class="form-section">
 
     <div class="form-row">
-      <app-input label="Initial Deposit Amount"
-        formControlName="initialAmount" inputId="initialAmount" name="initialAmount" type="number"
-        [required]="true"
-        [inputAttrs]="{ min: 0, max: 100000, step: 1, inputmode: 'decimal' }"
-        [submitted]="submitted()"
-        helpText="Enter an amount like 2000 or 2000.00."
-        errorText="Enter a valid amount (e.g., 2000.00)."
-      />
-      <app-select label="Deposit Method" id="depositMethod" name="depositMethod"
-        formControlName="depositMethod" [required]="true"
-        [options]="depositMethods"
-        helpText="Select your preferred deposit method."
-        errorText="Deposit Method is required."
-      />
+      <app-input label="Initial Deposit Amount" formControlName="initialAmount" inputId="initialAmount"
+        name="initialAmount" type="number" [required]="true"
+        [inputAttrs]="{ min: 0, max: 100000, step: 1, inputmode: 'decimal' }" [submitted]="submitted()"
+        helpText="Enter an amount like 2000 or 2000.00." errorText="Enter a valid amount (e.g., 2000.00)." />
+      <app-select label="Deposit Method" selectId="depositMethod" name="depositMethod" formControlName="depositMethod"
+        [required]="true" [options]="depositMethods" helpText="Select your preferred deposit method."
+        errorText="Deposit Method is required." />
     </div>
 
     <div class="form-row">
-      <app-select label="Funding Source" [required]="true" id="fundingSource" name="fundingSource"
-        formControlName="fundingSource"
-        [options]="fundingSources"
-        helpText="Select the source of your funding."
-        errorText="Funding Source is required."
-        class="full-width"
-      />
+      <app-select label="Funding Source" [required]="true" selectId="fundingSource" name="fundingSource"
+        formControlName="fundingSource" [options]="fundingSources" helpText="Select the source of your funding."
+        errorText="Funding Source is required." class="full-width" />
     </div>
 
     <div class="form-row">
-      <app-input label="Routing Number" [required]="true" id="routingNumber" name="routingNumber"
-        formControlName="routingNumber" inputmode="numeric" autocomplete="off"
+      <app-input label="Routing Number" [required]="true" inputId="routingNumber" name="routingNumber"
+        formControlName="routingNumber" [inputAttrs]="{ inputmode: 'numeric', autocomplete: 'off' }"
         errorText="Routing Number must be exactly 9 digits." helpText="Routing Number must be exactly 9 digits." />
-      <app-input label="Account Number" [required]="true" id="accountNumber" name="accountNumber"
-        formControlName="accountNumber" inputmode="numeric" autocomplete="off" helpText="Enter your Account Number"
-        errorText="Account Number is required and must be digits only." />
+      <app-input label="Account Number" [required]="true" inputId="accountNumber" name="accountNumber"
+        formControlName="accountNumber" [inputAttrs]="{ inputmode: 'numeric', autocomplete: 'off' }"
+        helpText="Enter your Account Number" errorText="Account Number is required and must be digits only." />
     </div>
 
     <div class="form-row">
-      <app-select label="Account Type" [required]="true" id="accountType" name="accountType"
-        formControlName="accountType"
-        [options]="accountTypes"
-        helpText="Select the type of your bank account."
-        errorText="Account Type is required."
-      />
-      <app-input label="Bank Name" [required]="true" id="bankName" name="bankName" formControlName="bankName"
-        autocomplete="organization" helpText="Enter the name of your bank." errorText="Bank Name is required." />
+      <app-select label="Account Type" [required]="true" selectId="accountType" name="accountType"
+        formControlName="accountType" [options]="accountTypes" helpText="Select the type of your bank account."
+        errorText="Account Type is required." />
+      <app-input label="Bank Name" [required]="true" inputId="bankName" name="bankName" formControlName="bankName"
+        [inputAttrs]="{ autocomplete: 'organization' }" helpText="Enter the name of your bank."
+        errorText="Bank Name is required." />
     </div>
   </div>
 
   <div class="form-actions">
-    <button type="button" class="btn">Previous</button>
-    <button type="submit" class="btn btn-primary">Next</button>
+    <app-button type="button" size="full" variant="standard" (click)="onPrevious()">Previous</app-button>
+    <app-button type="submit" size="full" variant="primary">Next</app-button>
   </div>
 
 </form>

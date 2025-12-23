@@ -1,11 +1,12 @@
+<app-stepper [currentStep]="1"/>
 <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate aria-describedby="required-text">
-
-
   <div class="form-section">
     <div>
       <h2 class="form-section-title">Personal Information</h2>
       <p class="required-text">* Required fields</p>
     </div>
+
+    <app-error-summary [control]="form" [show]="showSummary()" [messages]="errorMessages" [focusOnShow]="true" />
 
     <div *ngIf="showSummary()" class="error-summary" role="alert" aria-live="assertive" aria-atomic="true">
       <p class="error-summary-title">Please fix the following errors:</p>
@@ -24,14 +25,14 @@
     <div class="form-row">
       <app-input label="First Name"
         formControlName="firstName" inputId="firstName" name="firstName" type="text"
-        [attr.autocomplete]="'given-name'" [required]="true"
+        [inputAttrs]="{ autocomplete: 'given-name' }" [required]="true"
         [submitted]="submitted()"
         helpText="Enter your First Name"
         errorText="First Name is required."
       />
       <app-input label="Last Name"
         formControlName="lastName" inputId="lastName" name="lastName" type="text"
-        [attr.autocomplete]="'family-name'" [required]="true"
+        [inputAttrs]="{ autocomplete: 'family-name' }" [required]="true"
         [submitted]="submitted()"
         helpText="Enter your Last Name"
         errorText="Last Name is required."
@@ -43,14 +44,14 @@
 
       <app-input label="Date of Birth"
         formControlName="dateOfBirth" inputId="dateOfBirth" name="dateOfBirth" type="date"
-        [attr.autocomplete]="'bday'" [required]="true"
+        [required]="true"
         [submitted]="submitted()"
         helpText="Enter your Date of Birth"
         errorText="Date of Birth is required"
       />
       <app-input label="Social Security Number"
         formControlName="socialSecurityNumber" inputId="ssn" name="ssn" type="text"
-        [attr.inputmode]="'numeric'" [required]="true"
+        [inputAttrs]="{ inputmode: 'numeric' }" [required]="true"
         [submitted]="submitted()"
         helpText="Enter your SSN in the format XXX-XX-XXXX"
         errorText="SSN is required"
@@ -64,7 +65,7 @@
     <div class="form-row">
       <app-input label="Street Address"
         formControlName="streetAddress" inputId="streetAddress" name="streetAddress" type="text"
-        [attr.autocomplete]="'street-address'" [required]="true"
+        [inputAttrs]="{ autocomplete: 'street-address' }" [required]="true"
         [submitted]="submitted()"
         class="full-width"
         helpText="Enter your Street Address"
@@ -76,13 +77,13 @@
 
       <app-input label="City"
         formControlName="city" inputId="city" name="city" type="text"
-        [attr.autocomplete]="'address-level2'" [required]="true"
+        [inputAttrs]="{ autocomplete: 'address-level2' }" [required]="true"
         [submitted]="submitted()"
         helpText="Enter your City"
         errorText="City is required."
       />
 
-      <app-select label="State" [required]="true" id="state" name="state"
+      <app-select label="State" [required]="true" selectId="state" name="state"
         formControlName="state"
         [options]="states"
         helpText="Select your State."
@@ -95,7 +96,7 @@
 
       <app-input label="ZIP Code"
         formControlName="zipCode" inputId="zipCode" name="zipCode" type="text"
-        [attr.inputmode]="'numeric'" [attr.autocomplete]="'postal-code'" [required]="true"
+        [inputAttrs]="{ inputmode: 'numeric', autocomplete: 'postal-code' }" [required]="true"
         [submitted]="submitted()"
         helpText="Enter your ZIP Code"
         errorText="ZIP Code is required."
@@ -106,8 +107,10 @@
   </div>
 
   <div class="form-actions">
-    <div style="width:100%">&nbsp;</div>
-    <button type="submit" class="btn btn-primary">Next Step</button>
+    <div style="width:55%">&nbsp;</div>
+    <app-button variant="primary" size="fixed" type="submit">
+      Next
+    </app-button>
   </div>
 
 </form>

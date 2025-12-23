@@ -1,5 +1,7 @@
-<button [attr.type]="type()" [attr.aria-disabled]="disabled() ? 'true' : null" [disabled]="disabled()">
-  <span class="ui-btn__label">
-    <ng-content></ng-content>
-  </span>
+<button
+  [attr.type]="type"
+  [disabled]="disabled"
+  [class]="buttonClassString"
+>
+  <ng-content></ng-content>
 </button>

@@ -1,7 +1,23 @@
+/* button.component.css */
 
-/* TODO Move to Button styles */
+/* Host must participate in layout */
+:host {
+  display: inline-block;
+}
 
-.btn {
+/* Full width: host stretches to container */
+:host(.btn-full) {
+  display: block;
+  width: 100%;
+}
+
+/* The actual button should fill host when full */
+.btn.btn-full {
+  width: 100%;
+}
+
+/* Base button styling */
+button.btn {
   display: inline-block;
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--border-radius-sm);
@@ -12,24 +28,29 @@
   border: none;
   font-size: var(--body-font-size);
   text-align: center;
+  padding: var(--spacing-sm) var(--spacing-md);
 }
 
-.btn.btn-primary {
+/* Fixed width */
+button.btn.btn-fixed {
+  width: 25ch;
+}
+
+/* Variants */
+button.btn.btn-primary {
   background-color: var(--primary-color);
   color: var(--white);
 }
-
-.btn.btn-primary:hover {
+button.btn.btn-primary:hover {
   background-color: var(--primary-dark);
   transform: translateY(-2px);
 }
 
-.btn.btn-secondary {
+button.btn.btn-secondary {
   background-color: var(--secondary-color);
   color: var(--black);
 }
-
-.btn.btn-secondary:hover {
+button.btn.btn-secondary:hover {
   background-color: var(--secondary-dark);
   transform: translateY(-2px);
 }
