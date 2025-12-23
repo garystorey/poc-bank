@@ -1,4 +1,3 @@
-
 <div
   *ngIf="visible"
   #summary
@@ -12,7 +11,7 @@
 
   <ul class="error-summary-list">
     <li *ngFor="let item of items">
-      <a href="#" (click)="$event.preventDefault(); focusField(item.anchorId)">
+      <a href="" (click)="$event.preventDefault(); focusField(item.anchorId)">
         {{ item.message }}
       </a>
     </li>

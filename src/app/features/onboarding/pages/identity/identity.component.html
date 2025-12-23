@@ -6,21 +6,7 @@
       <p class="required-text">* Required fields</p>
     </div>
 
-    <app-error-summary [control]="form" [show]="showSummary()" [messages]="errorMessages" [focusOnShow]="true" />
-
-    <div *ngIf="showSummary()" class="error-summary" role="alert" aria-live="assertive" aria-atomic="true">
-      <p class="error-summary-title">Please fix the following errors:</p>
-      <ul class="error-summary-list">
-        <li *ngIf="form.controls.firstName.invalid">First Name is required.</li>
-        <li *ngIf="form.controls.lastName.invalid">Last Name is required.</li>
-        <li *ngIf="form.controls.dateOfBirth.invalid">Date of Birth is required and must be in the past.</li>
-        <li *ngIf="form.controls.socialSecurityNumber.invalid">SSN is required (format: XXX-XX-XXXX).</li>
-        <li *ngIf="form.controls.streetAddress.invalid">Street Address is required.</li>
-        <li *ngIf="form.controls.city.invalid">City is required.</li>
-        <li *ngIf="form.controls.state.invalid">State is required.</li>
-        <li *ngIf="form.controls.zipCode.invalid">ZIP Code is required (format: 12345 or 12345-6789).</li>
-      </ul>
-    </div>
+    <app-error-summary [control]="form" [show]="showSummary()" [messages]="errorMessages" [focusOnShow]="true" class="error-summary"/>
 
     <div class="form-row">
       <app-input label="First Name"
