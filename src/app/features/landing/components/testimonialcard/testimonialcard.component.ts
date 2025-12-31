@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Testimonial } from '../../../../types/types';
 
 @Component({
@@ -6,11 +6,11 @@ import { Testimonial } from '../../../../types/types';
   standalone: true,
   imports: [],
   templateUrl: './testimonialcard.component.html',
-  styleUrl: './testimonialcard.component.scss'
+  styleUrl: './testimonialcard.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestimonialCardComponent {
-
-  testimonial = input<Testimonial>({
+  readonly testimonial = input<Testimonial>({
     name: '',
     position: '',
     feedback: '',

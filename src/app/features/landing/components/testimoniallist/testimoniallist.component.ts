@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TestimonialCardComponent } from '../testimonialcard/testimonialcard.component';
 import { Testimonial } from '../../../../types/types';
 import { SubheadingComponent } from "../subheading/subheading.component";
@@ -8,10 +8,11 @@ import { SubheadingComponent } from "../subheading/subheading.component";
   standalone: true,
   imports: [TestimonialCardComponent, SubheadingComponent],
   templateUrl: './testimoniallist.component.html',
-  styleUrl: './testimoniallist.component.scss'
+  styleUrl: './testimoniallist.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestimonialListComponent {
-  testimonials: Testimonial[] = [
+  readonly testimonials: Testimonial[] = [
     {
       name: "John Smith",
       position: "Marketing Director",

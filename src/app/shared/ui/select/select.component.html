@@ -1,34 +1,38 @@
-<div class="form-group" [ngClass]="groupClass">
-  <label [for]="resolvedId" [class.required]="required">
-    {{ label }}
+<div class="form-group" [ngClass]="groupClass()">
+  <label [for]="resolvedId()" [class.required]="required()">
+    {{ label() }}
   </label>
 
   <select
     appApplyAttrs
-    [appAttrs]="selectAttrs"
-    [id]="resolvedId"
-    [name]="resolvedName"
-    [disabled]="disabled"
-    [value]="value"
+    [appAttrs]="selectAttrs()"
+    [id]="resolvedId()"
+    [name]="resolvedName()"
+    [disabled]="disabled()"
+    [value]="value()"
     (change)="handleChange(($any($event.target)).value)"
     (blur)="handleBlur()"
-    [attr.required]="required ? '' : null"
-    [attr.aria-invalid]="showError ? 'true' : null"
-    [attr.aria-describedby]="describedBy"
-    [attr.aria-errormessage]="showError ? errorId : null"
+    [attr.required]="required() ? '' : null"
+    [attr.aria-invalid]="showError() ? 'true' : null"
+    [attr.aria-describedby]="describedBy()"
+    [attr.aria-errormessage]="showError() ? errorId() : null"
   >
-    @for (opt of options; track trackByValue($index, opt)) {
+    @for (opt of options(); track trackByValue($index, opt)) {
       <option [value]="opt.value" [disabled]="opt.disabled ?? false">
         {{ opt.label }}
       </option>
     }
   </select>
 
-  <p *ngIf="helpText && !showError" [id]="helpId">
-    {{ helpText }}
-  </p>
+  @if (helpText() && !showError()) {
+    <p [id]="helpId()">
+      {{ helpText() }}
+    </p>
+  }
 
-  <p *ngIf="errorText && showError" class="form-error" [id]="errorId">
-    {{ errorText }}
-  </p>
+  @if (errorText() && showError()) {
+    <p class="form-error" [id]="errorId()">
+      {{ errorText() }}
+    </p>
+  }
 </div>

@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dateInPastValidator } from '../../validators/date-past.validator';
 import { Router } from '@angular/router';
@@ -10,23 +9,22 @@ import { ErrorSummaryMessages, SelectOption } from '../../../../types/types';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { StepperComponent } from '../../components/stepper/stepper.component';
 import { ErrorSummaryComponent } from '../../../../shared/ui/errorsummary/errorsummary.component';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-identity',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, SelectComponent, ButtonComponent, StepperComponent, ErrorSummaryComponent],
+  imports: [ReactiveFormsModule, InputComponent, SelectComponent, ButtonComponent, StepperComponent, ErrorSummaryComponent],
   templateUrl: './identity.component.html',
-  styleUrl: './identity.component.scss'
+  styleUrl: './identity.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class IdentityComponent {
-
-  private readonly router: Router = new Router;
+  private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
 
   readonly submitted = signal(false);
   readonly showSummary = computed(() => this.submitted() && this.form.invalid);
-  readonly states: SelectOption[] = US_STATES
+  readonly states: SelectOption[] = US_STATES;
 
   readonly form = this.fb.group({
     firstName: this.fb.nonNullable.control('', [
@@ -98,7 +96,6 @@ export class IdentityComponent {
       }
     };
 
-  constructor(private readonly fb: FormBuilder) {}
 
   shouldShowError(controlName: keyof IdentityComponent['form']['controls']): boolean {
     const c = this.form.controls[controlName];

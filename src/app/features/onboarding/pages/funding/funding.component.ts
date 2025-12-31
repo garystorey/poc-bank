@@ -1,8 +1,7 @@
-import { Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { digitsOnly, moneyValidator } from '../../validators/money.validator';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES } from '../../../../shared/utils/onboarding.utils';
 import { InputComponent } from "../../../../shared/ui/input/input.component";
 import { SelectComponent } from "../../../../shared/ui/select/select.component";
@@ -14,19 +13,20 @@ import { ErrorSummaryMessages } from '../../../../types/types';
 @Component({
   selector: 'app-funding',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, SelectComponent, ButtonComponent,StepperComponent,ErrorSummaryComponent],
+  imports: [ReactiveFormsModule, InputComponent, SelectComponent, ButtonComponent, StepperComponent, ErrorSummaryComponent],
   templateUrl: './funding.component.html',
-  styleUrl: './funding.component.scss'
+  styleUrl: './funding.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
-
 export class FundingComponent {
+  private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
 
   readonly submitted = signal(false);
 
-  readonly depositMethods = DEPOSIT_METHODS
-  readonly fundingSources = FUNDING_SOURCES
-  readonly accountTypes = ACCOUNT_TYPES
+  readonly depositMethods = DEPOSIT_METHODS;
+  readonly fundingSources = FUNDING_SOURCES;
+  readonly accountTypes = ACCOUNT_TYPES;
 
   readonly form = this.fb.group({
     initialAmount: this.fb.nonNullable.control('', [
@@ -83,11 +83,6 @@ export class FundingComponent {
   };
 
   readonly showSummary = computed(() => this.submitted() && this.form.invalid);
-
-  constructor(
-    private readonly fb: FormBuilder,
-    private readonly router: Router
-  ) {}
 
   shouldShowError(controlName: keyof FundingComponent['form']['controls']): boolean {
     const c = this.form.controls[controlName];

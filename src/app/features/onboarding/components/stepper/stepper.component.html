@@ -1,11 +1,11 @@
 <section class="stepper">
 
   <div class="progress-bar">
-    <div class="{{this.progressClass}}"></div>
+    <div [class]="progressClass()"></div>
   </div>
 
   <div class="step-indicator">
-    @for (step of this.steps; track step.number) {
+    @for (step of steps; track step.number) {
       <app-step [currentStep]="currentStep()" [stepNumber]="step.number" [stepLabel]="step.label" [active]="step.number === currentStep()"/>
     }
   </div>
