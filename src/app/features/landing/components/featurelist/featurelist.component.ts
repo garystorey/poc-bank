@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FeatureCardComponent } from '../featurecard/featurecard.component';
 import { SubheadingComponent } from '../subheading/subheading.component';
 
@@ -7,11 +7,11 @@ import { SubheadingComponent } from '../subheading/subheading.component';
   standalone: true,
   imports: [FeatureCardComponent, SubheadingComponent],
   templateUrl: './featurelist.component.html',
-  styleUrl: './featurelist.component.scss'
+  styleUrl: './featurelist.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeaturelistComponent {
-
-  features = [
+  readonly features = [
     {
       icon: 'fa-shield-alt',
       title: 'Secure Banking',

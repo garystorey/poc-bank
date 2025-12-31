@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Service } from '../../../../types/types';
 
 @Component({
@@ -6,8 +6,9 @@ import { Service } from '../../../../types/types';
   standalone: true,
   imports: [],
   templateUrl: './servicecard.component.html',
-  styleUrl: './servicecard.component.scss'
+  styleUrl: './servicecard.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServiceCardComponent {
-  service = input<Service>({ title: '', description: '' });
+  readonly service = input<Service>({ title: '', description: '' });
 }

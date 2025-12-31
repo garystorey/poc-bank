@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Feature } from '../../../../types/types';
 
 @Component({
@@ -6,10 +6,9 @@ import { Feature } from '../../../../types/types';
   standalone: true,
   imports: [],
   templateUrl: './featurecard.component.html',
-  styleUrl: './featurecard.component.scss'
+  styleUrl: './featurecard.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeatureCardComponent {
-
-  feature = input<Feature>({ icon: '', title: '', description: '' });
-
+  readonly feature = input<Feature>({ icon: '', title: '', description: '' });
 }

@@ -1,14 +1,14 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-subheading',
   standalone: true,
   imports: [],
   templateUrl: './subheading.component.html',
-  styleUrl: './subheading.component.scss'
+  styleUrl: './subheading.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubheadingComponent {
-  title = input<string>('');
-  description = input<string>('');
-
+  readonly title = input<string>('');
+  readonly description = input<string>('');
 }

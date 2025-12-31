@@ -1,6 +1,6 @@
 // input.component.ts
-import { CommonModule } from '@angular/common';
-import { Component, Input, Optional, Self } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { ApplyAttrsDirective, AttrBag } from './apply-attrs.directive';
 
@@ -9,36 +9,32 @@ let nextUniqueId = 0;
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ApplyAttrsDirective],
+  imports: [NgClass, ReactiveFormsModule, ApplyAttrsDirective],
   templateUrl: './input.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent implements ControlValueAccessor {
-  @Input({ required: true }) label!: string;
+  readonly ngControl = inject(NgControl, { optional: true, self: true });
 
-  @Input() inputId?: string;
-  @Input() name?: string;
-
-  @Input() type: string = 'text';
-  @Input() required = false;
-
-  @Input() helpText?: string;
-  @Input() errorText?: string;
-
-  /** Additional CSS classes to merge onto the outer .form-group wrapper */
-  @Input() groupClass?: string | string[] | Set<string> | { [klass: string]: any };
-
-  /** Arbitrary standard HTML / ARIA / data attributes to apply to the inner <input> */
-  @Input() inputAttrs: AttrBag | null = null;
-
-  @Input() submitted = false;
+  // Signal inputs
+  readonly label = input.required<string>();
+  readonly inputId = input<string>();
+  readonly name = input<string>();
+  readonly type = input<string>('text');
+  readonly required = input<boolean>(false);
+  readonly helpText = input<string>();
+  readonly errorText = input<string>();
+  readonly groupClass = input<string | string[] | Set<string> | { [klass: string]: unknown }>();
+  readonly inputAttrs = input<AttrBag | null>(null);
+  readonly submitted = input<boolean>(false);
 
   // ---- CVA state ----
-  value = '';
-  disabled = false;
+  readonly value = signal('');
+  readonly disabled = signal(false);
 
   private readonly autoId = `app-input-${++nextUniqueId}`;
 
-  constructor(@Optional() @Self() public ngControl: NgControl | null) {
+  constructor() {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
@@ -46,7 +42,7 @@ export class InputComponent implements ControlValueAccessor {
 
   // ---- ControlValueAccessor ----
   writeValue(val: unknown): void {
-    this.value = (val ?? '') as string;
+    this.value.set((val ?? '') as string);
   }
 
   private onChange: (val: string) => void = () => {};
@@ -61,45 +57,32 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled.set(isDisabled);
   }
 
   // ---- Form control + error state ----
-  get control(): AbstractControl | null {
-    return this.ngControl?.control ?? null;
-  }
+  readonly control = computed<AbstractControl | null>(() => this.ngControl?.control ?? null);
 
-  get showError(): boolean {
-    const c = this.control;
-    return !!c && c.invalid && (c.touched || this.submitted);
-  }
+  readonly showError = computed(() => {
+    const c = this.control();
+    return !!c && c.invalid && (c.touched || this.submitted());
+  });
 
   // ---- A11y ids ----
-  get resolvedId(): string {
-    return this.inputId ?? this.name ?? this.autoId;
-  }
+  readonly resolvedId = computed(() => this.inputId() ?? this.name() ?? this.autoId);
+  readonly resolvedName = computed(() => this.name() ?? '');
+  readonly helpId = computed(() => `${this.resolvedId()}-help`);
+  readonly errorId = computed(() => `${this.resolvedId()}-error`);
 
-  get resolvedName(): string {
-    return this.name ?? '';
-  }
-
-  get helpId(): string {
-    return `${this.resolvedId}-help`;
-  }
-
-  get errorId(): string {
-    return `${this.resolvedId}-error`;
-  }
-
-  get describedBy(): string | null {
-    if (this.showError) return this.errorId;
-    if (this.helpText) return this.helpId;
+  readonly describedBy = computed(() => {
+    if (this.showError()) return this.errorId();
+    if (this.helpText()) return this.helpId();
     return null;
-  }
+  });
 
   // ---- DOM events ----
   handleInput(raw: string): void {
-    this.value = raw;
+    this.value.set(raw);
     this.onChange(raw);
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
 
 @Component({
@@ -6,14 +6,13 @@ import { RouterLink } from "@angular/router";
   standalone: true,
   imports: [RouterLink],
   templateUrl: './topnav.component.html',
-  styleUrl: './topnav.component.scss'
+  styleUrl: './topnav.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopnavComponent {
-
-  activeMenuItem: string = 'dashboard';
+  readonly activeMenuItem = signal('dashboard');
 
   setActiveMenuItem(item: string): void {
-    this.activeMenuItem = item;
+    this.activeMenuItem.set(item);
   }
-
 }

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { StepComponent } from "../step/step.component";
 
 @Component({
@@ -6,20 +6,18 @@ import { StepComponent } from "../step/step.component";
   standalone: true,
   imports: [StepComponent],
   templateUrl: './stepper.component.html',
-  styleUrl: './stepper.component.scss'
+  styleUrl: './stepper.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StepperComponent {
-  currentStep = input<number>(1)  ;
-  steps =[
+  readonly currentStep = input<number>(1);
+
+  readonly steps = [
     { number: 1, label: 'Personal Information' },
     { number: 2, label: 'Funding' },
     { number: 3, label: 'Review' },
     { number: 4, label: 'Confirmation' },
-  ]
-  get progressClass() {
-    return `progress-fill progress-${this.currentStep()}`;
-  }
+  ];
 
-
-
+  readonly progressClass = computed(() => `progress-fill progress-${this.currentStep()}`);
 }

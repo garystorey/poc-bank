@@ -1,53 +1,41 @@
 // select.component.ts
-import { CommonModule } from '@angular/common';
-import { Component, Input, Optional, Self } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ReactiveFormsModule } from '@angular/forms';
-import { ApplyAttrsDirective, AttrBag } from '../input/apply-attrs.directive'; // adjust path if needed
+import { ApplyAttrsDirective, AttrBag } from '../input/apply-attrs.directive';
 import { SelectOption } from '../../../types/types';
-
 
 let nextUniqueId = 0;
 
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ApplyAttrsDirective],
+  imports: [NgClass, ReactiveFormsModule, ApplyAttrsDirective],
   templateUrl: './select.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent implements ControlValueAccessor {
-  @Input({ required: true }) label!: string;
+  readonly ngControl = inject(NgControl, { optional: true, self: true });
 
-  /**
-   * Mirror app-input: do NOT use `id` as an @Input (host id collision).
-   * Use `selectId` for the internal <select> id.
-   */
-  @Input() selectId?: string;
-  @Input() name?: string;
-
-  @Input() required = false;
-
-  @Input() helpText?: string;
-  @Input() errorText?: string;
-
-  /** Additional CSS classes to merge onto the outer .form-group wrapper */
-  @Input() groupClass?: string | string[] | Set<string> | { [klass: string]: any };
-
-  /** Arbitrary standard HTML / ARIA / data attributes to apply to the inner <select> */
-  @Input() selectAttrs: AttrBag | null = null;
-
-  /** Options to render */
-  @Input() options: SelectOption[] = [];
-
-  /** Mirrors your original logic: invalid && (touched || submitted) */
-  @Input() submitted = false;
+  // Signal inputs
+  readonly label = input.required<string>();
+  readonly selectId = input<string>();
+  readonly name = input<string>();
+  readonly required = input<boolean>(false);
+  readonly helpText = input<string>();
+  readonly errorText = input<string>();
+  readonly groupClass = input<string | string[] | Set<string> | { [klass: string]: unknown }>();
+  readonly selectAttrs = input<AttrBag | null>(null);
+  readonly options = input<SelectOption[]>([]);
+  readonly submitted = input<boolean>(false);
 
   // ---- CVA state ----
-  value: string = '';
-  disabled = false;
+  readonly value = signal('');
+  readonly disabled = signal(false);
 
   private readonly autoId = `app-select-${++nextUniqueId}`;
 
-  constructor(@Optional() @Self() public ngControl: NgControl | null) {
+  constructor() {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
@@ -55,8 +43,7 @@ export class SelectComponent implements ControlValueAccessor {
 
   // ---- ControlValueAccessor ----
   writeValue(val: unknown): void {
-    // Keep as string for <select> value binding
-    this.value = (val ?? '') as string;
+    this.value.set((val ?? '') as string);
   }
 
   private onChange: (val: string) => void = () => {};
@@ -71,45 +58,32 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled.set(isDisabled);
   }
 
   // ---- Form control + error state ----
-  get control(): AbstractControl | null {
-    return this.ngControl?.control ?? null;
-  }
+  readonly control = computed<AbstractControl | null>(() => this.ngControl?.control ?? null);
 
-  get showError(): boolean {
-    const c = this.control;
-    return !!c && c.invalid && (c.touched || this.submitted);
-  }
+  readonly showError = computed(() => {
+    const c = this.control();
+    return !!c && c.invalid && (c.touched || this.submitted());
+  });
 
   // ---- A11y ids ----
-  get resolvedId(): string {
-    return this.selectId ?? this.name ?? this.autoId;
-  }
+  readonly resolvedId = computed(() => this.selectId() ?? this.name() ?? this.autoId);
+  readonly resolvedName = computed(() => this.name() ?? '');
+  readonly helpId = computed(() => `${this.resolvedId()}-help`);
+  readonly errorId = computed(() => `${this.resolvedId()}-error`);
 
-  get resolvedName(): string {
-    return this.name ?? '';
-  }
-
-  get helpId(): string {
-    return `${this.resolvedId}-help`;
-  }
-
-  get errorId(): string {
-    return `${this.resolvedId}-error`;
-  }
-
-  get describedBy(): string | null {
-    if (this.showError) return this.errorId;
-    if (this.helpText) return this.helpId;
+  readonly describedBy = computed(() => {
+    if (this.showError()) return this.errorId();
+    if (this.helpText()) return this.helpId();
     return null;
-  }
+  });
 
   // ---- DOM events ----
   handleChange(raw: string): void {
-    this.value = raw;
+    this.value.set(raw);
     this.onChange(raw);
   }
 
