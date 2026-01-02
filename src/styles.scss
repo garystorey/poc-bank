@@ -85,34 +85,48 @@
   --transition-slow: 0.5s ease;
 }
 
-/* Dark Theme */
+/* Dark Theme - Professional Banking Dark Mode */
 [data-theme="dark"] {
-  --bg-primary: hsl(220, 26%, 14%);
-  --bg-secondary: hsl(220, 26%, 18%);
-  --bg-tertiary: hsl(220, 26%, 22%);
-  --text-primary: hsl(220, 33%, 97%);
-  --text-secondary: hsl(215, 19%, 65%);
-  --text-inverted: var(--black);
-  --border-color: hsl(220, 26%, 28%);
-  --border-color-light: hsl(220, 26%, 24%);
+  /* Core backgrounds - unified dark palette */
+  --bg-primary: hsl(222, 47%, 11%);
+  --bg-secondary: hsl(222, 47%, 11%);
+  --bg-tertiary: hsl(223, 39%, 16%);
 
-  /* Adjusted shadows for dark mode */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  /* Text colors - WCAG AA compliant (min 4.5:1 contrast) */
+  --text-primary: hsl(210, 40%, 96%);
+  --text-secondary: hsl(215, 20%, 75%);
+  --text-inverted: hsl(222, 47%, 11%);
 
-  /* Component-specific */
-  --card-bg: hsl(220, 26%, 18%);
-  --card-border: hsl(220, 26%, 28%);
-  --input-bg: hsl(220, 26%, 16%);
-  --input-border: hsl(220, 26%, 30%);
-  --input-focus-ring: hsla(43, 100%, 49%, 0.3);
-  --header-bg: hsl(220, 26%, 12%);
-  --footer-bg: hsl(220, 26%, 8%);
+  /* Border colors - subtle definition */
+  --border-color: hsl(223, 39%, 22%);
+  --border-color-light: hsl(223, 39%, 18%);
+
+  /* Enhanced shadows for dark mode depth */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(0, 0, 0, 0.4);
+
+  /* Card styling - subtle elevation without jarring contrast */
+  --card-bg: hsl(223, 39%, 16%);
+  --card-border: hsl(223, 39%, 24%);
+
+  /* Input styling - slightly recessed look */
+  --input-bg: hsl(222, 47%, 13%);
+  --input-border: hsl(223, 39%, 26%);
+  --input-focus-ring: hsla(43, 100%, 49%, 0.25);
+
+  /* Header/Footer - deepest backgrounds */
+  --header-bg: hsl(222, 47%, 9%);
+  --footer-bg: hsl(222, 47%, 7%);
 
   /* Overlay adjustments */
-  --overlay-dark: rgba(0, 0, 0, 0.7);
-  --overlay-light: rgba(255, 255, 255, 0.05);
+  --overlay-dark: rgba(0, 0, 0, 0.75);
+  --overlay-light: rgba(255, 255, 255, 0.03);
+
+  /* Status colors adjusted for dark mode visibility */
+  --success: hsl(142, 76%, 46%);
+  --warning: hsl(38, 92%, 55%);
+  --error: hsl(0, 84%, 62%);
 }
 
 /* ===== Global Reset ===== */
@@ -360,10 +374,14 @@ form .full-width {
 .requirements {
   margin-top: var(--spacing-xs);
   padding: var(--spacing-sm);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
   border-radius: var(--border-radius-md);
   font-size: var(--small-font-size);
   border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .requirements {
+  background-color: hsla(223, 39%, 20%, 0.5);
 }
 
 .requirements h4 {
@@ -475,9 +493,14 @@ form .full-width {
 }
 
 .social-btn:hover {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
   border-color: var(--primary-color);
   transform: translateY(-2px);
+}
+
+[data-theme="dark"] .social-btn:hover {
+  background-color: hsla(223, 39%, 20%, 0.6);
+  border-color: var(--secondary-color);
 }
 
 .social-btn i {
