@@ -1,0 +1,107 @@
+/* ===== Input Component Styles ===== */
+
+:host {
+  display: block;
+  flex: 1;
+}
+
+.form-group {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ===== Label ===== */
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  font-size: var(--small-font-size);
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.form-group label.required::after {
+  content: " *";
+  color: var(--error);
+}
+
+/* ===== Input Field ===== */
+.form-group input {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 2px solid var(--input-border);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-primary);
+  font-size: var(--body-font-size);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.form-group input::placeholder {
+  color: var(--text-secondary);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--input-focus-ring);
+}
+
+[data-theme="dark"] .form-group input:focus {
+  border-color: var(--secondary-color);
+}
+
+/* ===== Disabled State ===== */
+.form-group input:disabled {
+  background-color: var(--bg-tertiary);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ===== Error State ===== */
+.form-group.has-error input,
+.form-group input[aria-invalid="true"] {
+  border-color: var(--error);
+}
+
+.form-group.has-error input:focus,
+.form-group input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px hsla(0, 74%, 57%, 0.2);
+}
+
+/* ===== Help Text ===== */
+.form-description {
+  margin-top: var(--spacing-xs);
+  font-size: var(--small-font-size);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ===== Error Text ===== */
+.form-error {
+  margin-top: var(--spacing-xs);
+  font-size: var(--small-font-size);
+  color: var(--error);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.form-error::before {
+  content: '\f071';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 0.75rem;
+}
+
+/* ===== Full Width Modifier ===== */
+:host(.full-width) {
+  flex: 1 0 100%;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .form-group input {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}

@@ -1,12 +1,23 @@
-
-/* Features Section */
+/* ===== Features Section ===== */
 .features {
-  padding: var(--spacing-lg) 0;
-  background-color: var(--white);
+  padding: var(--spacing-xl) 0;
+  background-color: var(--bg-primary);
+  transition: background-color var(--transition-base);
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-md);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .features {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .features-grid {
+    gap: var(--spacing-sm);
+  }
 }

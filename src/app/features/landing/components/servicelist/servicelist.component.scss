@@ -1,12 +1,23 @@
-
-/* Services Section */
+/* ===== Services Section ===== */
 .services {
-  padding: var(--spacing-lg) 0;
-  background-color: var(--light-gray);
+  padding: var(--spacing-xl) 0;
+  background-color: var(--bg-secondary);
+  transition: background-color var(--transition-base);
 }
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: var(--spacing-md);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .services {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .services-grid {
+    gap: var(--spacing-sm);
+  }
 }

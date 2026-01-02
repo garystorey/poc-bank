@@ -1,25 +1,92 @@
+/* ===== Onboarding Header ===== */
+header {
+  background-color: var(--header-bg);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color var(--transition-base), box-shadow var(--transition-base);
+}
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-sm) 0;
+  min-height: 64px;
 }
 
+/* ===== Logo ===== */
 .logo-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary-color);
   text-decoration: none;
+  transition: transform var(--transition-fast);
 }
 
+.logo-container:hover {
+  transform: scale(1.02);
+}
+
+.logo-icon,
 .logo-container .logo {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: var(--gradient-secondary);
+  border-radius: var(--border-radius-md);
+  color: var(--black);
+  font-size: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.logo-text {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .logo-text {
+  color: var(--white);
+}
+
+/* ===== Help Link ===== */
+.help-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-secondary);
+  font-size: var(--small-font-size);
+  text-decoration: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+}
+
+.help-link:hover {
+  color: var(--primary-color);
+  background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .help-link:hover {
   color: var(--secondary-color);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 1.25rem;
+  }
+
+  .logo-icon,
+  .logo-container .logo {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
 }

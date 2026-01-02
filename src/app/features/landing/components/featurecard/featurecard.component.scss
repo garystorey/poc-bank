@@ -1,24 +1,85 @@
-
+/* ===== Feature Card ===== */
 .feature-card {
-  background: var(--light-gray);
-  border-radius: var(--border-radius-md);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius-lg);
   padding: var(--spacing-md);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform var(--transition-base);
 }
 
 .feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
 }
 
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* ===== Feature Icon ===== */
 .feature-icon {
-  font-size: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-md);
+  font-size: 1.75rem;
   color: var(--primary-color);
   margin-bottom: var(--spacing-sm);
+  transition: all var(--transition-base);
 }
 
+.feature-card:hover .feature-icon {
+  background: var(--gradient-primary);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .feature-icon {
+  color: var(--secondary-color);
+}
+
+[data-theme="dark"] .feature-card:hover .feature-icon {
+  background: var(--gradient-secondary);
+  color: var(--black);
+}
+
+/* ===== Feature Title ===== */
 .feature-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
   margin-bottom: var(--spacing-xs);
   color: var(--primary-color);
+  transition: color var(--transition-base);
+}
+
+[data-theme="dark"] .feature-card h3 {
+  color: var(--secondary-color);
+}
+
+/* ===== Feature Description ===== */
+.feature-card p {
+  font-size: var(--small-font-size);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
 }

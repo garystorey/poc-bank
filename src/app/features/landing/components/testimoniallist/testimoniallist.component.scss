@@ -1,12 +1,24 @@
-
-/* Testimonials */
+/* ===== Testimonials Section ===== */
 .testimonials {
-  padding: var(--spacing-lg) 0;
-  background-color: var(--white);
+  padding: var(--spacing-xl) 0;
+  background-color: var(--bg-primary);
+  transition: background-color var(--transition-base);
 }
 
 .testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--spacing-md);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .testimonials {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
 }

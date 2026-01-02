@@ -1,18 +1,87 @@
-
+/* ===== Service Card ===== */
 .service-card {
-  background: var(--white);
-  border-radius: var(--border-radius-md);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius-lg);
   padding: var(--spacing-md);
   box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
-  min-height: 11rem;
+  transition: all var(--transition-base);
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-secondary);
+  transform: scaleX(0);
+  transition: transform var(--transition-base);
 }
 
 .service-card:hover {
+  transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
+  border-color: var(--secondary-color);
 }
 
+.service-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* ===== Service Icon (if exists) ===== */
+.service-icon {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* ===== Service Title ===== */
 .service-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
   color: var(--primary-color);
   margin-bottom: var(--spacing-xs);
+  transition: color var(--transition-base);
+}
+
+[data-theme="dark"] .service-card h3 {
+  color: var(--secondary-color);
+}
+
+/* ===== Service Description ===== */
+.service-card p {
+  font-size: var(--small-font-size);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* ===== Service Link ===== */
+.service-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--primary-color);
+  font-size: var(--small-font-size);
+  font-weight: 500;
+  margin-top: var(--spacing-sm);
+  transition: all var(--transition-fast);
+}
+
+.service-card a:hover {
+  color: var(--primary-light);
+  gap: var(--spacing-sm);
+}
+
+[data-theme="dark"] .service-card a {
+  color: var(--secondary-color);
 }
