@@ -1,0 +1,60 @@
+<!-- Account Summary Page – POC Bank -->
+<section class="account-summary" aria-labelledby="page-title">
+  <h1 id="page-title" class="heading">POC Bank - Account Summary</h1>
+
+  <!-- Account selector -->
+  <div class="account-selector">
+    <label for="account-select" class="label">Select account:</label>
+    <select id="account-select" name="account" aria-label="Account type" class="select">
+      <option value="checking" selected>Checking</option>
+      <option value="savings">Savings</option>
+      <option value="credit">Credit Card</option>
+    </select>
+  </div>
+
+  <!-- Transaction filter -->
+  <div class="filter-bar">
+    <label for="filter-input" class="visually-hidden">Filter transactions</label>
+    <input
+      type="text"
+      id="filter-input"
+      placeholder="Search by location or description"
+      class="filter-input"
+      aria-label="Filter transactions"
+    />
+  </div>
+
+  <!-- Transaction table -->
+  <table class="transactions-table" role="grid">
+    <caption class="visually-hidden">List of account transactions</caption>
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Location</th>
+        <th scope="col" class="amount-header">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Sample rows – replace with real data -->
+      <tr>
+        <td>2025-12-01</td>
+        <td>Direct Deposit</td>
+        <td></td>
+        <td class="amount success">+$2,500.00</td>
+      </tr>
+      <tr>
+        <td>2025-11-28</td>
+        <td>Grocery Store</td>
+        <td>Walmart</td>
+        <td class="amount error">-$120.45</td>
+      </tr>
+      <tr>
+        <td>2025-11-25</td>
+        <td>Online Transfer</td>
+        <td></td>
+        <td class="amount warning">-$200.00</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

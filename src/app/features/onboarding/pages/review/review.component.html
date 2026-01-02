@@ -1,1 +1,72 @@
-<p>review works!</p>
+  <div class="review">
+    <div class="review-container">
+      <header class="review-header">
+        <h1 class="review-title">Account Verification</h1>
+        <p class="review-subtitle">Please review your information before submitting</p>
+      </header>
+      <div class="review-content">
+        <section class="review-section">
+          <h2 class="review-section-title">Personal Information</h2>
+          <div class="review-details">
+            <div class="review-item">
+              <span class="review-label">First Name</span>
+              <div class="review-value">{{user.firstName}}</div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Last Name</span>
+              <div class="review-value">{{user.lastName}}</div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Address</span>
+              <div class="review-value">{{user.address}} {{user.city}}, {{user.state}} {{user.zip}}</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="review-section">
+          <h2 class="review-section-title">Account Details</h2>
+          <div class="review-details">
+            <div class="review-item">
+              <span class="review-label">Account Type</span>
+              <div class="review-value">{{deposit.accountType}}</div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Bank Name</span>
+              <div class="review-value">{{deposit.bankName}}</div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Routing Number</span>
+              <div class="review-value">{{deposit.routingNumber}}</div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Account Number</span>
+              <div class="review-value">{{deposit.accountNumber}}</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="review-section">
+          <h2 class="review-section-title">Funding Information</h2>
+          <div class="review-details">
+            <div class="review-item">
+              <span class="review-label">Initial Deposit Amount</span>
+              <div class="review-value">{{deposit.initialAmount}}</div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Funding Source</span>
+              <div class="review-value">{{deposit.fundingSource}}</div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Deposit Method</span>
+              <div class="review-value">{{deposit.depositMethod}}</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="review-actions">
+          <app-button class="btn-edit" variant="standard"> Back </app-button>
+          <app-button class="btn-submit" variant="primary">Create Account</app-button>
+        </div>
+    </div>
+    </div>
+  </div>

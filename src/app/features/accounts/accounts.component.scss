@@ -1,0 +1,102 @@
+/* Page container */
+.account-summary {
+  max-width: 960px;
+  margin-inline: auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+  font-family: var(--font-primary);
+  color: var(--black);
+}
+
+/* Headings */
+.heading {
+  font-family: var(--font-heading);
+  font-size: var(--heading-font-size);
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-color);
+}
+
+/* Account selector */
+.account-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+.label {
+  font-weight: bold;
+  color: var(--dark-gray);
+}
+.select {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--white);
+  color: var(--black);
+  font-size: var(--body-font-size);
+}
+
+/* Filter bar */
+.filter-bar {
+  margin-bottom: var(--spacing-lg);
+}
+.filter-input {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--body-font-size);
+  background-color: var(--white);
+  color: var(--black);
+}
+
+/* Transaction table */
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.transactions-table th,
+.transactions-table td {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  text-align: left;
+}
+.transactions-table thead th {
+  background-color: var(--primary-light);
+  color: var(--white);
+  font-weight: 600;
+}
+.transactions-table tbody tr:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+/* Amount styling */
+.amount {
+  font-weight: bold;
+  text-align: right;
+}
+.success { color: var(--success); }
+.warning { color: var(--warning); }
+.error   { color: var(--error); }
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .transactions-table thead,
+  .transactions-table th {
+    display: none; /* hide header for mobile */
+  }
+  .transactions-table tr {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+  }
+  .transactions-table td {
+    display: flex;
+    justify-content: space-between;
+    padding-left: var(--spacing-md);
+    position: relative;
+  }
+  .transactions-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 50%;
+  }
+}
