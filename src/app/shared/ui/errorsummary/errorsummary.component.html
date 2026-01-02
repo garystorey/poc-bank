@@ -1,19 +1,22 @@
-<div
-  *ngIf="visible"
-  #summary
-  class="error-summary"
-  role="alert"
-  aria-live="assertive"
-  aria-atomic="true"
-  tabindex="-1"
->
-  <p class="error-summary-title">Please fix the following errors:</p>
+@if (visible) {
+  <div
+    #summary
+    class="error-summary"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    tabindex="-1"
+  >
+    <p class="error-summary-title">Please fix the following errors:</p>
 
-  <ul class="error-summary-list">
-    <li *ngFor="let item of items">
-      <a href="" (click)="$event.preventDefault(); focusField(item.anchorId)">
-        {{ item.message }}
-      </a>
-    </li>
-  </ul>
-</div>
+    <ul class="error-summary-list">
+      @for (item of items; track item.path) {
+        <li>
+          <a href="" (click)="$event.preventDefault(); focusField(item.anchorId)">
+            {{ item.message }}
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+}

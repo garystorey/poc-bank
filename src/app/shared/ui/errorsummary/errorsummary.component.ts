@@ -11,7 +11,6 @@ import {
   inject,
   OnChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AbstractControl, FormArray, FormGroup, ValidationErrors } from '@angular/forms';
 import { merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
@@ -29,9 +28,10 @@ type ErrorItem = { path: string; message: string; anchorId: string };
 @Component({
   selector: 'app-error-summary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './errorsummary.component.html',
   styleUrls: ['./errorsummary.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorSummaryComponent implements OnChanges {
   private readonly cdr = inject(ChangeDetectorRef);

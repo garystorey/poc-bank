@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { ButtonComponent } from "../../../../shared/ui/button/button.component";
 
@@ -7,8 +7,7 @@ import { ButtonComponent } from "../../../../shared/ui/button/button.component";
   standalone: true,
   imports: [RouterLink, ButtonComponent],
   templateUrl: './hero.component.html',
-  styleUrl: './hero.component.scss'
+  styleUrl: './hero.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroComponent {
-
-}
+export class HeroComponent {}

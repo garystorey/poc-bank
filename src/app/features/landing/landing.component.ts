@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HeroComponent } from './components/hero/hero.component';
 import { FeaturelistComponent } from './components/featurelist/featurelist.component';
 import { ServiceListComponent } from './components/servicelist/servicelist.component';
@@ -14,8 +14,7 @@ import { TestimonialListComponent } from './components/testimoniallist/testimoni
     <app-servicelist />
     <app-testimoniallist />
   `,
-  styleUrl: './landing.component.scss'
+  styleUrl: './landing.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LandingPageComponent {
-
-}
+export class LandingPageComponent {}

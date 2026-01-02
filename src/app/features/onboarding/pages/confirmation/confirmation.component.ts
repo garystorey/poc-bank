@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { RouterLink } from "@angular/router";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-confirmation',
   standalone: true,
   imports: [ButtonComponent, RouterLink],
   templateUrl: './confirmation.component.html',
-  styleUrl: './confirmation.component.scss'
+  styleUrl: './confirmation.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConfirmationComponent {
-
-}
+export class ConfirmationComponent {}

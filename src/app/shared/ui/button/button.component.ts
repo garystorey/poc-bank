@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, HostBinding, input } from '@angular/core';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'standard' | 'link';
 export type ButtonSize = 'fixed' | 'standard' | 'full';
@@ -8,30 +8,29 @@ export type ButtonSize = 'fixed' | 'standard' | 'full';
   standalone: true,
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Input() type: 'button' | 'submit' | 'reset' = 'button';
-  @Input() disabled = false;
-
-  @Input() variant: ButtonVariant = 'standard';
-  @Input() size: ButtonSize = 'standard';
-
-  /** Optional extra classes applied to the inner <button> */
-  @Input() class?: string;
+  // Signal inputs
+  readonly type = input<'button' | 'submit' | 'reset'>('button');
+  readonly disabled = input<boolean>(false);
+  readonly variant = input<ButtonVariant>('standard');
+  readonly size = input<ButtonSize>('standard');
+  readonly class = input<string>();
 
   /** Host sizing flags (do NOT bind the whole class attribute) */
   @HostBinding('class.btn-full')
   get hostIsFull(): boolean {
-    return this.size === 'full';
+    return this.size() === 'full';
   }
 
   @HostBinding('class.btn-fixed')
   get hostIsFixed(): boolean {
-    return this.size === 'fixed';
+    return this.size() === 'fixed';
   }
 
-  get variantClass(): string {
-    switch (this.variant) {
+  readonly variantClass = computed(() => {
+    switch (this.variant()) {
       case 'primary':
         return 'btn-primary';
       case 'secondary':
@@ -41,10 +40,10 @@ export class ButtonComponent {
       default:
         return 'btn-standard';
     }
-  }
+  });
 
-  get sizeClass(): string | null {
-    switch (this.size) {
+  readonly sizeClass = computed(() => {
+    switch (this.size()) {
       case 'fixed':
         return 'btn-fixed';
       case 'full':
@@ -52,9 +51,9 @@ export class ButtonComponent {
       default:
         return null;
     }
-  }
+  });
 
-  get buttonClassString(): string {
-    return ['btn', this.variantClass, this.sizeClass, this.class].filter(Boolean).join(' ');
-  }
+  readonly buttonClassString = computed(() => {
+    return ['btn', this.variantClass(), this.sizeClass(), this.class()].filter(Boolean).join(' ');
+  });
 }
