@@ -1,27 +1,79 @@
+/* ===== Error Summary Component ===== */
 
 .error-summary {
-  border: 1px solid var(--error);
-  background-color: #ffe6e6;
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
+  border: 2px solid var(--error);
+  background-color: hsla(0, 74%, 57%, 0.1);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
   margin-bottom: var(--spacing-lg);
-  font-size: .75rem;
+  font-size: var(--small-font-size);
+  animation: shake 0.5s ease;
 }
+
+[data-theme="dark"] .error-summary {
+  background-color: hsla(0, 74%, 57%, 0.15);
+}
+
 .error-summary-title {
+  font-family: var(--font-heading);
   font-weight: 600;
-  margin-bottom: var(--spacing-xs);
+  font-size: var(--body-font-size);
+  margin-bottom: var(--spacing-sm);
+  color: var(--error);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.error-summary-title::before {
+  content: '\f071';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 1rem;
 }
 
 .error-summary-list {
-  list-style-type: disc;
-  padding-left: var(--spacing-md);
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
 }
 
 .error-summary-list li {
   margin-bottom: var(--spacing-xs);
+  padding-left: var(--spacing-md);
+  position: relative;
+  color: var(--text-primary);
+}
+
+.error-summary-list li::before {
+  content: '\2022';
+  color: var(--error);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.error-summary-list li:last-child {
+  margin-bottom: 0;
 }
 
 .error-summary-list li a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--error);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.error-summary-list li a:hover {
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .error-summary-list li a:hover {
+  color: var(--secondary-color);
+}
+
+/* Shake animation for attention */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
 }

@@ -1,21 +1,80 @@
-/* CTA Section */
+/* ===== CTA Section ===== */
 .cta {
-  background: linear-gradient(
-    135deg,
-    var(--secondary-color) 0%,
-    var(--secondary-dark) 100%
-  );
+  background: var(--gradient-secondary);
   color: var(--black);
-  padding: var(--spacing-lg) 0;
+  padding: var(--spacing-xl) 0;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background */
+.cta::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -25%;
+  width: 50%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cta::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 40%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ===== CTA Content ===== */
+.cta-content {
+  position: relative;
+  z-index: 1;
 }
 
 .cta h2 {
-  font-size: var(--subheading-font-size);
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
   margin-bottom: var(--spacing-sm);
+  color: var(--black);
 }
 
 .cta p {
   max-width: 600px;
   margin: 0 auto var(--spacing-md);
+  font-size: var(--body-font-size);
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+/* ===== CTA Button ===== */
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.cta-buttons a {
+  text-decoration: none;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .cta {
+    padding: var(--spacing-lg) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
 }

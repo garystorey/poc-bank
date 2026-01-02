@@ -1,41 +1,104 @@
-
+/* ===== Testimonial Card ===== */
 .testimonial-card {
-  background: var(--light-gray);
-  border-radius: var(--border-radius-md);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius-lg);
   padding: var(--spacing-md);
   position: relative;
+  transition: all var(--transition-base);
+  overflow: hidden;
 }
 
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Quote decoration */
 .testimonial-card::before {
-  content: '"';
+  content: '\201C';
   position: absolute;
   top: var(--spacing-sm);
   left: var(--spacing-sm);
-  font-size: 4rem;
+  font-size: 5rem;
+  line-height: 1;
   color: var(--secondary-color);
-  opacity: 0.2;
-  font-family: Georgia, serif;
+  opacity: 0.15;
+  font-family: Georgia, 'Times New Roman', serif;
+  pointer-events: none;
 }
 
+/* ===== Testimonial Content ===== */
 .testimonial-content {
+  position: relative;
+  z-index: 1;
   margin-top: var(--spacing-md);
   font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: var(--body-font-size);
 }
 
+.testimonial-content p {
+  margin: 0;
+}
+
+/* ===== Testimonial Author ===== */
 .testimonial-author {
   display: flex;
   align-items: center;
-  margin-top: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border-color);
 }
 
+/* ===== Author Avatar ===== */
 .author-avatar {
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background-color: var(--medium-gray);
+  background: var(--gradient-primary);
   margin-right: var(--spacing-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--dark-gray);
+  color: var(--white);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .author-avatar {
+  background: var(--gradient-secondary);
+  color: var(--black);
+}
+
+/* ===== Author Info ===== */
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-info strong {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--body-font-size);
+}
+
+.author-info span {
+  font-size: var(--small-font-size);
+  color: var(--text-secondary);
+}
+
+/* ===== Star Rating ===== */
+.rating {
+  display: flex;
+  gap: 2px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.rating i {
+  color: var(--secondary-color);
+  font-size: 0.875rem;
 }
