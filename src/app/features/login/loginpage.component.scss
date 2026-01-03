@@ -111,7 +111,7 @@
 .login-form .requirements {
   margin-top: var(--spacing-sm);
   padding: var(--spacing-sm);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
   border-radius: var(--border-radius-md);
   border: 1px solid var(--border-color);
 }
@@ -122,6 +122,11 @@
   font-weight: 600;
   margin-bottom: var(--spacing-xs);
   color: var(--primary-color);
+}
+
+[data-theme="dark"] .login-form .requirements {
+  background-color: hsla(223, 39%, 20%, 0.5);
+  border-color: var(--border-color);
 }
 
 [data-theme="dark"] .login-form .requirements h4 {

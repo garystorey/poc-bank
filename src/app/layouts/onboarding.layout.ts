@@ -21,7 +21,8 @@ import { OnboardingheaderComponent } from "./components/onboardingheader/onboard
   styles: [
     `
     .wizard-container {
-        background: var(--white);
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
         border-radius: var(--border-radius-lg);
         box-shadow: var(--shadow-lg);
         width: 100%;
@@ -29,9 +30,17 @@ import { OnboardingheaderComponent } from "./components/onboardingheader/onboard
         max-width: 120ch;
         margin: 2rem auto;
         padding: var(--spacing-sm) var(--spacing-xl);
+        transition: background-color var(--transition-base), border-color var(--transition-base);
+    }
+
+    @media (max-width: 768px) {
+        .wizard-container {
+            margin: 1rem;
+            padding: var(--spacing-sm);
+            max-width: calc(100% - 2rem);
+        }
     }
     `,
-
   ]
 })
 export class OnboardingLayoutComponent {

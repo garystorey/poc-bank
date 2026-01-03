@@ -95,13 +95,14 @@ button.btn.btn-standard {
 }
 
 button.btn.btn-standard:hover:not(:disabled) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
   border-color: var(--primary-color);
   color: var(--primary-color);
   transform: translateY(-2px);
 }
 
 [data-theme="dark"] button.btn.btn-standard:hover:not(:disabled) {
+  background-color: hsla(223, 39%, 20%, 0.6);
   border-color: var(--secondary-color);
   color: var(--secondary-color);
 }

@@ -132,20 +132,22 @@ header {
 
 .nav-links li a:hover {
   color: var(--primary-color);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
 }
 
 [data-theme="dark"] .nav-links li a:hover {
   color: var(--secondary-color);
+  background-color: hsla(223, 39%, 20%, 0.6);
 }
 
 .nav-links li a.active {
   color: var(--primary-color);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
 }
 
 [data-theme="dark"] .nav-links li a.active {
   color: var(--secondary-color);
+  background-color: hsla(223, 39%, 20%, 0.6);
 }
 
 /* ===== Navigation Actions ===== */
@@ -173,12 +175,13 @@ header {
 .theme-toggle:hover {
   border-color: var(--primary-color);
   color: var(--primary-color);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
 }
 
 [data-theme="dark"] .theme-toggle:hover {
   border-color: var(--secondary-color);
   color: var(--secondary-color);
+  background-color: hsla(223, 39%, 20%, 0.6);
 }
 
 .theme-toggle i {

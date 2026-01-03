@@ -148,11 +148,15 @@
 }
 
 .transactions-table tbody tr:nth-child(even) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
 }
 
 .transactions-table tbody tr:hover {
-  background-color: var(--bg-tertiary);
+  background-color: hsla(223, 39%, 20%, 0.5);
+}
+
+[data-theme="dark"] .transactions-table tbody tr:hover {
+  background-color: hsla(223, 39%, 24%, 0.5);
 }
 
 .transactions-table tbody td {
