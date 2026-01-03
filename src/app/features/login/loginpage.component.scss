@@ -36,7 +36,7 @@
 }
 
 [data-theme="dark"] .login-form-header h1 {
-  color: var(--secondary-color);
+  color: var(--accent-heading);
 }
 
 .login-form-header p {
@@ -130,7 +130,7 @@
 }
 
 [data-theme="dark"] .login-form .requirements h4 {
-  color: var(--secondary-color);
+  color: var(--accent-heading);
 }
 
 /* ===== Form Footer ===== */
@@ -158,7 +158,7 @@
 }
 
 [data-theme="dark"] .login-form .form-footer a {
-  color: var(--secondary-color);
+  color: var(--accent-heading);
 }
 
 /* ===== Divider ===== */
@@ -186,17 +186,17 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-xs);
-  transition: all var(--transition-fast);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .login-form .social-btn:hover {
   border-color: var(--primary-color);
-  background-color: var(--bg-secondary);
-  transform: translateY(-2px);
+  background-color: var(--bg-tertiary);
 }
 
 [data-theme="dark"] .login-form .social-btn:hover {
-  border-color: var(--secondary-color);
+  border-color: var(--accent-heading);
+  background-color: hsl(223, 39%, 22%);
 }
 
 .login-form .social-btn i {

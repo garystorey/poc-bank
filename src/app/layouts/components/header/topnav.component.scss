@@ -136,8 +136,8 @@ header {
 }
 
 [data-theme="dark"] .nav-links li a:hover {
-  color: var(--secondary-color);
-  background-color: hsla(223, 39%, 20%, 0.6);
+  color: var(--accent-heading);
+  background-color: hsl(223, 39%, 22%);
 }
 
 .nav-links li a.active {
@@ -146,8 +146,8 @@ header {
 }
 
 [data-theme="dark"] .nav-links li a.active {
-  color: var(--secondary-color);
-  background-color: hsla(223, 39%, 20%, 0.6);
+  color: var(--accent-heading);
+  background-color: hsl(223, 39%, 22%);
 }
 
 /* ===== Navigation Actions ===== */
@@ -169,7 +169,7 @@ header {
   border-radius: var(--border-radius-md);
   color: var(--text-primary);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .theme-toggle:hover {
@@ -179,9 +179,9 @@ header {
 }
 
 [data-theme="dark"] .theme-toggle:hover {
-  border-color: var(--secondary-color);
-  color: var(--secondary-color);
-  background-color: hsla(223, 39%, 20%, 0.6);
+  border-color: var(--accent-heading);
+  color: var(--accent-heading);
+  background-color: hsl(223, 39%, 22%);
 }
 
 .theme-toggle i {
