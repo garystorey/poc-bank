@@ -31,7 +31,7 @@ button.btn {
   text-align: center;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: all var(--transition-fast);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
 }
@@ -49,41 +49,37 @@ button.btn.btn-fixed {
 
 /* ===== Primary Variant ===== */
 button.btn.btn-primary {
-  background: var(--gradient-primary);
+  background-color: var(--primary-color);
   border-color: var(--primary-color);
   color: var(--white);
   box-shadow: var(--shadow-sm);
 }
 
 button.btn.btn-primary:hover:not(:disabled) {
-  background: var(--primary-dark);
+  background-color: var(--primary-dark);
   border-color: var(--primary-dark);
-  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
 button.btn.btn-primary:active:not(:disabled) {
-  transform: translateY(0);
   box-shadow: var(--shadow-sm);
 }
 
 /* ===== Secondary Variant ===== */
 button.btn.btn-secondary {
-  background: var(--gradient-secondary);
+  background-color: var(--secondary-color);
   border-color: var(--secondary-color);
   color: var(--black);
   box-shadow: var(--shadow-sm);
 }
 
 button.btn.btn-secondary:hover:not(:disabled) {
-  background: var(--secondary-dark);
+  background-color: var(--secondary-dark);
   border-color: var(--secondary-dark);
-  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
 button.btn.btn-secondary:active:not(:disabled) {
-  transform: translateY(0);
   box-shadow: var(--shadow-sm);
 }
 
@@ -98,13 +94,12 @@ button.btn.btn-standard:hover:not(:disabled) {
   background-color: var(--bg-tertiary);
   border-color: var(--primary-color);
   color: var(--primary-color);
-  transform: translateY(-2px);
 }
 
 [data-theme="dark"] button.btn.btn-standard:hover:not(:disabled) {
-  background-color: hsla(223, 39%, 20%, 0.6);
-  border-color: var(--secondary-color);
-  color: var(--secondary-color);
+  background-color: hsl(223, 39%, 22%);
+  border-color: var(--accent-heading);
+  color: var(--accent-heading);
 }
 
 /* ===== Link Variant ===== */

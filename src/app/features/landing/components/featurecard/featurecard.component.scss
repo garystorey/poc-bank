@@ -5,7 +5,7 @@
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-md);
   text-align: center;
-  transition: all var(--transition-base);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
   position: relative;
   overflow: hidden;
 }
@@ -17,13 +17,12 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--gradient-primary);
+  background: var(--secondary-color);
   transform: scaleX(0);
   transition: transform var(--transition-base);
 }
 
 .feature-card:hover {
-  transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
   border-color: var(--primary-light);
 }
@@ -44,22 +43,21 @@
   font-size: 1.75rem;
   color: var(--primary-color);
   margin-bottom: var(--spacing-sm);
-  transition: all var(--transition-base);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .feature-card:hover .feature-icon {
-  background: var(--gradient-primary);
+  background-color: var(--primary-color);
   color: var(--white);
-  transform: scale(1.1);
 }
 
 [data-theme="dark"] .feature-icon {
-  background: hsla(223, 39%, 24%, 0.6);
-  color: var(--secondary-color);
+  background-color: hsl(223, 39%, 22%);
+  color: var(--accent-heading);
 }
 
 [data-theme="dark"] .feature-card:hover .feature-icon {
-  background: var(--gradient-secondary);
+  background-color: var(--secondary-color);
   color: var(--black);
 }
 
@@ -74,7 +72,7 @@
 }
 
 [data-theme="dark"] .feature-card h3 {
-  color: var(--secondary-color);
+  color: var(--accent-heading);
 }
 
 /* ===== Feature Description ===== */
