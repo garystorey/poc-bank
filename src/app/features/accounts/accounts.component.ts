@@ -54,23 +54,39 @@ export class AccountsComponent {
     { id: 23, account: 'savings', date: '2024-04-05', description: 'Round-up Transfer', type: 'deposit', amount: 35.42 },
     { id: 24, account: 'credit', date: '2024-03-15', description: 'Travel Booking', location: 'Skybound Airlines', type: 'withdrawal', amount: -520.75 },
     { id: 25, account: 'checking', date: '2024-03-01', description: 'Tax Refund', type: 'deposit', amount: 1435.66 },
+    { id: 26, account: 'checking', date: '2024-02-22', description: 'Concert Tickets', location: 'City Arena', type: 'withdrawal', amount: -210 },
+    { id: 27, account: 'checking', date: '2024-02-14', description: 'Payday Deposit', type: 'deposit', amount: 3200 },
+    { id: 28, account: 'checking', date: '2024-01-30', description: 'Home Supplies', location: 'Hardware Hub', type: 'withdrawal', amount: -89.5 },
+    { id: 29, account: 'checking', date: '2024-01-10', description: 'Gym Membership', location: 'Pulse Fitness', type: 'withdrawal', amount: -59.99 },
+    { id: 30, account: 'checking', date: '2023-12-18', description: 'Holiday Bonus', type: 'deposit', amount: 750 },
+    { id: 31, account: 'savings', date: '2024-06-12', description: 'Emergency Fund Boost', type: 'deposit', amount: 600 },
+    { id: 32, account: 'savings', date: '2024-05-30', description: 'Vacation Transfer', type: 'withdrawal', amount: -300 },
+    { id: 33, account: 'savings', date: '2024-05-10', description: 'Interest Payout', type: 'deposit', amount: 9.12 },
+    { id: 34, account: 'savings', date: '2024-04-22', description: 'Round-up Transfer', type: 'deposit', amount: 24.77 },
+    { id: 35, account: 'savings', date: '2024-03-12', description: 'Car Repair Fund', type: 'deposit', amount: 450 },
+    { id: 36, account: 'savings', date: '2024-02-05', description: 'Unexpected Expense', type: 'withdrawal', amount: -275 },
+    { id: 37, account: 'savings', date: '2024-01-15', description: 'Transfer to Checking', type: 'transfer', amount: -150 },
+    { id: 38, account: 'credit', date: '2024-06-13', description: 'Electronics Purchase', location: 'Gadget World', type: 'withdrawal', amount: -1299.99 },
+    { id: 39, account: 'credit', date: '2024-06-02', description: 'Restaurant', location: 'Olive & Oak', type: 'withdrawal', amount: -84.2 },
+    { id: 40, account: 'credit', date: '2024-05-25', description: 'Payment Received', type: 'deposit', amount: 700 },
+    { id: 41, account: 'credit', date: '2024-05-12', description: 'Subscription Bundle', location: 'StreamHub', type: 'withdrawal', amount: -54.99 },
+    { id: 42, account: 'credit', date: '2024-04-27', description: 'Transfer to Savings', type: 'transfer', amount: -150 },
+    { id: 43, account: 'credit', date: '2024-04-10', description: 'Home Decor', location: 'Cozy Living', type: 'withdrawal', amount: -220.45 },
+    { id: 44, account: 'credit', date: '2024-03-05', description: 'Payment Received', type: 'deposit', amount: 550 },
+    { id: 45, account: 'credit', date: '2024-02-14', description: 'Travel Booking', location: 'Skybound Airlines', type: 'withdrawal', amount: -780.25 },
   ]);
 
   readonly selectedAccount = signal<AccountType>('checking');
 
-  readonly pendingFilterType = signal<TransactionFilter>('all');
-  readonly pendingStartDate = signal<string>('');
-  readonly pendingEndDate = signal<string>('');
-
-  readonly activeFilterType = signal<TransactionFilter>('all');
-  readonly activeStartDate = signal<string>('');
-  readonly activeEndDate = signal<string>('');
+  readonly filterType = signal<TransactionFilter>('all');
+  readonly startDate = signal<string>('');
+  readonly endDate = signal<string>('');
 
   readonly filteredTransactions = computed(() => {
     const selectedAccount = this.selectedAccount();
-    const filterType = this.activeFilterType();
-    const startDate = this.activeStartDate();
-    const endDate = this.activeEndDate();
+    const filterType = this.filterType();
+    const startDate = this.startDate();
+    const endDate = this.endDate();
 
     const start = startDate ? new Date(startDate) : null;
     const end = endDate ? new Date(endDate) : null;
@@ -94,20 +110,19 @@ export class AccountsComponent {
   }
 
   onFilterTypeChange(filter: TransactionFilter) {
-    this.pendingFilterType.set(filter);
+    this.filterType.set(filter);
   }
 
   onStartDateChange(date: string) {
-    this.pendingStartDate.set(date);
+    this.startDate.set(date);
   }
 
   onEndDateChange(date: string) {
-    this.pendingEndDate.set(date);
+    this.endDate.set(date);
   }
 
   applyFilter() {
-    this.activeFilterType.set(this.pendingFilterType());
-    this.activeStartDate.set(this.pendingStartDate());
-    this.activeEndDate.set(this.pendingEndDate());
+    // Filters are applied immediately via signals, but this keeps the button accessible
+    // and explicit for keyboard users.
   }
 }

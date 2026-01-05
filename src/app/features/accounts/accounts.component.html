@@ -27,7 +27,7 @@
       name="filter"
       aria-label="Transaction filter"
       class="select"
-      [ngModel]="pendingFilterType()"
+      [ngModel]="filterType()"
       (ngModelChange)="onFilterTypeChange($event)"
     >
       <option value="all">All</option>
@@ -41,7 +41,7 @@
       name="start-date"
       class="input"
       aria-label="Start date"
-      [ngModel]="pendingStartDate()"
+      [ngModel]="startDate()"
       (ngModelChange)="onStartDateChange($event)"
     />
     <input
@@ -50,7 +50,7 @@
       name="end-date"
       class="input"
       aria-label="End date"
-      [ngModel]="pendingEndDate()"
+      [ngModel]="endDate()"
       (ngModelChange)="onEndDateChange($event)"
     />
     <button type="button" class="button" (click)="applyFilter()">Apply Filter</button>
