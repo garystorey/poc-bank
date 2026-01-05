@@ -1,7 +1,7 @@
 /* ===== CTA Section ===== */
 .cta {
   background: var(--gradient-secondary);
-  color: var(--black);
+  color: var(--text-on-secondary);
   padding: var(--spacing-xl) 0;
   text-align: center;
   position: relative;
@@ -42,7 +42,7 @@
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   margin-bottom: var(--spacing-sm);
-  color: var(--black);
+  color: var(--text-on-secondary);
 }
 
 .cta p {

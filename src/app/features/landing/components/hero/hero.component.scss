@@ -1,7 +1,7 @@
 /* ===== Hero Section ===== */
 .hero {
   background: var(--gradient-hero);
-  color: var(--white);
+  color: var(--text-inverted);
   padding: var(--spacing-xl) 0;
   position: relative;
   overflow: hidden;
@@ -109,17 +109,5 @@
   .hero-buttons {
     flex-direction: column;
     align-items: center;
-  }
-}
-
-/* ===== Animation ===== */
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }

@@ -102,20 +102,20 @@
 .step.active .step-number {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
-  color: var(--white);
+  color: var(--text-on-secondary);
   box-shadow: 0 0 0 4px var(--input-focus-ring);
 }
 
 [data-theme="dark"] .step.active .step-number {
   background-color: var(--secondary-color);
   border-color: var(--secondary-color);
-  color: var(--black);
+  color: var(--text-on-secondary);
 }
 
 .step.completed .step-number {
   background-color: var(--secondary-color);
   border-color: var(--secondary-color);
-  color: var(--black);
+  color: var(--text-on-secondary);
 }
 
 /* Checkmark for completed steps */
