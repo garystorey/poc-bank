@@ -50,13 +50,9 @@
   font-family: var(--font-heading);
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--text-primary);
   margin-bottom: var(--spacing-xs);
   transition: color var(--transition-base);
-}
-
-[data-theme="dark"] .service-card h3 {
-  color: var(--accent-heading);
 }
 
 /* ===== Service Description ===== */

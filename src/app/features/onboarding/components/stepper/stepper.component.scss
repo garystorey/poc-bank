@@ -42,7 +42,7 @@
   left: calc(12.5% + 18px);
   right: calc(12.5% + 18px);
   height: 2px;
-  background-color: var(--border-color);
+  background-color: var(--text-secondary);
   z-index: 0;
 }
 
@@ -61,12 +61,12 @@
 }
 
 .step.active {
-  color: var(--primary-color);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 [data-theme="dark"] .step.active {
-  color: var(--accent-heading);
+  color: var(--text-primary);
 }
 
 [data-theme="dark"] .step {
@@ -100,8 +100,8 @@
 }
 
 .step.active .step-number {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
   color: var(--text-on-secondary);
   box-shadow: 0 0 0 4px var(--input-focus-ring);
 }
