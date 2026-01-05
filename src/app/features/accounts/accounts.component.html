@@ -48,6 +48,7 @@
       aria-label="End date"
     />
     <app-button type="button" variant="primary" class="filter-button" (click)="applyFilter()">Apply Filter</app-button>
+    <app-button type="button" variant="standard" class="filter-button" (click)="resetFilters()">Reset Filters</app-button>
   </div>
 
   <p class="label" aria-live="polite">
@@ -60,10 +61,51 @@
       <caption class="visually-hidden">List of account transactions</caption>
       <thead>
         <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Description</th>
-          <th scope="col">Type</th>
-          <th scope="col" class="amount-header">Amount</th>
+          <th
+            scope="col"
+            [attr.aria-sort]="getAriaSort('date')"
+          >
+            <button type="button" class="sort-button" (click)="changeSort('date')">
+              Date
+              <span class="sort-indicator" aria-hidden="true">
+                {{ sortColumn() === 'date' ? (sortDirection() === 'asc' ? '↑' : '↓') : '↕' }}
+              </span>
+            </button>
+          </th>
+          <th
+            scope="col"
+            [attr.aria-sort]="getAriaSort('description')"
+          >
+            <button type="button" class="sort-button" (click)="changeSort('description')">
+              Description
+              <span class="sort-indicator" aria-hidden="true">
+                {{ sortColumn() === 'description' ? (sortDirection() === 'asc' ? '↑' : '↓') : '↕' }}
+              </span>
+            </button>
+          </th>
+          <th
+            scope="col"
+            [attr.aria-sort]="getAriaSort('type')"
+          >
+            <button type="button" class="sort-button" (click)="changeSort('type')">
+              Type
+              <span class="sort-indicator" aria-hidden="true">
+                {{ sortColumn() === 'type' ? (sortDirection() === 'asc' ? '↑' : '↓') : '↕' }}
+              </span>
+            </button>
+          </th>
+          <th
+            scope="col"
+            class="amount-header"
+            [attr.aria-sort]="getAriaSort('amount')"
+          >
+            <button type="button" class="sort-button" (click)="changeSort('amount')">
+              Amount
+              <span class="sort-indicator" aria-hidden="true">
+                {{ sortColumn() === 'amount' ? (sortDirection() === 'asc' ? '↑' : '↓') : '↕' }}
+              </span>
+            </button>
+          </th>
         </tr>
       </thead>
       <tbody>

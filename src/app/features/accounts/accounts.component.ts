@@ -25,6 +25,8 @@ export class AccountsComponent implements OnInit {
   readonly filterType = signal<TransactionFilter>('all');
   readonly startDate = signal<string>('');
   readonly endDate = signal<string>('');
+  readonly sortColumn = signal<'date' | 'description' | 'type' | 'amount'>('date');
+  readonly sortDirection = signal<'asc' | 'desc'>('desc');
   readonly filterOptions: SelectOption[] = [
     { value: 'all', label: 'All', selected: true },
     { value: 'deposit', label: 'Deposits' },
@@ -42,6 +44,8 @@ export class AccountsComponent implements OnInit {
     const filterType = this.filterType();
     const startDate = this.startDate();
     const endDate = this.endDate();
+    const sortColumn = this.sortColumn();
+    const sortDirection = this.sortDirection();
 
     const start = startDate ? new Date(startDate) : null;
     const end = endDate ? new Date(endDate) : null;
@@ -57,7 +61,26 @@ export class AccountsComponent implements OnInit {
         const beforeEnd = end ? transactionDate <= end : true;
         return afterStart && beforeEnd;
       })
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      .sort((a, b) => {
+        let comparison = 0;
+
+        switch (sortColumn) {
+          case 'date':
+            comparison = new Date(a.date).getTime() - new Date(b.date).getTime();
+            break;
+          case 'description':
+            comparison = a.description.localeCompare(b.description);
+            break;
+          case 'type':
+            comparison = a.type.localeCompare(b.type);
+            break;
+          case 'amount':
+            comparison = a.amount - b.amount;
+            break;
+        }
+
+        return sortDirection === 'asc' ? comparison : -comparison;
+      });
   });
 
   onAccountChange(account: AccountType) {
@@ -79,5 +102,31 @@ export class AccountsComponent implements OnInit {
   applyFilter() {
     // Filters are applied immediately via signals, but this keeps the button accessible
     // and explicit for keyboard users.
+  }
+
+  resetFilters() {
+    this.filterType.set('all');
+    this.startDate.set('');
+    this.endDate.set('');
+    this.sortColumn.set('date');
+    this.sortDirection.set('desc');
+  }
+
+  changeSort(column: 'date' | 'description' | 'type' | 'amount') {
+    if (this.sortColumn() === column) {
+      this.sortDirection.set(this.sortDirection() === 'asc' ? 'desc' : 'asc');
+      return;
+    }
+
+    this.sortColumn.set(column);
+    this.sortDirection.set(column === 'date' ? 'desc' : 'asc');
+  }
+
+  getAriaSort(column: 'date' | 'description' | 'type' | 'amount') {
+    if (this.sortColumn() !== column) {
+      return 'none';
+    }
+
+    return this.sortDirection() === 'asc' ? 'ascending' : 'descending';
   }
 }
