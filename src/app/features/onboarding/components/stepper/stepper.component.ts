@@ -6,7 +6,7 @@ import { StepComponent } from "../step/step.component";
   standalone: true,
   imports: [StepComponent],
   templateUrl: './stepper.component.html',
-  styleUrl: './stepper.component.scss',
+  styleUrl: './stepper.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StepperComponent {

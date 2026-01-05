@@ -25,7 +25,7 @@
   </select>
 
   @if (helpText() && !showError()) {
-    <p [id]="helpId()">
+    <p class="form-description" [id]="helpId()">
       {{ helpText() }}
     </p>
   }

@@ -77,6 +77,14 @@
   color: var(--success);
 }
 
+
+
+.step.active .step-number {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+
 /* ===== Step Number ===== */
 .step-number {
   width: 36px;
@@ -92,6 +100,7 @@
   font-size: var(--small-font-size);
   transition: all var(--transition-base);
   color: var(--text-secondary);
+  z-index: 1;
 }
 
 [data-theme="dark"] .step-number {

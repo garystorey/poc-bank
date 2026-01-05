@@ -35,6 +35,7 @@
   background-color: var(--input-bg);
   color: var(--text-primary);
   transition: all var(--transition-fast);
+  width:100%;
 }
 
 .form-group input::placeholder {

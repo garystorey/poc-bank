@@ -255,8 +255,9 @@ a:hover {
 }
 
 .form-row {
-  display: flex;
-  gap: var(--spacing-sm);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
   margin-bottom: var(--spacing-sm);
   justify-content: space-between;
   align-self: stretch;

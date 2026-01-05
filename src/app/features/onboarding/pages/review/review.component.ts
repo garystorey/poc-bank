@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-review',
@@ -10,6 +11,9 @@ import { ButtonComponent } from '../../../../shared/ui/button/button.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewComponent {
+
+  router = inject(Router);
+
   // Placeholder data - in a real app this would come from a service
   user = {
     firstName: 'John',
@@ -29,4 +33,15 @@ export class ReviewComponent {
     fundingSource: 'External Bank Transfer',
     depositMethod: 'ACH Transfer'
   };
+
+  handleCreateAccount() {
+    // Logic to create account goes here
+    console.log('Account creation initiated');
+    this.router.navigate(['/onboarding/confirmation']);
+  }
+
+  handlePrevious() {
+    this.router.navigate(['/onboarding/funding']);
+  }
+
 }

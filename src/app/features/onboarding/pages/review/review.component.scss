@@ -1,23 +1,14 @@
 /* ===== Review Page ===== */
 .review {
-  min-height: calc(100vh - 200px);
   padding: var(--spacing-md);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-secondary);
-  transition: background-color var(--transition-base);
+
 }
 
 .review-container {
-  max-width: 900px;
   width: 100%;
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-  transition: background-color var(--transition-base), border-color var(--transition-base);
   animation: slideInUp 0.5s ease forwards;
 }
 
@@ -57,13 +48,9 @@
 .review-section-title {
   font-size: var(--subheading-font-size);
   font-family: var(--font-heading);
-  color: var(--primary-color);
   margin-bottom: var(--spacing-sm);
   padding-bottom: var(--spacing-xs);
   border-bottom: 2px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
 }
 
 [data-theme="dark"] .review-section-title {
