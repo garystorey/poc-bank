@@ -37,7 +37,8 @@
       />
       <app-input label="Social Security Number"
         formControlName="socialSecurityNumber" inputId="ssn" name="ssn" type="text"
-        [inputAttrs]="{ inputmode: 'numeric' }" [required]="true"
+        [inputAttrs]="{ inputmode: 'numeric', maxlength: 11 }" [required]="true"
+        [keyDownHandler]="handleSsnKeydown"
         [submitted]="submitted()"
         helpText="Enter your SSN in the format XXX-XX-XXXX"
         errorText="SSN is required"
