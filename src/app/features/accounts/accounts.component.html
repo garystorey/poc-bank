@@ -14,14 +14,18 @@
 
   <!-- Transaction filter -->
   <div class="filter-bar">
-    <label for="filter-input" class="visually-hidden">Filter transactions</label>
-    <input
-      type="text"
-      id="filter-input"
-      placeholder="Search by location or description"
-      class="filter-input"
-      aria-label="Filter transactions"
-    />
+
+    <label for="transaction-filter" class="label">Filter transactions:</label>
+    <select id="transaction-filter" name="filter" aria-label="Transaction filter" class="select">
+      <option value="all" selected>All</option>
+      <option value="deposits">Deposits</option>
+      <option value="withdrawals">Withdrawals</option>
+      <option value="transfers">Transfers</option>
+    </select>
+    <input type="date" id="start-date" name="start-date" class="input" aria-label="Start date" />
+    <input type="date" id="end-date" name="end-date" class="input" aria-label="End date" />
+    <button type="button" class="button">Apply Filter</button>
+
   </div>
 
   <!-- Transaction table -->
