@@ -26,6 +26,7 @@ export class InputComponent implements ControlValueAccessor {
   readonly errorText = input<string>();
   readonly groupClass = input<string | string[] | Set<string> | { [klass: string]: unknown }>();
   readonly inputAttrs = input<AttrBag | null>(null);
+  readonly keyDownHandler = input<((event: KeyboardEvent) => void) | null>(null);
   readonly submitted = input<boolean>(false);
 
   // ---- CVA state ----
@@ -84,6 +85,10 @@ export class InputComponent implements ControlValueAccessor {
   handleInput(raw: string): void {
     this.value.set(raw);
     this.onChange(raw);
+  }
+
+  handleKeyDown(event: KeyboardEvent): void {
+    this.keyDownHandler()?.(event);
   }
 
   handleBlur(): void {

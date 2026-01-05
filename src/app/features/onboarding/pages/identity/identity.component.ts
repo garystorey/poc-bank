@@ -118,6 +118,38 @@ export class IdentityComponent {
       });
   }
 
+  handleSsnKeydown(event: KeyboardEvent): void {
+    const allowedControlKeys = new Set([
+      'Backspace',
+      'Delete',
+      'Tab',
+      'ArrowLeft',
+      'ArrowRight',
+      'Home',
+      'End',
+    ]);
+
+    if (event.ctrlKey || event.metaKey) return;
+
+    const key = event.key;
+
+    if (allowedControlKeys.has(key) || key === '-') return;
+
+    if (/^\d$/.test(key)) {
+      const input = event.target as HTMLInputElement;
+      const selectionLength = (input.selectionEnd ?? 0) - (input.selectionStart ?? 0);
+      const digits = input.value.replace(/\D/g, '');
+
+      if (digits.length >= 9 && selectionLength === 0) {
+        event.preventDefault();
+      }
+
+      return;
+    }
+
+    event.preventDefault();
+  }
+
   onSubmit(): void {
     this.submitted.set(true);
     if (this.form.invalid) {
