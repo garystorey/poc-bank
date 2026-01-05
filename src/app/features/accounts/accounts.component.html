@@ -5,60 +5,94 @@
   <!-- Account selector -->
   <div class="account-selector">
     <label for="account-select" class="label">Select account:</label>
-    <select id="account-select" name="account" aria-label="Account type" class="select">
-      <option value="checking" selected>Checking</option>
-      <option value="savings">Savings</option>
-      <option value="credit">Credit Card</option>
+    <select
+      id="account-select"
+      name="account"
+      aria-label="Account type"
+      class="select"
+      [ngModel]="selectedAccount()"
+      (ngModelChange)="onAccountChange($event)"
+    >
+      @for (account of accounts; track account) {
+        <option [value]="account">{{ account }}</option>
+      }
     </select>
   </div>
 
   <!-- Transaction filter -->
   <div class="filter-bar">
-
     <label for="transaction-filter" class="label">Filter transactions:</label>
-    <select id="transaction-filter" name="filter" aria-label="Transaction filter" class="select">
-      <option value="all" selected>All</option>
-      <option value="deposits">Deposits</option>
-      <option value="withdrawals">Withdrawals</option>
-      <option value="transfers">Transfers</option>
+    <select
+      id="transaction-filter"
+      name="filter"
+      aria-label="Transaction filter"
+      class="select"
+      [ngModel]="pendingFilterType()"
+      (ngModelChange)="onFilterTypeChange($event)"
+    >
+      <option value="all">All</option>
+      <option value="deposit">Deposits</option>
+      <option value="withdrawal">Withdrawals</option>
+      <option value="transfer">Transfers</option>
     </select>
-    <input type="date" id="start-date" name="start-date" class="input" aria-label="Start date" />
-    <input type="date" id="end-date" name="end-date" class="input" aria-label="End date" />
-    <button type="button" class="button">Apply Filter</button>
-
+    <input
+      type="date"
+      id="start-date"
+      name="start-date"
+      class="input"
+      aria-label="Start date"
+      [ngModel]="pendingStartDate()"
+      (ngModelChange)="onStartDateChange($event)"
+    />
+    <input
+      type="date"
+      id="end-date"
+      name="end-date"
+      class="input"
+      aria-label="End date"
+      [ngModel]="pendingEndDate()"
+      (ngModelChange)="onEndDateChange($event)"
+    />
+    <button type="button" class="button" (click)="applyFilter()">Apply Filter</button>
   </div>
 
-  <!-- Transaction table -->
-  <table class="transactions-table" role="grid">
-    <caption class="visually-hidden">List of account transactions</caption>
-    <thead>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Description</th>
-        <th scope="col">Location</th>
-        <th scope="col" class="amount-header">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Sample rows – replace with real data -->
-      <tr>
-        <td>2025-12-01</td>
-        <td>Direct Deposit</td>
-        <td></td>
-        <td class="amount success">+$2,500.00</td>
-      </tr>
-      <tr>
-        <td>2025-11-28</td>
-        <td>Grocery Store</td>
-        <td>Walmart</td>
-        <td class="amount error">-$120.45</td>
-      </tr>
-      <tr>
-        <td>2025-11-25</td>
-        <td>Online Transfer</td>
-        <td></td>
-        <td class="amount warning">-$200.00</td>
-      </tr>
-    </tbody>
-  </table>
+  <p class="label" aria-live="polite">
+    Showing {{ filteredTransactions().length }} transactions for the
+    {{ selectedAccount() }} account.
+  </p>
+
+  @if (filteredTransactions().length) {
+    <table class="transactions-table" role="grid">
+      <caption class="visually-hidden">List of account transactions</caption>
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Description</th>
+          <th scope="col">Location</th>
+          <th scope="col" class="amount-header">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (transaction of filteredTransactions(); track transaction.id) {
+          <tr>
+            <td data-label="Date">{{ transaction.date | date: 'yyyy-MM-dd' }}</td>
+            <td data-label="Description">{{ transaction.description }}</td>
+            <td data-label="Location">{{ transaction.location || '—' }}</td>
+            <td
+              data-label="Amount"
+              class="amount"
+              [class.success]="transaction.amount > 0"
+              [class.error]="transaction.amount < 0 && transaction.type === 'withdrawal'"
+              [class.warning]="transaction.type === 'transfer'"
+            >
+              {{ transaction.amount | currency: 'USD':'symbol':'1.2-2' }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+  @else {
+    <p class="label">No transactions match the selected filters.</p>
+  }
 </section>
