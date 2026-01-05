@@ -109,13 +109,40 @@
 }
 
 .transactions-table thead th {
-  background: var(--gradient-primary);
+  background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: var(--white);
   font-weight: 600;
   font-family: var(--font-heading);
   font-size: var(--small-font-size);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--primary-dark);
+}
+
+.sort-button {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--spacing-xs);
+  padding: 0;
+  cursor: pointer;
+}
+
+.sort-button:focus-visible {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 4px;
+  border-radius: var(--border-radius-sm);
+}
+
+.sort-indicator {
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
 .transactions-table tbody tr {
