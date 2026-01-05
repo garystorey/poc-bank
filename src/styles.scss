@@ -241,7 +241,7 @@ a:hover {
   font-family: var(--font-heading);
   font-size: var(--subheading-font-size);
   color: var(--primary-color);
-  margin-bottom: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
   padding-bottom: var(--spacing-xs);
   border-bottom: 2px solid var(--border-color);
   display: flex;
@@ -287,7 +287,7 @@ form .full-width {
 .form-group input,
 .form-group select {
   width: 100%;
-  min-width: 20ch;
+  min-width: 30ch;
   padding: var(--spacing-sm);
   border: 2px solid var(--input-border);
   border-radius: var(--border-radius-md);

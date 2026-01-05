@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { Router } from '@angular/router';
+import { StepperComponent } from '../../components/stepper/stepper.component';
 
 @Component({
   selector: 'app-review',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, StepperComponent],
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

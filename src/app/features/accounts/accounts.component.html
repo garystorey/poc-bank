@@ -13,7 +13,6 @@
       (ngModelChange)="onAccountChange($event)"
       aria-label="Account type"
     />
-  </div>
 
   <!-- Transaction filter -->
   <div class="filter-bar">
@@ -47,8 +46,10 @@
       (ngModelChange)="onEndDateChange($event)"
       aria-label="End date"
     />
-    <app-button type="button" variant="primary" class="filter-button" (click)="applyFilter()">Apply Filter</app-button>
-    <app-button type="button" variant="standard" class="filter-button" (click)="resetFilters()">Reset Filters</app-button>
+  </div>
+  <div class="filter-actions">
+    <app-button type="button" variant="primary" class="filter-button" (click)="resetFilters()">Reset Filters</app-button>
+  </div>
   </div>
 
   <p class="label" aria-live="polite">
