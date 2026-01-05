@@ -58,7 +58,7 @@
 
 [data-theme="dark"] .feature-card:hover .feature-icon {
   background-color: var(--secondary-color);
-  color: var(--black);
+  color: var(--text-on-secondary);
 }
 
 /* ===== Feature Title ===== */
@@ -67,12 +67,8 @@
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: var(--spacing-xs);
-  color: var(--primary-color);
+  color: var(--text-primary);
   transition: color var(--transition-base);
-}
-
-[data-theme="dark"] .feature-card h3 {
-  color: var(--accent-heading);
 }
 
 /* ===== Feature Description ===== */

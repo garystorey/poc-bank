@@ -16,7 +16,7 @@
   --white: hsl(0, 0%, 100%);
   --light-gray: hsl(220, 33%, 97%);
   --medium-gray: hsl(215, 41%, 91%);
-  --dark-gray: hsl(215, 19%, 52%);
+  --dark-gray: hsl(215, 24%, 28%);
   --black: hsl(220, 26%, 14%);
 
   /* Status Colors */
@@ -57,6 +57,7 @@
   --text-primary: var(--black);
   --text-secondary: var(--dark-gray);
   --text-inverted: var(--white);
+  --text-on-secondary: var(--black);
   --border-color: var(--medium-gray);
   --border-color-light: hsl(215, 41%, 95%);
 
@@ -94,8 +95,9 @@
 
   /* Text colors - WCAG AA compliant (min 4.5:1 contrast) */
   --text-primary: hsl(0, 0%, 95%);
-  --text-secondary: hsl(220, 15%, 70%);
-  --text-inverted: hsl(222, 47%, 11%);
+  --text-secondary: hsl(220, 12%, 78%);
+  --text-inverted: hsl(0, 0%, 96%);
+  --text-on-secondary: hsl(222, 47%, 11%);
 
   /* Heading colors for dark mode - high contrast */
   --heading-color: hsl(0, 0%, 98%);

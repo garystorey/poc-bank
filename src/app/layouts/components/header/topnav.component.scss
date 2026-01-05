@@ -24,7 +24,7 @@ header {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: var(--text-primary);
   text-decoration: none;
   transition: transform var(--transition-fast);
   z-index: 1001;
@@ -42,7 +42,7 @@ header {
   height: 42px;
   background: var(--gradient-secondary);
   border-radius: var(--border-radius-md);
-  color: var(--black);
+  color: var(--text-on-secondary);
   font-size: 1.25rem;
   box-shadow: var(--shadow-sm);
 }
@@ -131,23 +131,24 @@ header {
 }
 
 .nav-links li a:hover {
-  color: var(--primary-color);
+  color: var(--text-primary);
   background-color: var(--bg-tertiary);
 }
 
 [data-theme="dark"] .nav-links li a:hover {
-  color: var(--accent-heading);
-  background-color: hsl(223, 39%, 22%);
+  color: var(--text-primary);
+  background-color: hsl(223, 39%, 24%);
 }
 
 .nav-links li a.active {
-  color: var(--primary-color);
+  color: var(--text-primary);
   background-color: var(--bg-tertiary);
+  font-weight: 700;
 }
 
 [data-theme="dark"] .nav-links li a.active {
-  color: var(--accent-heading);
-  background-color: hsl(223, 39%, 22%);
+  color: var(--text-primary);
+  background-color: hsl(223, 39%, 24%);
 }
 
 /* ===== Navigation Actions ===== */
