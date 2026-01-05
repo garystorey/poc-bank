@@ -19,7 +19,7 @@ export class SelectComponent implements ControlValueAccessor {
 
   // Signal inputs
   readonly label = input.required<string>();
-  readonly selectId = input<string>();
+  readonly selectId = input<string|number>();
   readonly name = input<string>();
   readonly required = input<boolean>(false);
   readonly helpText = input<string>();
@@ -28,10 +28,15 @@ export class SelectComponent implements ControlValueAccessor {
   readonly selectAttrs = input<AttrBag | null>(null);
   readonly options = input<SelectOption[]>([]);
   readonly submitted = input<boolean>(false);
-
   // ---- CVA state ----
   readonly value = signal('');
   readonly disabled = signal(false);
+
+  readonly selected = computed<string>(() => {
+    const val = this.value();
+    const selectedOption = this.options().find(opt => opt.value === val);
+    return selectedOption ? String(selectedOption.value) : '';
+  });
 
   private readonly autoId = `app-select-${++nextUniqueId}`;
 

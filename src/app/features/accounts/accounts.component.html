@@ -4,56 +4,50 @@
 
   <!-- Account selector -->
   <div class="account-selector">
-    <label for="account-select" class="label">Select account:</label>
-    <select
-      id="account-select"
-      name="account"
-      aria-label="Account type"
-      class="select"
+    <app-select
+      [label]="'Select account:'"
+      [options]="accounts"
+      [selectId]="selectedAccount()"
+      [name]="'account'"
       [ngModel]="selectedAccount()"
       (ngModelChange)="onAccountChange($event)"
-    >
-      @for (account of accounts; track account) {
-        <option [value]="account">{{ account }}</option>
-      }
-    </select>
+      aria-label="Account type"
+    />
   </div>
 
   <!-- Transaction filter -->
   <div class="filter-bar">
-    <label for="transaction-filter" class="label">Filter transactions:</label>
-    <select
-      id="transaction-filter"
-      name="filter"
-      aria-label="Transaction filter"
-      class="select"
+    <app-select
+      [label]="'Filter transactions:'"
+      [options]="filterOptions"
+      [selectId]="'transaction-filter'"
+      [name]="'filter'"
       [ngModel]="filterType()"
       (ngModelChange)="onFilterTypeChange($event)"
-    >
-      <option value="all">All</option>
-      <option value="deposit">Deposits</option>
-      <option value="withdrawal">Withdrawals</option>
-      <option value="transfer">Transfers</option>
-    </select>
-    <input
-      type="date"
-      id="start-date"
+      aria-label="Transaction filter"
+    />
+
+    <app-input
+      label="Start date"
+      inputId="start-date"
       name="start-date"
-      class="input"
-      aria-label="Start date"
+      type="date"
+      class="date-input"
       [ngModel]="startDate()"
       (ngModelChange)="onStartDateChange($event)"
+      aria-label="Start date"
     />
-    <input
-      type="date"
-      id="end-date"
+    <app-input
+      label="End date"
+      inputId="end-date"
       name="end-date"
-      class="input"
-      aria-label="End date"
+      type="date"
+      class="date-input"
       [ngModel]="endDate()"
       (ngModelChange)="onEndDateChange($event)"
+      aria-label="End date"
     />
-    <button type="button" class="button" (click)="applyFilter()">Apply Filter</button>
+    <app-button type="button" variant="primary" class="filter-button" (click)="applyFilter()">Apply Filter</app-button>
   </div>
 
   <p class="label" aria-live="polite">

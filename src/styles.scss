@@ -314,6 +314,11 @@ form .full-width {
   border-color: var(--secondary-color);
 }
 
+[data-theme="dark"] input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+
 .form-actions {
   display: flex;
   justify-content: flex-end;

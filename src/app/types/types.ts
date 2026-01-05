@@ -20,6 +20,7 @@ export interface SelectOption {
   value: string | number;
   label: string;
   disabled?: boolean;
+  selected?: boolean;
 }
 
 export type ErrorSummaryMessage =
@@ -34,3 +35,18 @@ export type ErrorItem = {
   message: string;
   anchorId: string; // used to link/focus the field; defaults to path
 };
+
+export type AccountType = 'checking' | 'savings' | 'credit';
+export type TransactionFilter = 'all' | 'deposit' | 'withdrawal' | 'transfer';
+
+export type TransactionType = Exclude<TransactionFilter, 'all'>;
+
+export interface Transaction {
+  id: number;
+  account: AccountType;
+  date: string;
+  description: string;
+  location?: string;
+  type: TransactionType;
+  amount: number;
+}
