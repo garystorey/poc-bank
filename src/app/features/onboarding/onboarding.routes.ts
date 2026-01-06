@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { redirectAuthenticatedGuard } from '../../shared/guards/auth.guard';
 
 export const ONBOARDING_ROUTES: Routes = [
   {
@@ -8,6 +9,7 @@ export const ONBOARDING_ROUTES: Routes = [
   },
   {
     path: 'onboarding',
+    canMatch: [redirectAuthenticatedGuard],
     loadComponent: () =>
       import('../../layouts/onboarding.layout').then(m => m.OnboardingLayoutComponent),
     children: [

@@ -38,13 +38,15 @@ export class FundingComponent {
     fundingSource: this.fb.nonNullable.control('', [Validators.required]),
     routingNumber: this.fb.nonNullable.control('', [
       Validators.required,
+      Validators.minLength(9),
+      Validators.maxLength(9),
       digitsOnly(9),
     ]),
     accountNumber: this.fb.nonNullable.control('', [
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(17),
-      Validators.pattern(/^\d+$/),
+      Validators.pattern(/^[a-zA-Z0-9]+$/),
     ]),
     accountType: this.fb.nonNullable.control('', [Validators.required]),
     bankName: this.fb.nonNullable.control('', [
@@ -64,6 +66,8 @@ export class FundingComponent {
     fundingSource: { required: 'Funding Source is required.' },
     routingNumber: {
       required: 'Routing Number is required.',
+      minlength: 'Routing Number must be exactly 9 digits.',
+      maxlength: 'Routing Number must be exactly 9 digits.',
       digitsOnly: 'Routing Number must be 9 digits.',
       _default: 'Routing Number is invalid.',
     },
@@ -71,7 +75,7 @@ export class FundingComponent {
       required: 'Account Number is required.',
       minlength: 'Account Number must be at least 4 digits.',
       maxlength: 'Account Number must be 17 digits or fewer.',
-      pattern: 'Account Number must contain digits only.',
+      pattern: 'Account Number may only include letters and numbers.',
       _default: 'Account Number is invalid.',
     },
     accountType: { required: 'Account Type is required.' },

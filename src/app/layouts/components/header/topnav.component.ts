@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal, inject, PLATFORM_ID } from '@angular/core';
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { isPlatformBrowser, NgClass } from '@angular/common';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-topnav',
@@ -12,6 +13,8 @@ import { isPlatformBrowser, NgClass } from '@angular/common';
 })
 export class TopnavComponent {
   private platformId = inject(PLATFORM_ID);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   readonly mobileMenuOpen = signal(false);
   readonly isDarkMode = signal(false);
@@ -30,6 +33,15 @@ export class TopnavComponent {
 
   closeMobileMenu(): void {
     this.mobileMenuOpen.set(false);
+  }
+
+  handleProtectedNavigation(event: Event): void {
+    this.closeMobileMenu();
+
+    if (this.authService.isAuthenticated()) {
+      event.preventDefault();
+      this.router.navigate(this.authService.accountRoute());
+    }
   }
 
   toggleTheme(): void {

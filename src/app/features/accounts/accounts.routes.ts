@@ -1,8 +1,10 @@
 import { HomeLayoutComponent } from '../../layouts/home.layout';
+import { authGuard } from '../../shared/guards/auth.guard';
 
 export const ACCOUNT_ROUTES = [
   {
     path: 'accounts',
+    canMatch: [authGuard],
     component: HomeLayoutComponent,
     children: [
       {
