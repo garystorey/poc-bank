@@ -1,12 +1,16 @@
 <section class="stepper">
-
-  <div class="progress-bar">
-    <div [class]="progressClass()"></div>
+  <div class="stepper-track">
+    <div class="track-base"></div>
+    <div class="track-progress" [style.width]="progressWidth()"></div>
   </div>
 
   <div class="step-indicator">
     @for (step of steps; track step.number) {
-      <app-step [currentStep]="currentStep()" [stepNumber]="step.number" [stepLabel]="step.label" [active]="step.number === currentStep()"/>
+      <app-step
+        [currentStep]="currentStep()"
+        [stepNumber]="step.number"
+        [stepLabel]="step.label"
+        [active]="step.number === currentStep()"/>
     }
   </div>
 

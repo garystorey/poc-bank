@@ -1,44 +1,52 @@
-/* ===== Progress Bar ===== */
-.progress-bar {
-  height: 6px;
-  background-color: var(--bg-tertiary);
+/* ===== Stepper Layout ===== */
+.stepper {
   position: relative;
-  overflow: hidden;
-  transition: background-color var(--transition-base);
+  padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--card-shadow);
+  transition: background-color var(--transition-base), box-shadow var(--transition-base);
 }
 
-.progress-1,
-.progress-2,
-.progress-3,
-.progress-4 {
+.stepper-track {
+  position: absolute;
+  top: calc(var(--spacing-md) + 18px);
+  left: var(--spacing-lg);
+  right: var(--spacing-lg);
+  height: 4px;
+  pointer-events: none;
+}
+
+.track-base,
+.track-progress {
+  position: absolute;
   height: 100%;
+  border-radius: 999px;
+}
+
+.track-base {
+  width: 100%;
+  background-color: var(--border-color-light);
+}
+
+.track-progress {
   background: var(--gradient-secondary);
-  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
   transition: width var(--transition-slow);
 }
-
-.progress-1 { width: 25%; }
-.progress-2 { width: 50%; }
-.progress-3 { width: 75%; }
-.progress-4 { width: 100%; border-radius: 0; }
 
 /* ===== Step Indicator ===== */
 .step-indicator {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: var(--spacing-md) var(--spacing-lg);
-  background-color: var(--card-bg);
-  border-bottom: 1px solid var(--border-color);
-  transition: background-color var(--transition-base), border-color var(--transition-base);
+  gap: var(--spacing-md);
   position: relative;
-  column-gap: 0;
+  z-index: 1;
 }
 
 /* ===== Responsive Design ===== */
 @media (max-width: 768px) {
   .step-indicator {
-    padding: var(--spacing-sm);
     flex-wrap: wrap;
     column-gap: 0;
     row-gap: var(--spacing-sm);
