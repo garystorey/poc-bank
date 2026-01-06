@@ -11,6 +11,6 @@ export function digitsOnly(len: number) {
   return (control: AbstractControl): ValidationErrors | null => {
     const raw = String(control.value ?? '').trim();
     if (!raw) return null; // required handled separately
-    return new RegExp(`^\\d{${len}}$`).test(raw) ? null : { digits: { len } };
+    return new RegExp(`^\\d{${len}}$`).test(raw) ? null : { digitsOnly: { len } };
   };
 }

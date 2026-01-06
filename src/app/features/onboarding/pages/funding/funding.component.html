@@ -28,11 +28,11 @@
 
     <div class="form-row">
       <app-input label="Routing Number" [required]="true" inputId="routingNumber" name="routingNumber"
-        formControlName="routingNumber" [inputAttrs]="{ inputmode: 'numeric', autocomplete: 'off' }"
+        formControlName="routingNumber" [inputAttrs]="{ inputmode: 'numeric', autocomplete: 'off', maxlength: 9 }"
         errorText="Routing Number must be exactly 9 digits." helpText="Routing Number must be exactly 9 digits." />
       <app-input label="Account Number" [required]="true" inputId="accountNumber" name="accountNumber"
-        formControlName="accountNumber" [inputAttrs]="{ inputmode: 'numeric', autocomplete: 'off' }"
-        helpText="Enter your Account Number" errorText="Account Number is required and must be digits only." />
+        formControlName="accountNumber" [inputAttrs]="{ inputmode: 'text', autocomplete: 'off' }"
+        helpText="Account number can include letters and numbers." errorText="Account Number is required and must be alphanumeric." />
     </div>
 
     <div class="form-row">
