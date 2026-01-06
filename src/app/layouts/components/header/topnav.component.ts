@@ -25,7 +25,8 @@ export class TopnavComponent {
     if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.isDarkMode.set(savedTheme === 'dark' || (!savedTheme && prefersDark));
+      const resolvedTheme = (savedTheme as 'light' | 'dark' | null) ?? (prefersDark ? 'dark' : 'light');
+      this.applyTheme(resolvedTheme);
     }
   }
 
@@ -60,9 +61,13 @@ export class TopnavComponent {
   toggleTheme(): void {
     if (isPlatformBrowser(this.platformId)) {
       const newTheme = this.isDarkMode() ? 'light' : 'dark';
-      this.isDarkMode.set(!this.isDarkMode());
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+      this.applyTheme(newTheme);
     }
+  }
+
+  private applyTheme(theme: 'light' | 'dark'): void {
+    this.isDarkMode.set(theme === 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }
 }
