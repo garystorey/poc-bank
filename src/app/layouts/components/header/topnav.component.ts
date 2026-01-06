@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, signal, inject, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { isPlatformBrowser, NgClass } from '@angular/common';
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthService } from '../../../services/auth.service';
+
 
 @Component({
   selector: 'app-topnav',
