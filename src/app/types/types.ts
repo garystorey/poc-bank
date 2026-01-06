@@ -50,3 +50,8 @@ export interface Transaction {
   type: TransactionType;
   amount: number;
 }
+
+export interface Option {
+  value: string,
+  label: string
+}

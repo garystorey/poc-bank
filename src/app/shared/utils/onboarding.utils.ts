@@ -1,8 +1,4 @@
-interface Option {
-  value: string,
-  label: string
-}
-
+import {Option} from '../../types/types';
 export const DEPOSIT_METHODS: Option[] = [
     { value: '', label: 'Select Method' },
     { value: 'check', label: 'Check' },

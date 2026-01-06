@@ -7,10 +7,33 @@
   position: relative;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
   overflow: hidden;
+  min-height: 375px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+
+.testimonial-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--secondary-color);
+  transform: scaleX(0);
+  transition: transform var(--transition-base);
 }
 
 .testimonial-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary-color);
+}
+
+.testimonial-card:hover::after {
+  transform: scaleX(1);
 }
 
 /* Quote decoration */
@@ -21,8 +44,8 @@
   left: var(--spacing-sm);
   font-size: 5rem;
   line-height: 1;
-  color: var(--secondary-color);
-  opacity: 0.15;
+  color: var(--secondary-light);
+  opacity: 0.75;
   font-family: Georgia, 'Times New Roman', serif;
   pointer-events: none;
 }
