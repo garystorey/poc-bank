@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Launch the accompanying API with `npm run server:dev`. The service listens on `http://localhost:4000` and stores data in `server/data/bank.db.json`. You can reseed the database with `npm run db:seed` and run API integration checks with `npm run test:api`.
+Launch the accompanying API with `npm run server:dev`. The service listens on `http://localhost:4000` and stores data in `server/data/bank.db` (SQLite). You can reseed the database with `npm run db:seed` and run API integration checks with `npm run test:api`. Node 22's `--experimental-strip-types` flag is used so the backend can stay authored in TypeScript without extra tooling.
 
 ## Code scaffolding
 

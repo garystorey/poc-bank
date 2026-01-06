@@ -1,16 +1,18 @@
-const { before, after, describe, it } = require('node:test');
-const assert = require('node:assert');
-const { app } = require('../app');
-const { seedDatabase } = require('../database');
+import { before, after, describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import http from 'node:http';
+import type { AddressInfo } from 'node:net';
+import { app } from '../app.ts';
+import { seedDatabase } from '../database.ts';
 
-let server;
-let baseUrl;
+let server: http.Server;
+let baseUrl: string;
 
 describe('API', () => {
   before(() => {
     seedDatabase();
     server = app.listen(0);
-    const { port } = server.address();
+    const { port } = server.address() as AddressInfo;
     baseUrl = `http://127.0.0.1:${port}`;
   });
 
@@ -38,6 +40,6 @@ describe('API', () => {
     const response = await fetch(`${baseUrl}/api/transactions?accountId=1&pageSize=5`);
     assert.equal(response.status, 200);
     const body = await response.json();
-    assert.ok(body.data.every((txn) => txn.accountId === 1));
+    assert.ok(body.data.every((txn: any) => txn.accountId === 1));
   });
 });
