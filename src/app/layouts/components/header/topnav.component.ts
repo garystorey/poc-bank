@@ -19,6 +19,7 @@ export class TopnavComponent {
 
   readonly mobileMenuOpen = signal(false);
   readonly isDarkMode = signal(false);
+  readonly isAuthenticated = this.authService.isAuthenticated;
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
@@ -36,10 +37,21 @@ export class TopnavComponent {
     this.mobileMenuOpen.set(false);
   }
 
+  handleAuthAction(): void {
+    if (!this.isAuthenticated()) {
+      this.closeMobileMenu();
+      return;
+    }
+
+    this.authService.logout();
+    this.router.navigate(['/']);
+    this.closeMobileMenu();
+  }
+
   handleProtectedNavigation(event: Event): void {
     this.closeMobileMenu();
 
-    if (this.authService.isAuthenticated()) {
+    if (this.isAuthenticated()) {
       event.preventDefault();
       this.router.navigate(this.authService.accountRoute());
     }

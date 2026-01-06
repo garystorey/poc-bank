@@ -1,61 +1,82 @@
-/* =======================
-   Success page styles
-   ======================= */
-
 .confirmation-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-lg);
-  background-color: var(--light-gray);
+  padding: var(--spacing-lg) var(--spacing-sm);
+  background: radial-gradient(
+      circle at 20% 20%,
+      color-mix(in srgb, var(--primary-color) 18%, transparent),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 80% 0%,
+      color-mix(in srgb, var(--secondary-color) 18%, transparent),
+      transparent 28%
+    ),
+    var(--bg-secondary);
 }
 
-.confirmation-content {
-  text-align: center;
-  background: var(--white);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-xl) var(--spacing-lg);
-  max-width: 60ch;
+.confirmation-card {
   width: 100%;
-  animation: fadeIn 0.8s ease-out forwards;
+  max-width: 720px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(var(--spacing-lg), 5vw, var(--spacing-xl));
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.confirmation-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: var(--text-inverted);
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  box-shadow: var(--shadow-md);
 }
 
 .confirmation-title {
   font-family: var(--font-heading);
-  font-size: var(--heading-font-size);
-  color: var(--success);
-  margin-bottom: var(--spacing-md);
-  animation: bounce 1s infinite alternate;
+  font-size: clamp(1.75rem, 3vw, var(--heading-font-size));
+  color: var(--text-primary);
 }
 
 .confirmation-message {
   font-family: var(--font-primary);
   font-size: var(--body-font-size);
-  color: var(--dark-gray);
-  margin-bottom: var(--spacing-lg);
+  color: var(--text-secondary);
+  max-width: 60ch;
+  margin: 0 auto;
 }
 
 .confirmation-actions {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+  justify-content: center;
+  align-items: stretch;
 }
 
-@media (min-width: 480px) {
+.confirmation-link {
+  display: block;
+}
+
+@media (min-width: 640px) {
   .confirmation-actions {
     flex-direction: row;
+    align-items: center;
     justify-content: center;
   }
-}
 
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes bounce {
-  0%   { transform: translateY(-3px); }
-  100% { transform: translateY(3px); }
+  .confirmation-link {
+    width: auto;
+  }
 }

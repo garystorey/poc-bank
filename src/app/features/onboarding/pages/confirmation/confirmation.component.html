@@ -1,20 +1,19 @@
-<!-- Success page – “Account created” -->
 <div class="confirmation-page">
-  <div class="confirmation-content">
-    <!-- Header / Logo -->
-    <h1 class="confirmation-title">🎉 Account Created!</h1>
+  <div class="confirmation-card">
+    <div class="confirmation-icon" aria-hidden="true">
+      <i class="fas fa-check"></i>
+    </div>
 
-    <!-- Message -->
+    <h1 class="confirmation-title">Account Created</h1>
     <p class="confirmation-message">
-      Your new checking account at POC Bank is ready to use. Let’s get started.
+      Your new POC Bank checking account is ready. You can head back home or sign in to explore your new account dashboard.
     </p>
 
-    <!-- Action buttons -->
     <div class="confirmation-actions">
-      <a routerLink="/">
-        <app-button variant="standard">Return to Home</app-button>
+      <a routerLink="/" class="confirmation-link">
+        <app-button variant="standard">Return Home</app-button>
       </a>
-      <a routerLink="/login">
+      <a routerLink="/login" class="confirmation-link">
         <app-button variant="primary">Go to Login</app-button>
       </a>
     </div>
