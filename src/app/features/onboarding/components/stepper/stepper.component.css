@@ -32,7 +32,7 @@
   border-bottom: 1px solid var(--border-color);
   transition: background-color var(--transition-base), border-color var(--transition-base);
   position: relative;
-  gap: var(--spacing-md);
+  column-gap: 0;
 }
 
 /* ===== Responsive Design ===== */
@@ -40,7 +40,8 @@
   .step-indicator {
     padding: var(--spacing-sm);
     flex-wrap: wrap;
-    gap: var(--spacing-sm);
+    column-gap: 0;
+    row-gap: var(--spacing-sm);
   }
 }
 
