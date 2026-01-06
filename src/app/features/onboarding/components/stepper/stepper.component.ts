@@ -19,5 +19,11 @@ export class StepperComponent {
     { number: 4, label: 'Confirmation' },
   ];
 
-  readonly progressClass = computed(() => `progress-fill progress-${this.currentStep()}`);
+  readonly progressWidth = computed(() => {
+    const totalSegments = this.steps.length - 1;
+    const clampedStep = Math.min(Math.max(this.currentStep(), 1), this.steps.length);
+    const progress = (clampedStep - 1) / totalSegments;
+
+    return `${progress * 100}%`;
+  });
 }

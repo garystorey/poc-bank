@@ -5,36 +5,13 @@
 }
 
 .step {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: var(--small-font-size);
   color: var(--text-secondary);
   text-align: center;
-  gap: var(--spacing-xxs);
-}
-
-.step::before,
-.step::after {
-  content: '';
-  position: absolute;
-  top: 18px;
-  width: 50%;
-  height: 2px;
-  background-color: var(--border-color-light);
-  z-index: 0;
-}
-
-.step::before { left: -50%; }
-.step::after { left: 50%; }
-
-:host(:first-child) .step::before {
-  display: none;
-}
-
-:host(:last-child) .step::after {
-  display: none;
+  gap: var(--spacing-xs);
 }
 
 .step-number {
@@ -51,11 +28,12 @@
   transition: all var(--transition-base);
   color: var(--text-secondary);
   z-index: 1;
+  position: relative;
 }
 
 .step-label {
   font-size: var(--small-font-size);
-  max-width: 120px;
+  max-width: 140px;
   line-height: 1.3;
 }
 
@@ -68,7 +46,7 @@
   background-color: var(--secondary-color);
   border-color: var(--secondary-color);
   color: var(--text-on-secondary);
-  box-shadow: 0 0 0 4px var(--input-focus-ring);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), 0 0 0 4px var(--input-focus-ring);
 }
 
 .step.completed {
@@ -82,9 +60,13 @@
 }
 
 .step.completed .step-number::before {
-  content: '\f00c';
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: var(--small-font-size);
+  font-weight: 700;
 }
 
 [data-theme="dark"] .step,
