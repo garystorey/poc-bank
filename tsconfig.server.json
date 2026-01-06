@@ -10,10 +10,7 @@
     "moduleResolution": "NodeNext",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "types": ["node"],
-    "paths": {
-      "zod": ["./server/vendor/zod"]
-    }
+    "types": ["node"]
   },
   "include": ["server/**/*.ts"],
   "exclude": ["node_modules", "dist"]
