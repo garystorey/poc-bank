@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "server:dev": "node --watch server/index.js",
+    "db:seed": "node server/seed.js",
+    "test:api": "node --test server/tests/api.test.js"
   },
   "private": true,
   "dependencies": {
