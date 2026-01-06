@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { digitsOnly, moneyValidator } from '../../validators/money.validator';
+import { digitsOnly, moneyValidator } from '../../../../shared/utils/money.validator';
 import { Router } from '@angular/router';
 import { ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES } from '../../../../shared/utils/onboarding.utils';
 import { InputComponent } from "../../../../shared/ui/input/input.component";

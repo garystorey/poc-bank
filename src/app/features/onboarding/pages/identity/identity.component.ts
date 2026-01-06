@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { dateInPastValidator } from '../../validators/date-past.validator';
+import { dateInPastValidator } from '../../../../shared/utils/date-past.validator';
 import { Router } from '@angular/router';
 import { US_STATES } from '../../../../shared/utils/usstates';
 import { InputComponent } from "../../../../shared/ui/input/input.component";
@@ -10,7 +10,7 @@ import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { StepperComponent } from '../../components/stepper/stepper.component';
 import { ErrorSummaryComponent } from '../../../../shared/ui/errorsummary/errorsummary.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { minimumAgeValidator } from '../../validators/age.validator';
+import { minimumAgeValidator } from '../../../../shared/utils/age.validator';
 
 @Component({
   selector: 'app-identity',
