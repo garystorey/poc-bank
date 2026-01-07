@@ -142,8 +142,4 @@ export class AccountsComponent {
 
     return this.sortDirection() === 'asc' ? 'ascending' : 'descending';
   }
-
-  reseed() {
-    this.store.reseed();
-  }
 }

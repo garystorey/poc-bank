@@ -63,6 +63,13 @@ export function runMigrations() {
   `);
 }
 
+export function ensureSeeded() {
+  const userCount = db.prepare('SELECT COUNT(*) as count FROM users').get() as { count: number };
+  if (userCount.count === 0) {
+    seedDatabase();
+  }
+}
+
 function resetTables() {
   db.exec(`
     DELETE FROM transactions;

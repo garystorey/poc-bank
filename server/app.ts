@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import {
+  ensureSeeded,
   findUserWithAccounts,
   listAccounts,
   listTransactions,
@@ -11,6 +12,7 @@ import {
 import { z, ZodError } from './validation.ts';
 
 runMigrations();
+ensureSeeded();
 
 const app = express();
 app.use(cors({ origin: 'http://localhost:4200', credentials: true }));
