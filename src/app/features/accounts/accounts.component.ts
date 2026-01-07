@@ -21,11 +21,11 @@ export class AccountsComponent {
   readonly userId = input<number>(1);
 
   readonly accounts = computed<SelectOption[]>(() =>
-    this.store.accounts().map((account) => ({ value: account.id, label: `${account.type} • ${account.balance.toFixed(2)}` }))
+    this.store.accounts().map((account) => ({ value: String(account.id), label: `${account.type} • ${account.balance.toFixed(2)}` }))
   );
 
   readonly transactions = signal<TransactionDto[]>([]);
-  readonly selectedAccount = signal<number | null>(null);
+  readonly selectedAccount = signal<string>('');
   readonly filterType = signal<TransactionFilter>('all');
   readonly startDate = signal<string>('');
   readonly endDate = signal<string>('');
@@ -47,7 +47,7 @@ export class AccountsComponent {
     effect(() => {
       const selectedId = this.store.selectedAccountId();
       if (selectedId !== null) {
-        this.selectedAccount.set(selectedId);
+        this.selectedAccount.set(String(selectedId));
       }
     });
 
@@ -67,8 +67,10 @@ export class AccountsComponent {
     const start = startDate ? new Date(startDate) : null;
     const end = endDate ? new Date(endDate) : null;
 
+    const selectedAccountId = selectedAccount ? Number(selectedAccount) : null;
+
     return this.transactions()
-      .filter((transaction) => transaction.accountId === selectedAccount)
+      .filter((transaction) => (selectedAccountId === null ? false : transaction.accountId === selectedAccountId))
       .filter((transaction) =>
         filterType === 'all' ? true : transaction.type === filterType
       )
@@ -100,13 +102,12 @@ export class AccountsComponent {
       });
   });
 
-  onAccountChange(account: number | string) {
-    const accountId = typeof account === 'string' ? Number(account) : account;
-    if (!Number.isFinite(accountId)) {
-      return;
+  onAccountChange(account: string) {
+    this.selectedAccount.set(account);
+    const accountId = Number(account);
+    if (Number.isFinite(accountId)) {
+      this.store.selectAccount(accountId);
     }
-    this.selectedAccount.set(accountId);
-    this.store.selectAccount(accountId);
   }
 
   onFilterTypeChange(filter: TransactionFilter) {
