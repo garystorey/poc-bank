@@ -1,12 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map, distinctUntilChanged } from 'rxjs';
 import { SelectOption, TransactionFilter } from '../../types/types';
 import { ButtonComponent } from '../../shared/ui/button/button.component';
 import { SelectComponent } from '../../shared/ui/select/select.component';
 import { InputComponent } from '../../shared/ui/input/input.component';
 import { AccountStoreService } from '../../services/account-store.service';
 import { TransactionDto } from '../../types/api-types';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-accounts',
@@ -18,11 +22,18 @@ import { TransactionDto } from '../../types/api-types';
 })
 export class AccountsComponent {
   readonly store = inject(AccountStoreService);
-  readonly userId = input<number>(1);
+  private readonly route = inject(ActivatedRoute);
+  private readonly authService = inject(AuthService);
 
-  readonly accounts = computed<SelectOption[]>(() =>
-    this.store.accounts().map((account) => ({ value: String(account.id), label: `${account.type} • ${account.balance.toFixed(2)}` }))
-  );
+  readonly accounts = computed<SelectOption[]>(() => {
+    const accounts = this.store.accounts();
+    const filtered = accounts.filter((account) => ['checking', 'savings'].includes(account.type));
+    const source = filtered.length ? filtered : accounts;
+    return source.map((account) => ({
+      value: String(account.id),
+      label: `${account.type.charAt(0).toUpperCase()}${account.type.slice(1)}`,
+    }));
+  });
 
   readonly transactions = signal<TransactionDto[]>([]);
   readonly selectedAccount = signal<string>('');
@@ -39,10 +50,25 @@ export class AccountsComponent {
   ];
 
   constructor() {
-    effect(() => {
-      const id = this.userId();
-      this.store.bootstrap(id);
-    });
+    this.route.paramMap
+      .pipe(
+        map((params) => {
+          const paramId = Number(params.get('userId'));
+          const authId = Number(this.authService.getAccountNumber());
+          if (Number.isFinite(paramId) && paramId > 0) {
+            return paramId;
+          }
+          if (Number.isFinite(authId) && authId > 0) {
+            return authId;
+          }
+          return 1;
+        }),
+        distinctUntilChanged(),
+        takeUntilDestroyed(),
+      )
+      .subscribe((id) => {
+        this.store.bootstrap(id);
+      });
 
     effect(() => {
       const selectedId = this.store.selectedAccountId();
