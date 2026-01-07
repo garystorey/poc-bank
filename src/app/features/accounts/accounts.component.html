@@ -16,9 +16,9 @@
     <app-select
       [label]="'Select account:'"
       [options]="accounts()"
-      [selectId]="selectedAccount()"
+      [selectId]="'account-select'"
       [name]="'account'"
-      [ngModel]="selectedAccount()"
+      [ngModel]="selectedAccountValue()"
       (ngModelChange)="onAccountChange($event)"
       aria-label="Account type"
     />
@@ -62,7 +62,7 @@
   </div>
 
   <p class="label" aria-live="polite">
-    Showing {{ filteredTransactions().length }} transactions for account {{ selectedAccount() }}.
+    Showing {{ filteredTransactions().length }} transactions for account {{ selectedAccountValue() }}.
   </p>
 
   @if (filteredTransactions().length) {

@@ -9,7 +9,6 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
 import { SelectComponent } from '../../shared/ui/select/select.component';
 import { InputComponent } from '../../shared/ui/input/input.component';
 import { AccountStoreService } from '../../services/account-store.service';
-import { TransactionDto } from '../../types/api-types';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -35,8 +34,10 @@ export class AccountsComponent {
     }));
   });
 
-  readonly transactions = signal<TransactionDto[]>([]);
-  readonly selectedAccount = signal<string>('');
+  readonly selectedAccountValue = computed(() => {
+    const selectedId = this.store.selectedAccountId();
+    return selectedId ? String(selectedId) : '';
+  });
   readonly filterType = signal<TransactionFilter>('all');
   readonly startDate = signal<string>('');
   readonly endDate = signal<string>('');
@@ -70,20 +71,9 @@ export class AccountsComponent {
         this.store.bootstrap(id);
       });
 
-    effect(() => {
-      const selectedId = this.store.selectedAccountId();
-      if (selectedId !== null) {
-        this.selectedAccount.set(String(selectedId));
-      }
-    });
-
-    effect(() => {
-      this.transactions.set(this.store.transactions());
-    });
   }
 
   readonly filteredTransactions = computed(() => {
-    const selectedAccount = this.selectedAccount();
     const filterType = this.filterType();
     const startDate = this.startDate();
     const endDate = this.endDate();
@@ -93,9 +83,10 @@ export class AccountsComponent {
     const start = startDate ? new Date(startDate) : null;
     const end = endDate ? new Date(endDate) : null;
 
-    const selectedAccountId = selectedAccount ? Number(selectedAccount) : null;
+    const selectedAccountId = this.store.selectedAccountId();
 
-    return this.transactions()
+    return this.store
+      .transactions()
       .filter((transaction) => (selectedAccountId === null ? false : transaction.accountId === selectedAccountId))
       .filter((transaction) =>
         filterType === 'all' ? true : transaction.type === filterType
@@ -129,7 +120,6 @@ export class AccountsComponent {
   });
 
   onAccountChange(account: string) {
-    this.selectedAccount.set(account);
     const accountId = Number(account);
     if (Number.isFinite(accountId)) {
       this.store.selectAccount(accountId);
