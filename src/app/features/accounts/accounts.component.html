@@ -16,7 +16,7 @@
     <app-select
       [label]="'Select account:'"
       [options]="accounts()"
-      [selectId]="selectedAccount() ?? ''"
+      [selectId]="selectedAccount()"
       [name]="'account'"
       [ngModel]="selectedAccount()"
       (ngModelChange)="onAccountChange($event)"
