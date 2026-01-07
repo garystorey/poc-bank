@@ -6,9 +6,8 @@ import {
   listTransactions,
   listUsers,
   runMigrations,
-} from './database.ts';
-import { z, ZodError } from './validation.ts';
-
+} from './database';
+import { z, ZodError } from 'zod';
 runMigrations();
 
 const app = express();
