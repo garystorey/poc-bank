@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { LandingPageComponent } from './landing.component';
 
@@ -9,7 +10,7 @@ describe('LandingPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LandingPageComponent],
+      imports: [LandingPageComponent, RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
