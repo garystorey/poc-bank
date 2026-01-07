@@ -34,13 +34,4 @@ describe('ApiService', () => {
     request.flush(expected);
   });
 
-  it('re-seeds data', () => {
-    service.reseed().subscribe((response) => {
-      expect(response.message).toContain('Database');
-    });
-
-    const request = httpMock.expectOne('http://localhost:4000/api/admin/seed');
-    expect(request.request.method).toBe('POST');
-    request.flush({ message: 'Database reseeded' });
-  });
 });

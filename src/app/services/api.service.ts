@@ -25,10 +25,6 @@ export class ApiService {
     return this.http.get<PaginatedResponse<TransactionDto>>(`${this.baseUrl}/transactions`, { params: this.buildParams(params) });
   }
 
-  reseed(): Observable<{ message: string }> {
-    return this.http.post<{ message: string }>(`${this.baseUrl}/admin/seed`, {});
-  }
-
   usersSignal(params: Record<string, string | number> = {}): Signal<PaginatedResponse<UserDto> | undefined> {
     return toSignal(this.listUsers(params), { initialValue: undefined });
   }

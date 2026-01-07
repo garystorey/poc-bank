@@ -91,17 +91,4 @@ export class AccountStoreService {
     };
     this._transactions.update((existing) => [newTransaction, ...existing]);
   }
-
-  reseed() {
-    this._loading.set(true);
-    this.api.reseed().subscribe({
-      next: () => {
-        this.bootstrap();
-      },
-      error: () => {
-        this._error.set('Unable to reseed data');
-        this._loading.set(false);
-      },
-    });
-  }
 }

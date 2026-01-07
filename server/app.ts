@@ -1,18 +1,15 @@
 import express from 'express';
 import cors from 'cors';
 import {
-  ensureSeeded,
   findUserWithAccounts,
   listAccounts,
   listTransactions,
   listUsers,
   runMigrations,
-  seedDatabase,
 } from './database.ts';
 import { z, ZodError } from './validation.ts';
 
 runMigrations();
-ensureSeeded();
 
 const app = express();
 app.use(cors({ origin: 'http://localhost:4200', credentials: true }));
@@ -88,15 +85,6 @@ app.get('/api/transactions', (req, res, next): void => {
     res.json(buildPaginatedResponse(data, pagination.page, pagination.pageSize, total));
   } catch (error) {
     return next(error);
-  }
-});
-
-app.post('/api/admin/seed', (_req, res, next): void => {
-  try {
-    const summary = seedDatabase();
-    res.json({ message: 'Database reseeded', summary });
-  } catch (error) {
-    next(error);
   }
 });
 
