@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AccountType, SelectOption, Transaction, TransactionFilter } from '../../types/types';
-import { accountTypes, fakeTransactions } from './fakeData';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map, distinctUntilChanged } from 'rxjs';
+import { SelectOption, TransactionFilter } from '../../types/types';
 import { ButtonComponent } from '../../shared/ui/button/button.component';
 import { SelectComponent } from '../../shared/ui/select/select.component';
-import { ACCOUNT_TYPES } from '../../shared/utils/onboarding.utils';
-import { InputComponent } from "../../shared/ui/input/input.component";
-
+import { InputComponent } from '../../shared/ui/input/input.component';
+import { AccountStoreService } from '../../services/account-store.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-accounts',
@@ -17,11 +19,25 @@ import { InputComponent } from "../../shared/ui/input/input.component";
   styleUrl: './accounts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AccountsComponent implements OnInit {
-  readonly accounts: SelectOption[] = ACCOUNT_TYPES;
+export class AccountsComponent {
+  readonly store = inject(AccountStoreService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly authService = inject(AuthService);
 
-  readonly transactions = signal<Transaction[]>(fakeTransactions);
-  readonly selectedAccount = signal<AccountType>('checking');
+  readonly accounts = computed<SelectOption[]>(() => {
+    const accounts = this.store.accounts();
+    const filtered = accounts.filter((account) => ['checking', 'savings'].includes(account.type));
+    const source = filtered.length ? filtered : accounts;
+    return source.map((account) => ({
+      value: String(account.id),
+      label: `${account.type.charAt(0).toUpperCase()}${account.type.slice(1)}`,
+    }));
+  });
+
+  readonly selectedAccountValue = computed(() => {
+    const selectedId = this.store.selectedAccountId();
+    return selectedId ? String(selectedId) : '';
+  });
   readonly filterType = signal<TransactionFilter>('all');
   readonly startDate = signal<string>('');
   readonly endDate = signal<string>('');
@@ -34,13 +50,30 @@ export class AccountsComponent implements OnInit {
     { value: 'transfer', label: 'Transfers' },
   ];
 
-  ngOnInit(): void {
-    // Initialization logic if needed
+  constructor() {
+    this.route.paramMap
+      .pipe(
+        map((params) => {
+          const authId = Number(this.authService.getAccountNumber());
+          if (Number.isFinite(authId) && authId > 0) {
+            return authId;
+          }
+          const paramId = Number(params.get('userId'));
+          if (Number.isFinite(paramId) && paramId > 0) {
+            return paramId;
+          }
+          return 1;
+        }),
+        distinctUntilChanged(),
+        takeUntilDestroyed(),
+      )
+      .subscribe((id) => {
+        this.store.bootstrap(id);
+      });
 
   }
 
   readonly filteredTransactions = computed(() => {
-    const selectedAccount = this.selectedAccount();
     const filterType = this.filterType();
     const startDate = this.startDate();
     const endDate = this.endDate();
@@ -50,13 +83,16 @@ export class AccountsComponent implements OnInit {
     const start = startDate ? new Date(startDate) : null;
     const end = endDate ? new Date(endDate) : null;
 
-    return this.transactions()
-      .filter((transaction) => transaction.account === selectedAccount)
+    const selectedAccountId = this.store.selectedAccountId();
+
+    return this.store
+      .transactions()
+      .filter((transaction) => (selectedAccountId === null ? false : transaction.accountId === selectedAccountId))
       .filter((transaction) =>
         filterType === 'all' ? true : transaction.type === filterType
       )
       .filter((transaction) => {
-        const transactionDate = new Date(transaction.date);
+        const transactionDate = new Date(transaction.postedAt);
         const afterStart = start ? transactionDate >= start : true;
         const beforeEnd = end ? transactionDate <= end : true;
         return afterStart && beforeEnd;
@@ -66,7 +102,7 @@ export class AccountsComponent implements OnInit {
 
         switch (sortColumn) {
           case 'date':
-            comparison = new Date(a.date).getTime() - new Date(b.date).getTime();
+            comparison = new Date(a.postedAt).getTime() - new Date(b.postedAt).getTime();
             break;
           case 'description':
             comparison = a.description.localeCompare(b.description);
@@ -83,8 +119,11 @@ export class AccountsComponent implements OnInit {
       });
   });
 
-  onAccountChange(account: AccountType) {
-    this.selectedAccount.set(account);
+  onAccountChange(account: string) {
+    const accountId = Number(account);
+    if (Number.isFinite(accountId)) {
+      this.store.selectAccount(accountId);
+    }
   }
 
   onFilterTypeChange(filter: TransactionFilter) {
@@ -97,11 +136,6 @@ export class AccountsComponent implements OnInit {
 
   onEndDateChange(date: string) {
     this.endDate.set(date);
-  }
-
-  applyFilter() {
-    // Filters are applied immediately via signals, but this keeps the button accessible
-    // and explicit for keyboard users.
   }
 
   resetFilters() {

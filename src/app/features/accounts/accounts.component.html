@@ -2,14 +2,23 @@
 <section class="account-summary" aria-labelledby="page-title">
   <h1 id="page-title" class="heading">POC Bank - Account Summary</h1>
 
+  <div class="status" aria-live="polite">
+    @if (store.loading()) {
+      <p class="label">Loading latest account activity…</p>
+    }
+    @if (store.error()) {
+      <p class="label error">{{ store.error() }}</p>
+    }
+  </div>
+
   <!-- Account selector -->
   <div class="account-selector">
     <app-select
       [label]="'Select account:'"
-      [options]="accounts"
-      [selectId]="selectedAccount()"
+      [options]="accounts()"
+      [selectId]="'account-select'"
       [name]="'account'"
-      [ngModel]="selectedAccount()"
+      [ngModel]="selectedAccountValue()"
       (ngModelChange)="onAccountChange($event)"
       aria-label="Account type"
     />
@@ -53,8 +62,7 @@
   </div>
 
   <p class="label" aria-live="polite">
-    Showing {{ filteredTransactions().length }} transactions for the
-    {{ selectedAccount() }} account.
+    Showing {{ filteredTransactions().length }} transactions for account {{ selectedAccountValue() }}.
   </p>
 
   @if (filteredTransactions().length) {
@@ -112,7 +120,7 @@
       <tbody>
         @for (transaction of filteredTransactions(); track transaction.id) {
           <tr>
-            <td data-label="Date">{{ transaction.date | date: 'yyyy-MM-dd' }}</td>
+            <td data-label="Date">{{ transaction.postedAt | date: 'yyyy-MM-dd' }}</td>
             <td data-label="Description">{{ transaction.description }}</td>
             <td data-label="Type">{{ transaction.type | titlecase }}</td>
             <td
