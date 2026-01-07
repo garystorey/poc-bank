@@ -29,12 +29,12 @@ export class SelectComponent implements ControlValueAccessor {
   readonly options = input<SelectOption[]>([]);
   readonly submitted = input<boolean>(false);
   // ---- CVA state ----
-  readonly value = signal<string | number>('');
+  readonly value = signal('');
   readonly disabled = signal(false);
 
   readonly selected = computed<string>(() => {
     const val = this.value();
-    const selectedOption = this.options().find((opt) => String(opt.value) === String(val));
+    const selectedOption = this.options().find(opt => opt.value === val);
     return selectedOption ? String(selectedOption.value) : '';
   });
 
@@ -48,13 +48,13 @@ export class SelectComponent implements ControlValueAccessor {
 
   // ---- ControlValueAccessor ----
   writeValue(val: unknown): void {
-    this.value.set((val ?? '') as string | number);
+    this.value.set((val ?? '') as string);
   }
 
-  private onChange: (val: string | number) => void = () => {};
+  private onChange: (val: string) => void = () => {};
   private onTouched: () => void = () => {};
 
-  registerOnChange(fn: (val: string | number) => void): void {
+  registerOnChange(fn: (val: string) => void): void {
     this.onChange = fn;
   }
 
@@ -88,10 +88,8 @@ export class SelectComponent implements ControlValueAccessor {
 
   // ---- DOM events ----
   handleChange(raw: string): void {
-    const matched = this.options().find((opt) => String(opt.value) === raw);
-    const nextValue = matched ? matched.value : raw;
-    this.value.set(nextValue);
-    this.onChange(nextValue);
+    this.value.set(raw);
+    this.onChange(raw);
   }
 
   handleBlur(): void {
