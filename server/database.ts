@@ -64,8 +64,16 @@ export function runMigrations() {
 }
 
 export function ensureSeeded() {
-  const userCount = db.prepare('SELECT COUNT(*) as count FROM users').get() as { count: number };
-  if (userCount.count === 0) {
+  const counts = db
+    .prepare(
+      `SELECT
+        (SELECT COUNT(*) FROM users) as userCount,
+        (SELECT COUNT(*) FROM accounts) as accountCount,
+        (SELECT COUNT(*) FROM transactions) as transactionCount`,
+    )
+    .get() as { userCount: number; accountCount: number; transactionCount: number };
+
+  if (counts.userCount === 0 || counts.accountCount === 0 || counts.transactionCount === 0) {
     seedDatabase();
   }
 }
