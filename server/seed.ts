@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { db, runMigrations } from './database.ts';
+import { db, runMigrations } from './database';
 
 type UserSeed = { name: string; email: string };
 type AccountSeed = { userId: number; type: string; balance: number };
