@@ -1,15 +1,21 @@
 <div class="login-container">
   <form class="login-form" id="loginForm" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
     <div class="form-group">
-      <label for="username">Username or Email</label>
+      <label for="email">Email address</label>
       <div class="input-wrapper">
-        <input type="text" id="username" class="form-control" formControlName="username" required>
+        <input type="email" id="email" class="form-control" formControlName="email" required>
         <span class="input-icon">
           <i class="fas fa-user"></i>
         </span>
       </div>
-      @if (form.controls.username.invalid && (form.controls.username.touched || submitted())) {
-        <p class="error">Username or email is required.</p>
+      @if (form.controls.email.invalid && (form.controls.email.touched || submitted())) {
+        <p class="error">A valid email address is required.</p>
+      }
+      @if (form.controls.email.errors?.['notFound']) {
+        <p class="error">We couldn't find that email address.</p>
+      }
+      @if (form.controls.email.errors?.['server']) {
+        <p class="error">We couldn't sign you in right now. Please try again.</p>
       }
     </div>
 
@@ -34,4 +40,3 @@
     </div>
   </form>
 </div>
-

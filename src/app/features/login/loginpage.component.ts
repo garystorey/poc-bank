@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ApiService } from '../../services/api.service';
 
 
 @Component({
@@ -16,11 +17,12 @@ export class LoginPageComponent {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
+  private readonly api = inject(ApiService);
 
   readonly submitted = signal(false);
 
   readonly form = this.fb.group({
-    username: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
 
@@ -32,7 +34,25 @@ export class LoginPageComponent {
       return;
     }
 
-    this.authService.login('664657');
-    this.router.navigate(this.authService.accountRoute());
+    const email = this.form.controls.email.value?.trim().toLowerCase();
+    if (!email) {
+      this.form.controls.email.setErrors({ required: true });
+      return;
+    }
+
+    this.api.listUsers({ pageSize: 50 }).subscribe({
+      next: (response) => {
+        const user = response.data.find((item) => item.email.toLowerCase() === email);
+        if (!user) {
+          this.form.controls.email.setErrors({ notFound: true });
+          return;
+        }
+        this.authService.login(String(user.id));
+        this.router.navigate(this.authService.accountRoute());
+      },
+      error: () => {
+        this.form.controls.email.setErrors({ server: true });
+      },
+    });
   }
 }
