@@ -175,14 +175,16 @@ header {
 
 .theme-toggle:hover {
   border-color: var(--primary-color);
-  color: var(--primary-color);
-  background-color: var(--bg-tertiary);
+  color: var(--white);
+  background-color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
 }
 
 [data-theme="dark"] .theme-toggle:hover {
   border-color: var(--accent-heading);
-  color: var(--accent-heading);
-  background-color: hsl(223, 39%, 22%);
+  color: var(--header-bg);
+  background-color: var(--accent-heading);
+  box-shadow: var(--shadow-sm);
 }
 
 .theme-toggle i {
@@ -204,6 +206,13 @@ header {
 
 .nav-actions .btn.btn-primary i {
   font-size: 0.875rem;
+}
+
+.nav-actions .btn.btn-primary:hover,
+.nav-actions .btn.btn-primary:focus-visible {
+  color: var(--white);
+  background-color: var(--primary-dark);
+  box-shadow: var(--shadow-md);
 }
 
 /* ===== Mobile Overlay ===== */
