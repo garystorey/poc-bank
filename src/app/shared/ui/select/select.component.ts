@@ -3,7 +3,7 @@ import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { ApplyAttrsDirective, AttrBag } from '../input/apply-attrs.directive';
-import { SelectOption } from '../../../types/types';
+import { SelectOption } from '../../../types';
 
 let nextUniqueId = 0;
 

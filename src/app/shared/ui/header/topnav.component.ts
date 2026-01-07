@@ -19,6 +19,7 @@ export class TopnavComponent {
 
   readonly mobileMenuOpen = signal(false);
   readonly isDarkMode = signal(false);
+  readonly isOnboardingPage = input<boolean>(false);
   readonly isAuthenticated = this.authService.isAuthenticated;
 
   constructor() {

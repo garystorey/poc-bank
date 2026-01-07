@@ -1,4 +1,4 @@
-import { SelectOption } from "../../types/types";
+import { SelectOption } from "../../types";
 
 export const US_STATES: SelectOption[] = [
     { value: '', label: 'Select State' },

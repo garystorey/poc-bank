@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
-import { ButtonComponent } from "../../../../shared/ui/button/button.component";
+import { ButtonComponent } from "../../../../shared";
 
 @Component({
   selector: 'app-hero',

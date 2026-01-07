@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { TopnavComponent } from "./components/header/topnav.component";
-import { FooterComponent } from "./components/footer/footer.component";
+import { TopnavComponent } from "../shared/ui/header/topnav.component";
+import { FooterComponent } from "../shared/ui/footer/footer.component";
 import { RouterOutlet } from "@angular/router";
 
 @Component({
@@ -8,7 +8,7 @@ import { RouterOutlet } from "@angular/router";
   standalone: true,
   imports: [TopnavComponent, FooterComponent, RouterOutlet],
   template: `
-    <app-topnav></app-topnav>
+    <app-topnav [isOnboardingPage]="false" />
     <main>
       <router-outlet></router-outlet>
     </main>

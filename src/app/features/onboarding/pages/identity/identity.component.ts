@@ -1,16 +1,12 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { dateInPastValidator } from '../../../../shared/utils/date-past.validator';
-import { Router } from '@angular/router';
-import { US_STATES } from '../../../../shared/utils/usstates';
-import { InputComponent } from "../../../../shared/ui/input/input.component";
-import { SelectComponent } from "../../../../shared/ui/select/select.component";
-import { ErrorSummaryMessages, SelectOption } from '../../../../types/types';
-import { ButtonComponent } from '../../../../shared/ui/button/button.component';
-import { StepperComponent } from '../../components/stepper/stepper.component';
-import { ErrorSummaryComponent } from '../../../../shared/ui/errorsummary/errorsummary.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { minimumAgeValidator } from '../../../../shared/utils/age.validator';
+import { Router } from '@angular/router';
+
+import { US_STATES,dateInPastValidator,minimumAgeValidator, InputComponent, SelectComponent,ButtonComponent, ErrorSummaryComponent } from '../../../../shared';
+import { ErrorSummaryMessages, SelectOption  } from '../../../../types';
+import { StepperComponent } from '../../components/stepper/stepper.component';
+
 
 @Component({
   selector: 'app-identity',

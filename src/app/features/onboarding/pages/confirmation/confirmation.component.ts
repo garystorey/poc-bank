@@ -1,4 +1,4 @@
-import { ButtonComponent } from '../../../../shared/ui/button/button.component';
+import { ButtonComponent } from '../../../../shared';
 import { RouterLink } from "@angular/router";
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 

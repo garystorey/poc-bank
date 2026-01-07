@@ -1,4 +1,5 @@
-import {Option} from '../../types/types';
+import {Option} from '../../types';
+
 export const DEPOSIT_METHODS: Option[] = [
     { value: '', label: 'Select Method' },
     { value: 'check', label: 'Check' },

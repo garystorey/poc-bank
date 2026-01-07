@@ -1,14 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { digitsOnly, moneyValidator } from '../../../../shared/utils/money.validator';
 import { Router } from '@angular/router';
-import { ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES } from '../../../../shared/utils/onboarding.utils';
-import { InputComponent } from "../../../../shared/ui/input/input.component";
-import { SelectComponent } from "../../../../shared/ui/select/select.component";
-import { ButtonComponent } from "../../../../shared/ui/button/button.component";
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { digitsOnly, moneyValidator, ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES,SelectComponent,InputComponent,ButtonComponent,ErrorSummaryComponent  } from '../../../../shared';
 import { StepperComponent } from '../../components/stepper/stepper.component';
-import { ErrorSummaryComponent } from '../../../../shared/ui/errorsummary/errorsummary.component';
-import { ErrorSummaryMessages } from '../../../../types/types';
+import type { ErrorSummaryMessages } from '../../../../types';
+
 
 @Component({
   selector: 'app-funding',
@@ -106,17 +103,6 @@ export class FundingComponent {
     }
 
     const deposit = this.form.getRawValue();
-    console.log('Deposit', deposit);
-
-    // this.onboardingService.fundAccount(deposit).subscribe({
-    //   next: () => {
-    //     this.router.navigate(['/onboarding/review']);
-    //   },
-    //   error: () => {
-    //     // stay on page, show error
-    //   }
-    // });
-
     this.router.navigate(['/onboarding/review']);
   }
 }

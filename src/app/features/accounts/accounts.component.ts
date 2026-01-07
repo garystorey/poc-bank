@@ -1,15 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map, distinctUntilChanged } from 'rxjs';
-import { SelectOption, TransactionFilter } from '../../types/types';
-import { ButtonComponent } from '../../shared/ui/button/button.component';
-import { SelectComponent } from '../../shared/ui/select/select.component';
-import { InputComponent } from '../../shared/ui/input/input.component';
-import { AccountStoreService } from '../../services/account-store.service';
-import { AuthService } from '../../services/auth.service';
+
+import { SelectOption, TransactionFilter } from '../../types';
+import { ButtonComponent,SelectComponent, InputComponent} from '../../shared';
+import { AccountStoreService, AuthService } from '../../services';
 
 @Component({
   selector: 'app-accounts',

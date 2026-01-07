@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Feature } from '../../../../types/types';
+import { Feature } from '../../../../types';
 
 @Component({
   selector: 'app-featurecard',

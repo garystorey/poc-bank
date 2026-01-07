@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
-import { AccountDto, PaginatedResponse, TransactionDto, UserDto } from '../types/api-types';
+import { AccountDto, PaginatedResponse, TransactionDto, UserDto } from '../types';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {

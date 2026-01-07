@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Testimonial } from '../../../../types/types';
+import { Testimonial } from '../../../../types';
 
 @Component({
   selector: 'app-testimonialcard',

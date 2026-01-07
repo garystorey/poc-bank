@@ -14,7 +14,6 @@ import { TestimonialListComponent } from './components/testimoniallist/testimoni
     <app-servicelist />
     <app-testimoniallist />
   `,
-  styleUrl: './landing.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingPageComponent {}

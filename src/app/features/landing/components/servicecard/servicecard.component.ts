@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Service } from '../../../../types/types';
+import { Service } from '../../../../types';
 
 @Component({
   selector: 'app-servicecard',

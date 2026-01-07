@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { Router } from '@angular/router';
+
+import { ButtonComponent } from '../../../../shared';
 import { StepperComponent } from '../../components/stepper/stepper.component';
 
 @Component({

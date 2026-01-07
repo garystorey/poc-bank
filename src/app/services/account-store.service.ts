@@ -1,6 +1,6 @@
 import { inject, Injectable, computed, signal } from '@angular/core';
 import { ApiService } from './api.service';
-import { AccountDto, TransactionDto, UserDto } from '../types/api-types';
+import { AccountDto, TransactionDto, UserDto } from '../types';
 
 @Injectable({ providedIn: 'root' })
 export class AccountStoreService {
