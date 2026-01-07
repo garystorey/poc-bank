@@ -99,31 +99,40 @@ export function seedDatabase() {
       { id: 1, userId: 1, type: 'checking', balance: 1250.35 },
       { id: 2, userId: 1, type: 'savings', balance: 8400.12 },
       { id: 3, userId: 2, type: 'checking', balance: 220.45 },
-      { id: 4, userId: 2, type: 'credit', balance: -1200.0 },
+      { id: 4, userId: 2, type: 'savings', balance: 5200.55 },
       { id: 5, userId: 3, type: 'checking', balance: 900.0 },
+      { id: 6, userId: 3, type: 'savings', balance: 3100.2 },
     ];
     accounts.forEach((a) => accountStmt.run(a.userId, a.type, a.balance));
+
+    const seededAccounts = db
+      .prepare('SELECT id, userId, type, balance FROM accounts ORDER BY id')
+      .all() as Account[];
 
     const descriptions = ['Payroll deposit', 'Coffee shop', 'Grocery store', 'Utilities', 'Transfer', 'Gym membership'];
     const locations = ['New York', 'Austin', 'Seattle', 'Remote', 'Portland', 'Chicago'];
     const types = ['deposit', 'withdrawal', 'transfer'];
+    const transactionsPerAccount = 20;
 
     const txnStmt = db.prepare(
       'INSERT INTO transactions (accountId, type, amount, description, location, postedAt) VALUES (?, ?, ?, ?, ?, ?)',
     );
-    for (let i = 0; i < 36; i++) {
-      const account = accounts[i % accounts.length];
-      const type = types[i % types.length];
-      const amount = type === 'deposit' ? 100 + i * 3 : -1 * (20 + i * 2);
-      txnStmt.run(
-        account.id,
-        type,
-        Math.round(amount * 100) / 100,
-        descriptions[i % descriptions.length],
-        locations[i % locations.length],
-        new Date(Date.now() - i * 86400000).toISOString(),
-      );
-    }
+    seededAccounts.forEach((account, accountIndex) => {
+      for (let i = 0; i < transactionsPerAccount; i++) {
+        const sequence = accountIndex * transactionsPerAccount + i;
+        const type = types[sequence % types.length];
+        const amountBase = 45 + (sequence % 12) * 7;
+        const amount = type === 'deposit' ? amountBase : -1 * (amountBase + 15);
+        txnStmt.run(
+          account.id,
+          type,
+          Math.round(amount * 100) / 100,
+          descriptions[sequence % descriptions.length],
+          locations[sequence % locations.length],
+          new Date(Date.now() - sequence * 86400000).toISOString(),
+        );
+      }
+    });
 
     const userCount = db.prepare('SELECT COUNT(*) as count FROM users').get() as { count: number };
     const accountCount = db.prepare('SELECT COUNT(*) as count FROM accounts').get() as { count: number };

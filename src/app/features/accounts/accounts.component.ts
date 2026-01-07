@@ -53,13 +53,13 @@ export class AccountsComponent {
     this.route.paramMap
       .pipe(
         map((params) => {
-          const paramId = Number(params.get('userId'));
           const authId = Number(this.authService.getAccountNumber());
-          if (Number.isFinite(paramId) && paramId > 0) {
-            return paramId;
-          }
           if (Number.isFinite(authId) && authId > 0) {
             return authId;
+          }
+          const paramId = Number(params.get('userId'));
+          if (Number.isFinite(paramId) && paramId > 0) {
+            return paramId;
           }
           return 1;
         }),
