@@ -1,4 +1,4 @@
-import { inject, Injectable, computed, effect, signal } from '@angular/core';
+import { inject, Injectable, computed, signal } from '@angular/core';
 import { ApiService } from './api.service';
 import { AccountDto, TransactionDto, UserDto } from '../types/api-types';
 
@@ -24,14 +24,7 @@ export class AccountStoreService {
     this._accounts().find((acc) => acc.id === this._selectedAccountId()) ?? null
   );
 
-  constructor() {
-    effect(() => {
-      const selected = this._selectedAccountId();
-      if (selected !== null) {
-        this.loadTransactions(selected);
-      }
-    });
-  }
+  constructor() {}
 
   bootstrap(userId = 1) {
     this._loading.set(true);
@@ -49,7 +42,13 @@ export class AccountStoreService {
     this.api.listAccounts({ userId, pageSize: 50 }).subscribe({
       next: (response) => {
         this._accounts.set(response.data);
-        this._selectedAccountId.set(response.data[0]?.id ?? null);
+        const selectedId = response.data[0]?.id ?? null;
+        this._selectedAccountId.set(selectedId);
+        if (selectedId !== null) {
+          this.loadTransactions(selectedId);
+        } else {
+          this._transactions.set([]);
+        }
         this._loading.set(false);
       },
       error: () => {
@@ -76,6 +75,7 @@ export class AccountStoreService {
 
   selectAccount(accountId: number) {
     this._selectedAccountId.set(accountId);
+    this.loadTransactions(accountId);
   }
 
   optimisticDeposit(amount: number, description: string) {
