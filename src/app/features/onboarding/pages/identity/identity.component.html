@@ -44,6 +44,16 @@
         errorText="SSN is required"
       />
     </div>
+
+    <div class="form-row">
+      <app-input label="Email Address"
+        formControlName="emailAddress" inputId="emailAddress" name="emailAddress" type="email"
+        [inputAttrs]="{ autocomplete: 'email' }" [required]="true"
+        [submitted]="submitted()"
+        helpText="Enter your Email Address"
+        errorText="Email Address is required and must be a valid email address"
+      />
+    </div>
   </div>
 
   <div class="form-section">

@@ -60,6 +60,10 @@ export class IdentityComponent {
       Validators.required,
       Validators.pattern(/^\d{5}(-\d{4})?$/),
     ]),
+    emailAddress: this.fb.nonNullable.control('', [
+      Validators.required,
+      Validators.email,
+    ]),
   });
   readonly errorMessages: ErrorSummaryMessages = {
     firstName: {
@@ -96,7 +100,13 @@ export class IdentityComponent {
       required: 'Zip Code is required.',
       pattern: 'Zip Code must be in the format XXXXX or XXXXX-XXXX.',
       _default: 'Zip Code is invalid.',
-    }
+    },
+    emailAddress: {
+      required: 'Email Address is required.',
+      email: 'Email Address must be a valid email address.',
+      _default: 'Email Address is invalid.',
+    },
+
   };
 
   shouldShowError(controlName: keyof IdentityComponent['form']['controls']): boolean {

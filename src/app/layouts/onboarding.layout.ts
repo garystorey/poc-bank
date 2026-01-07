@@ -1,14 +1,15 @@
-import { Component, input } from "@angular/core";
+import { Component } from "@angular/core";
 import { FooterComponent } from "./components/footer/footer.component";
 import { RouterOutlet } from "@angular/router";
+import { TopnavComponent } from "./components/header/topnav.component";
 import { OnboardingheaderComponent } from "./components/onboardingheader/onboardingheader.component";
 
 @Component({
   selector: "app-onboarding-layout",
   standalone: true,
-  imports: [OnboardingheaderComponent, FooterComponent, RouterOutlet],
+  imports: [ FooterComponent, RouterOutlet, OnboardingheaderComponent],
   template: `
-    <app-onboardingheader/>
+    <app-onboardingheader />
     <main>
       <div class="wizard-container">
         <div class="form-container">

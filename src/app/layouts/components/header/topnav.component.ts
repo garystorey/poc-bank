@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, inject, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, inject, PLATFORM_ID, input } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { isPlatformBrowser, NgClass } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';

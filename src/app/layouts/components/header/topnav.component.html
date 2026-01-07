@@ -1,7 +1,6 @@
 <header [class.menu-open]="mobileMenuOpen()">
   <div class="container">
     <nav class="navbar" role="navigation" aria-label="Main navigation">
-      <!-- Logo -->
       <a routerLink="/" class="logo-container" (click)="closeMobileMenu()">
         <span class="logo-icon">
           <i class="fas fa-piggy-bank" aria-hidden="true"></i>
@@ -9,7 +8,6 @@
         <span class="logo-text">POC Bank</span>
       </a>
 
-      <!-- Mobile Menu Toggle -->
       <button
         class="mobile-toggle"
         (click)="toggleMobileMenu()"
@@ -22,7 +20,6 @@
           <span></span>
         </span>
       </button>
-
       <!-- Navigation Links -->
       <div class="nav-wrapper" [class.open]="mobileMenuOpen()" id="nav-menu">
         <ul class="nav-links">
@@ -51,7 +48,6 @@
             </a>
           </li>
         </ul>
-
         <div class="nav-actions">
           <!-- Theme Toggle -->
           <button
