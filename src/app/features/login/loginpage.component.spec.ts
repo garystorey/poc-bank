@@ -61,7 +61,7 @@ describe('LoginPageComponent', () => {
   });
 
   it('sets notFound error when no user matches', () => {
-    const api = TestBed.inject(ApiService) as MockApiService;
+    const api = TestBed.inject(ApiService) as unknown as MockApiService;
     api.listUsers.and.returnValue(
       of({
         data: [],
@@ -78,7 +78,7 @@ describe('LoginPageComponent', () => {
   });
 
   it('sets server error on API failure', () => {
-    const api = TestBed.inject(ApiService) as MockApiService;
+    const api = TestBed.inject(ApiService) as unknown as MockApiService;
     api.listUsers.and.returnValue(throwError(() => new Error('network')));
 
     component.form.controls.email.setValue('jane@example.com');
