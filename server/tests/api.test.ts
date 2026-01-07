@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import http from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { app } from '../app.ts';
-import { seedDatabase } from '../database.ts';
+import { seedDatabase } from '../seed.ts';
 
 let server: http.Server;
 let baseUrl: string;
