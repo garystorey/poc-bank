@@ -100,9 +100,13 @@ export class AccountsComponent {
       });
   });
 
-  onAccountChange(account: number) {
-    this.selectedAccount.set(account);
-    this.store.selectAccount(account);
+  onAccountChange(account: number | string) {
+    const accountId = typeof account === 'string' ? Number(account) : account;
+    if (!Number.isFinite(accountId)) {
+      return;
+    }
+    this.selectedAccount.set(accountId);
+    this.store.selectAccount(accountId);
   }
 
   onFilterTypeChange(filter: TransactionFilter) {

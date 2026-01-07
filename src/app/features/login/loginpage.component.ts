@@ -32,7 +32,10 @@ export class LoginPageComponent {
       return;
     }
 
-    this.authService.login('664657');
+    const rawId = this.form.controls.username.value?.trim() ?? '';
+    const userId = /^\d+$/.test(rawId) ? rawId : '1';
+
+    this.authService.login(userId);
     this.router.navigate(this.authService.accountRoute());
   }
 }
