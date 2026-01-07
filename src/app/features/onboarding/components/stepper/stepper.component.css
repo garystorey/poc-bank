@@ -26,7 +26,11 @@
 
 .track-base {
   width: 100%;
-  background-color: var(--border-color-light);
+  background-color: var(--border-color);
+}
+
+[data-theme="dark"] .track-base {
+  background-color: var(--text-secondary);
 }
 
 .track-progress {
