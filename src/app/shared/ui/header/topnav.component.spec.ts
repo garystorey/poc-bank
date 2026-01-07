@@ -16,7 +16,7 @@ describe('TopnavComponent', () => {
   let fixture: ComponentFixture<TopnavComponent>;
   let component: TopnavComponent;
   let authService: MockAuthService;
-  let router: jasmine.SpyObj<Router>;
+  let router: Router;
 
   beforeAll(() => {
     (window as typeof window & { matchMedia?: (query: string) => MediaQueryList }).matchMedia = () =>
@@ -33,19 +33,16 @@ describe('TopnavComponent', () => {
   });
 
   beforeEach(async () => {
-    router = jasmine.createSpyObj('Router', ['navigate']);
-
     await TestBed.configureTestingModule({
       imports: [TopnavComponent, RouterTestingModule],
-      providers: [
-        { provide: AuthService, useClass: MockAuthService },
-        { provide: Router, useValue: router },
-      ],
+      providers: [{ provide: AuthService, useClass: MockAuthService }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TopnavComponent);
     component = fixture.componentInstance;
     authService = TestBed.inject(AuthService) as unknown as MockAuthService;
+    router = TestBed.inject(Router);
+    spyOn(router, 'navigate');
     fixture.detectChanges();
   });
 
