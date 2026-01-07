@@ -7,7 +7,8 @@ import { map, distinctUntilChanged } from 'rxjs';
 
 import { SelectOption, TransactionFilter } from '../../types';
 import { ButtonComponent,SelectComponent, InputComponent} from '../../shared';
-import { AccountStoreService, AuthService } from '../../services';
+import { AccountStoreService } from '../../services/account-store.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-accounts',

@@ -84,8 +84,9 @@ export interface Transaction {
   type: TransactionType;
   amount: number;
 }
-
-export interface Option {
-  value: string,
-  label: string
+export interface SelectOption {
+  value: string | number;
+  label: string;
+  disabled?: boolean;
+  selected?: boolean;
 }

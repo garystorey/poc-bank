@@ -1,6 +1,6 @@
-import {Option} from '../../types';
+import {SelectOption} from '../../types';
 
-export const DEPOSIT_METHODS: Option[] = [
+export const DEPOSIT_METHODS: SelectOption[] = [
     { value: '', label: 'Select Method' },
     { value: 'check', label: 'Check' },
     { value: 'ach', label: 'ACH Transfer' },
@@ -8,7 +8,7 @@ export const DEPOSIT_METHODS: Option[] = [
     { value: 'cash', label: 'Cash' },
   ] as const;
 
-export const FUNDING_SOURCES: Option[] = [
+export const FUNDING_SOURCES: SelectOption[] = [
     { value: '', label: 'Select Source' },
     { value: 'payroll', label: 'Payroll' },
     { value: 'savings', label: 'Savings' },
@@ -16,7 +16,7 @@ export const FUNDING_SOURCES: Option[] = [
     { value: 'other', label: 'Other' },
   ] as const;
 
-export const ACCOUNT_TYPES: Option[] = [
+export const ACCOUNT_TYPES: SelectOption[] = [
     { value: '', label: 'Select Type' },
     { value: 'checking', label: 'Checking' },
     { value: 'savings', label: 'Savings' },

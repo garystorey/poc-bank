@@ -1,7 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ApiService } from './api.service';
-import { PaginatedResponse, UserDto } from '../types/api-types';
+import { PaginatedResponse, UserDto } from '../types';
 
 describe('ApiService', () => {
   let service: ApiService;
