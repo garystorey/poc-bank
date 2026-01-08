@@ -8,6 +8,14 @@
   min-height: 500px;
   display: flex;
   align-items: center;
+  margin: var(--spacing-lg) auto;
+  max-width: calc(100% - var(--spacing-lg) * 2);
+  border-radius: var(--border-radius-lg);
+  background-image: url('/assets/hero-bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
 }
 
 /* Decorative background elements */
@@ -48,6 +56,7 @@
   z-index: 2;
   max-width: 650px;
   animation: slideInUp 0.8s ease forwards;
+
 }
 
 .hero h1 {
