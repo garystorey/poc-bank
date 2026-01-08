@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
-import { TopnavComponent } from "../shared/ui/header/topnav.component";
+import { PageHeaderComponent } from "../shared/ui/header/pageheader.component";
 import { FooterComponent } from "../shared/ui/footer/footer.component";
 import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: "app-home-layout",
   standalone: true,
-  imports: [TopnavComponent, FooterComponent, RouterOutlet],
+  imports: [PageHeaderComponent, FooterComponent, RouterOutlet],
   template: `
-    <app-topnav [isOnboardingPage]="false" />
+    <app-header [isOnboardingPage]="false" />
     <main>
       <router-outlet></router-outlet>
     </main>

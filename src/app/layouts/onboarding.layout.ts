@@ -1,13 +1,13 @@
 import { Component } from "@angular/core";
-import { FooterComponent,TopnavComponent } from "../shared/ui/";
+import { FooterComponent, PageHeaderComponent } from "../shared/ui/";
 import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: "app-onboarding-layout",
   standalone: true,
-  imports: [ FooterComponent, RouterOutlet, TopnavComponent],
+  imports: [ FooterComponent, RouterOutlet, PageHeaderComponent],
   template: `
-    <app-topnav [isOnboardingPage]="true"/>
+    <app-header [isOnboardingPage]="true"/>
     <main>
       <div class="wizard-container">
         <div class="form-container">

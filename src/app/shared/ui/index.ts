@@ -1,4 +1,4 @@
-export * from './header/topnav.component';
+export * from './header/pageheader.component';
 export * from './footer/footer.component';
 export * from './button/button.component';
 export * from './input/input.component';

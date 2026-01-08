@@ -3,7 +3,7 @@ import { signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { TopnavComponent } from './topnav.component';
+import { TopnavComponent } from './pageheader.component';
 import { AuthService } from '../../../services/auth.service';
 
 class MockAuthService {
