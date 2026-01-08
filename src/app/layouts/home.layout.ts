@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
-import { PageHeaderComponent } from "../shared/ui/header/pageheader.component";
-import { FooterComponent } from "../shared/ui/footer/footer.component";
 import { RouterOutlet } from "@angular/router";
+import { PageHeaderComponent, FooterComponent } from "@shared/index";
 
 @Component({
   selector: "app-home-layout",

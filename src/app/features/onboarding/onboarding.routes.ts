@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { redirectAuthenticatedGuard } from '../../shared/guards/auth.guard';
+import { redirectAuthenticatedGuard } from '@shared/index';
 
 export const ONBOARDING_ROUTES: Routes = [
   {

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FooterComponent, PageHeaderComponent } from "../shared/ui/";
+import { FooterComponent, PageHeaderComponent } from "@shared/index";
 import { RouterOutlet } from "@angular/router";
 
 @Component({

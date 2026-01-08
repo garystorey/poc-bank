@@ -6,9 +6,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map, distinctUntilChanged } from 'rxjs';
 
 import { SelectOption, TransactionFilter } from '../../types';
-import { ButtonComponent,SelectComponent, InputComponent} from '../../shared';
-import { AccountStoreService } from '../../services/account-store.service';
-import { AuthService } from '../../services/auth.service';
+import { ButtonComponent,SelectComponent, InputComponent} from '@shared/index';
+import { AccountStoreService, AuthService } from '@services/index';
 
 @Component({
   selector: 'app-accounts',

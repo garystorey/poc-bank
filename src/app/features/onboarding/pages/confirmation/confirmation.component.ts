@@ -1,6 +1,6 @@
-import { ButtonComponent } from '../../../../shared';
 import { RouterLink } from "@angular/router";
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ButtonComponent } from '@shared/index';
 
 @Component({
   selector: 'app-confirmation',
