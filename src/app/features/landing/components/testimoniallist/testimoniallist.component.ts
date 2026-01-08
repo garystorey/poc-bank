@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TestimonialCardComponent } from '../testimonialcard/testimonialcard.component';
-import { Testimonial } from '../../../../types';
 import { SubheadingComponent } from "../subheading/subheading.component";
+import { Testimonial } from '../../../../types';
 
 @Component({
   selector: 'app-testimoniallist',

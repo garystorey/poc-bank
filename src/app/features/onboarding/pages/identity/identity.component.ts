@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 
-import { US_STATES,dateInPastValidator,minimumAgeValidator, InputComponent, SelectComponent,ButtonComponent, ErrorSummaryComponent } from '../../../../shared';
+import { US_STATES,dateInPastValidator,minimumAgeValidator, InputComponent, SelectComponent,ButtonComponent, ErrorSummaryComponent } from '@shared/index';
 import { ErrorSummaryMessages, SelectOption  } from '../../../../types';
 import { StepperComponent } from '../../components/stepper/stepper.component';
 

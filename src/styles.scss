@@ -227,7 +227,7 @@ a:hover {
 
 /* ===== Form Styles ===== */
 .form-container {
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
   margin: 0 auto;
   background-color: var(--card-bg);
   border-radius: var(--border-radius-lg);
@@ -287,7 +287,6 @@ form .full-width {
 .form-group input,
 .form-group select {
   width: 100%;
-  min-width: 30ch;
   padding: var(--spacing-sm);
   border: 2px solid var(--input-border);
   border-radius: var(--border-radius-md);
@@ -344,6 +343,14 @@ form .full-width {
   font-size: var(--small-font-size);
   color: var(--error);
   text-decoration: none;
+}
+@media (min-width: 780px) {
+ .form-group select, .form-group input {
+    min-width: 30ch;
+  }
+  .form-container {
+      padding: var(--spacing-md);
+  }
 }
 
 @media (max-width: 768px) {

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { digitsOnly, moneyValidator, ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES,SelectComponent,InputComponent,ButtonComponent,ErrorSummaryComponent  } from '../../../../shared';
+import { digitsOnly, moneyValidator, ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES,SelectComponent,InputComponent,ButtonComponent,ErrorSummaryComponent  } from '@shared/index';
 import { StepperComponent } from '../../components/stepper/stepper.component';
 import type { ErrorSummaryMessages } from '../../../../types';
 

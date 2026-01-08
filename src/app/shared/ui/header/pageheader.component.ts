@@ -3,16 +3,15 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { isPlatformBrowser, NgClass } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 
-
 @Component({
-  selector: 'app-topnav',
+  selector: 'app-header',
   standalone: true,
   imports: [RouterLink, RouterLinkActive, NgClass],
-  templateUrl: './topnav.component.html',
-  styleUrl: './topnav.component.scss',
+  templateUrl: './pageheader.component.html',
+  styleUrl: './pageheader.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TopnavComponent {
+export class PageHeaderComponent {
   private platformId = inject(PLATFORM_ID);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);

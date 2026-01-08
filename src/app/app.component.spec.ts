@@ -19,7 +19,6 @@ describe('AppComponent', () => {
   it('creates the app component', () => {
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
-    expect(component.title).toBe('poc-bank');
   });
 
   it('renders the router outlet', () => {

@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { ApiService } from '../../services/api.service';
+import { AuthService, ApiService } from '@services/index';
+import { InputComponent, ButtonComponent } from '@shared/index';
 
 
 @Component({
   selector: 'app-login.page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputComponent, ButtonComponent],
   templateUrl: './loginpage.component.html',
   styleUrl: './loginpage.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

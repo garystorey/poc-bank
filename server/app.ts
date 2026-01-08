@@ -6,7 +6,7 @@ import {
   listTransactions,
   listUsers,
   runMigrations,
-} from './database';
+} from './database.ts';
 import { z, ZodError } from 'zod';
 runMigrations();
 

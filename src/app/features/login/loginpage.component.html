@@ -1,38 +1,19 @@
 <div class="login-container">
   <form class="login-form" id="loginForm" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-    <div class="form-group">
-      <label for="email">Email address</label>
-      <div class="input-wrapper">
-        <input type="email" id="email" class="form-control" formControlName="email" required>
-        <span class="input-icon">
-          <i class="fas fa-user"></i>
-        </span>
-      </div>
-      @if (form.controls.email.invalid && (form.controls.email.touched || submitted())) {
-        <p class="error">A valid email address is required.</p>
-      }
-      @if (form.controls.email.errors?.['notFound']) {
-        <p class="error">We couldn't find that email address.</p>
-      }
-      @if (form.controls.email.errors?.['server']) {
-        <p class="error">We couldn't sign you in right now. Please try again.</p>
-      }
-    </div>
 
-    <div class="form-group">
-      <label for="password">Password</label>
-      <div class="input-wrapper">
-        <input type="password" id="password" class="form-control" formControlName="password" required>
-        <span class="input-icon password-toggle" aria-hidden="true">
-          <i class="fas fa-lock"></i>
-        </span>
-      </div>
-      @if (form.controls.password.invalid && (form.controls.password.touched || submitted())) {
-        <p class="error">Password is required.</p>
-      }
-    </div>
-
-    <button type="submit" class="btn btn-primary">Sign In</button>
+    <app-input label="Email Address" formControlName="email" inputId="email"
+      name="email" type="email" [required]="true"
+      [inputAttrs]="{ min: 0, max: 100000, step: 1, inputmode: 'decimal' }" [submitted]="submitted()"
+      helpText="Enter your email address"
+      [errorText]="form.controls.email.errors?.['notFound'] ? 'We couldn\'t find that email address.' : form.controls.email.errors?.['server'] ? 'We couldn\'t sign you in right now. Please try again.'  :'A valid email address is required.' "
+    />
+    <app-input label="Password" formControlName="password" inputId="password"
+      name="password" type="password" [required]="true"
+      [submitted]="submitted()"
+      helpText="Enter your password."
+      [errorText]="form.controls.password.errors?.['incorrect'] ? 'The password you entered is incorrect.' : form.controls.password.errors?.['server'] ?  'We couldn\'t sign you in right now. Please try again.' : 'Password is required.' "
+    />
+    <app-button type="submit" variant="primary">Sign In</app-button>
 
     <div class="form-footer">
       <p><a href="#">Forgot your password?</a></p>

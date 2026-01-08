@@ -1,4 +1,4 @@
-import { HomeLayoutComponent } from '../../layouts/home.layout';
+import { HomeLayoutComponent } from '@layouts/home.layout';
 
 export const LANDING_ROUTES = [
   {
