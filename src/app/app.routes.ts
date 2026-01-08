@@ -10,5 +10,3 @@ export const routes: Routes = [
   ...ONBOARDING_ROUTES,
   ...ACCOUNT_ROUTES,
 ];
-
-console.log('App routes configured:', routes);
