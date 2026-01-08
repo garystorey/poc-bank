@@ -1,6 +1,15 @@
 // input.component.ts
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  afterNextRender,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { ApplyAttrsDirective, AttrBag } from './apply-attrs.directive';
 
@@ -15,6 +24,7 @@ let nextUniqueId = 0;
 })
 export class InputComponent implements ControlValueAccessor {
   readonly ngControl = inject(NgControl, { optional: true, self: true });
+  private readonly hostEl = inject(ElementRef<HTMLElement>);
 
   // Signal inputs
   readonly label = input.required<string>();
@@ -29,6 +39,12 @@ export class InputComponent implements ControlValueAccessor {
   readonly keyDownHandler = input<((event: KeyboardEvent) => void) | null>(null);
   readonly submitted = input<boolean>(false);
 
+  /**
+   * Allow `aria-label="..."` on <app-input> to be forwarded to the native <input>.
+   * This addresses the common case where callers set aria-label directly on the component.
+   */
+  readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
+
   // ---- CVA state ----
   readonly value = signal('');
   readonly disabled = signal(false);
@@ -39,6 +55,12 @@ export class InputComponent implements ControlValueAccessor {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
+
+    // Forward any static host classes (e.g., class="date-input") onto the native <input>.
+    // This fixes the “class set on <app-input> doesn’t style the <input>” symptom.
+    afterNextRender(() => {
+      this.hostClasses.set(Array.from(this.hostEl.nativeElement.classList));
+    });
   }
 
   // ---- ControlValueAccessor ----
@@ -80,6 +102,10 @@ export class InputComponent implements ControlValueAccessor {
     if (this.helpText()) return this.helpId();
     return null;
   });
+
+  // ---- Host class forwarding ----
+  private readonly hostClasses = signal<string[]>([]);
+  readonly inputClass = computed(() => this.hostClasses());
 
   // ---- DOM events ----
   handleInput(raw: string): void {

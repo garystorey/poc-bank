@@ -7,6 +7,7 @@
   <input
     appApplyAttrs
     [appAttrs]="inputAttrs()"
+    [ngClass]="inputClass()"
     [type]="type()"
     [id]="resolvedId()"
     [name]="resolvedName()"
@@ -16,6 +17,7 @@
     (input)="handleInput(($any($event.target)).value)"
     (blur)="handleBlur()"
     [attr.required]="required() ? '' : null"
+    [attr.aria-label]="ariaLabel()"
     [attr.aria-invalid]="showError() ? 'true' : null"
     [attr.aria-describedby]="describedBy()"
     [attr.aria-errormessage]="showError() ? errorId() : null"
