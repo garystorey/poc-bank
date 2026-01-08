@@ -2,12 +2,13 @@ import { ChangeDetectionStrategy, Component, signal, inject, PLATFORM_ID, input 
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { isPlatformBrowser, NgClass } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
+import { ButtonComponent } from "../button/button.component";
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgClass],
+  imports: [RouterLink, RouterLinkActive, NgClass, ButtonComponent],
   templateUrl: './pageheader.component.html',
   styleUrl: './pageheader.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

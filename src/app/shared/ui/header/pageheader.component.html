@@ -20,8 +20,10 @@
           <span></span>
         </span>
       </button>
+    }
       <!-- Navigation Links -->
       <div class="nav-wrapper" [class.open]="mobileMenuOpen()" id="nav-menu">
+        @if(!isOnboardingPage()) {
         <ul class="nav-links">
           <li>
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">
@@ -48,8 +50,8 @@
             </a>
           </li>
         </ul>
+        }
         <div class="nav-actions">
-          <!-- Theme Toggle -->
           <button
             class="theme-toggle"
             (click)="toggleTheme()"
@@ -57,22 +59,21 @@
             type="button">
             <i class="fas" [ngClass]="isDarkMode() ? 'fa-certificate' : 'fa-moon'" aria-hidden="true"></i>
           </button>
-
-          <!-- Auth Button -->
-          @if (isAuthenticated()) {
+          @if(!isOnboardingPage()) {
+            @if (isAuthenticated()) {
             <button class="btn btn-primary" type="button" (click)="handleAuthAction()">
               <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
               <span>Logout</span>
             </button>
-          } @else {
+            } @else {
             <a routerLink="/login" class="btn btn-primary" (click)="handleAuthAction()">
               <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
               <span>Login</span>
             </a>
+            }
           }
         </div>
       </div>
-    }
     </nav>
   </div>
 
