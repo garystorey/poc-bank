@@ -10,9 +10,9 @@ import { RouterOutlet } from "@angular/router";
   template: `
     <app-header [isOnboardingPage]="false" />
     <main>
-      <router-outlet></router-outlet>
+      <router-outlet />
     </main>
-    <app-footer></app-footer>
+    <app-footer />
   `,
   styles: []
 })
