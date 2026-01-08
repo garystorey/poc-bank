@@ -14,7 +14,6 @@ import { RouterOutlet } from "@angular/router";
     </main>
     <app-footer />
   `,
-  styles: []
 })
 export class HomeLayoutComponent {
 
