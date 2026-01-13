@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { US_STATES,dateInPastValidator,minimumAgeValidator, InputComponent, SelectComponent,ButtonComponent, ErrorSummaryComponent } from '@shared/index';
 import { ErrorSummaryMessages, SelectOption  } from '../../../../types';
 import { StepperComponent } from '../../components/stepper/stepper.component';
+import { OnboardingDataService } from '@services/index';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class IdentityComponent {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly onboardingData = inject(OnboardingDataService);
 
   readonly submitted = signal(false);
   readonly showSummary = computed(() => this.submitted() && this.form.invalid);
@@ -163,15 +165,15 @@ export class IdentityComponent {
       return;
     }
     const identity = this.form.getRawValue();
-    console.log('Identiy', identity);
-    // this.onboardingService.createUser(identity).subscribe({
-    //   next: () => {
-    //     this.router.navigate(['/onboarding/funding']);
-    //   },
-    //   error: () => {
-    //     // stay on page, show error
-    //   }
-    // });
+    this.onboardingData.setIdentity({
+      firstName: identity.firstName,
+      lastName: identity.lastName,
+      streetAddress: identity.streetAddress,
+      city: identity.city,
+      state: identity.state,
+      zipCode: identity.zipCode,
+      emailAddress: identity.emailAddress,
+    });
     this.router.navigate(['/onboarding/funding']);
 
   }

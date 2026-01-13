@@ -4,6 +4,19 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { AccountDto, PaginatedResponse, TransactionDto, UserDto } from '../types';
 
+export type CreateAccountRequest = {
+  name: string;
+  email: string;
+  accountType: string;
+  initialDeposit: number;
+};
+
+export type CreateAccountResponse = {
+  user: UserDto;
+  account: AccountDto;
+  transaction: TransactionDto;
+};
+
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private readonly http = inject(HttpClient);
@@ -23,6 +36,10 @@ export class ApiService {
 
   listTransactions(params: Record<string, string | number> = {}): Observable<PaginatedResponse<TransactionDto>> {
     return this.http.get<PaginatedResponse<TransactionDto>>(`${this.baseUrl}/transactions`, { params: this.buildParams(params) });
+  }
+
+  createAccount(payload: CreateAccountRequest): Observable<CreateAccountResponse> {
+    return this.http.post<CreateAccountResponse>(`${this.baseUrl}/accounts`, payload);
   }
 
   usersSignal(params: Record<string, string | number> = {}): Signal<PaginatedResponse<UserDto> | undefined> {
