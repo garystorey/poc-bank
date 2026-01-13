@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { ButtonComponent } from '@shared/index';
 import { StepperComponent } from '../../components/stepper/stepper.component';
-import { ApiService, AuthService, OnboardingDataService } from '@services/index';
+import { ApiService, OnboardingDataService } from '@services/index';
 
 @Component({
   selector: 'app-review',
@@ -17,7 +17,6 @@ export class ReviewComponent {
 
   router = inject(Router);
   private readonly api = inject(ApiService);
-  private readonly authService = inject(AuthService);
   private readonly onboardingData = inject(OnboardingDataService);
 
   user = {
@@ -87,8 +86,7 @@ export class ReviewComponent {
         initialDeposit,
       })
       .subscribe({
-        next: ({ user }) => {
-          this.authService.login(String(user.id));
+        next: () => {
           this.onboardingData.clear();
           this.router.navigate(['/onboarding/confirmation']);
         },

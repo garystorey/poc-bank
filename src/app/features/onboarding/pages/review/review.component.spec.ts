@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { ReviewComponent } from './review.component';
-import { ApiService, AuthService, OnboardingDataService } from '@services/index';
+import { ApiService, OnboardingDataService } from '@services/index';
 
 
 describe('ReviewComponent', () => {
@@ -11,20 +11,17 @@ describe('ReviewComponent', () => {
   let component: ReviewComponent;
   let router: jasmine.SpyObj<Router>;
   let api: jasmine.SpyObj<ApiService>;
-  let authService: jasmine.SpyObj<AuthService>;
   let onboardingData: OnboardingDataService;
 
   beforeEach(async () => {
     router = jasmine.createSpyObj('Router', ['navigate']);
     api = jasmine.createSpyObj('ApiService', ['createAccount']);
-    authService = jasmine.createSpyObj('AuthService', ['login']);
 
     await TestBed.configureTestingModule({
       imports: [ReviewComponent],
       providers: [
         { provide: Router, useValue: router },
         { provide: ApiService, useValue: api },
-        { provide: AuthService, useValue: authService },
       ],
     }).compileComponents();
 
@@ -69,7 +66,6 @@ describe('ReviewComponent', () => {
   it('navigates forward to confirmation', () => {
     component.handleCreateAccount();
     expect(api.createAccount).toHaveBeenCalled();
-    expect(authService.login).toHaveBeenCalledWith('1');
     expect(router.navigate).toHaveBeenCalledWith(['/onboarding/confirmation']);
   });
 
