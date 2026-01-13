@@ -126,3 +126,56 @@ export function listTransactions(
 
   return { data, total };
 }
+
+export function findUserByEmail(email: string): User | undefined {
+  return db.prepare('SELECT id, name, email FROM users WHERE email = ?').get(email) as User | undefined;
+}
+
+export function createAccountWithDeposit(params: {
+  name: string;
+  email: string;
+  accountType: string;
+  initialDeposit: number;
+}): { user: User; account: Account; transaction: Transaction } {
+  const now = new Date().toISOString();
+  const initialDeposit = Number.isFinite(params.initialDeposit) ? params.initialDeposit : 0;
+
+  db.exec('BEGIN');
+  try {
+    const insertUser = db.prepare('INSERT INTO users (name, email) VALUES (?, ?)');
+    const userInfo = insertUser.run(params.name, params.email);
+    const userId = Number(userInfo.lastInsertRowid);
+
+    const insertAccount = db.prepare('INSERT INTO accounts (userId, type, balance) VALUES (?, ?, ?)');
+    const accountInfo = insertAccount.run(userId, params.accountType, initialDeposit);
+    const accountId = Number(accountInfo.lastInsertRowid);
+
+    const insertTransaction = db.prepare(
+      'INSERT INTO transactions (accountId, type, amount, description, location, postedAt) VALUES (?, ?, ?, ?, ?, ?)',
+    );
+    const transactionInfo = insertTransaction.run(
+      accountId,
+      'deposit',
+      initialDeposit,
+      'Initial deposit',
+      'Online',
+      now,
+    );
+    const transactionId = Number(transactionInfo.lastInsertRowid);
+
+    db.exec('COMMIT');
+
+    const user = db.prepare('SELECT id, name, email FROM users WHERE id = ?').get(userId) as User;
+    const account = db
+      .prepare('SELECT id, userId, type, balance FROM accounts WHERE id = ?')
+      .get(accountId) as Account;
+    const transaction = db
+      .prepare('SELECT id, accountId, type, amount, description, location, postedAt FROM transactions WHERE id = ?')
+      .get(transactionId) as Transaction;
+
+    return { user, account, transaction };
+  } catch (error) {
+    db.exec('ROLLBACK');
+    throw error;
+  }
+}

@@ -5,6 +5,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { digitsOnly, moneyValidator, ACCOUNT_TYPES, DEPOSIT_METHODS, FUNDING_SOURCES,SelectComponent,InputComponent,ButtonComponent,ErrorSummaryComponent  } from '@shared/index';
 import { StepperComponent } from '../../components/stepper/stepper.component';
 import type { ErrorSummaryMessages } from '../../../../types';
+import { OnboardingDataService } from '@services/index';
 
 
 @Component({
@@ -18,6 +19,7 @@ import type { ErrorSummaryMessages } from '../../../../types';
 export class FundingComponent {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
+  private readonly onboardingData = inject(OnboardingDataService);
 
   readonly submitted = signal(false);
 
@@ -103,7 +105,15 @@ export class FundingComponent {
     }
 
     const deposit = this.form.getRawValue();
+    this.onboardingData.setFunding({
+      initialAmount: deposit.initialAmount,
+      depositMethod: deposit.depositMethod,
+      fundingSource: deposit.fundingSource,
+      routingNumber: deposit.routingNumber,
+      accountNumber: deposit.accountNumber,
+      accountType: deposit.accountType,
+      bankName: deposit.bankName,
+    });
     this.router.navigate(['/onboarding/review']);
   }
 }
-

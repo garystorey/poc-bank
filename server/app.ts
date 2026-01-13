@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import {
+  createAccountWithDeposit,
   findUserWithAccounts,
+  findUserByEmail,
   listAccounts,
   listTransactions,
   listUsers,
@@ -84,6 +86,29 @@ app.get('/api/transactions', (req, res, next): void => {
     res.json(buildPaginatedResponse(data, pagination.page, pagination.pageSize, total));
   } catch (error) {
     return next(error);
+  }
+});
+
+const createAccountSchema = z.object({
+  name: z.string().trim().min(1),
+  email: z.string().trim().email(),
+  accountType: z.string().trim().min(1),
+  initialDeposit: z.coerce.number().min(0),
+});
+
+app.post('/api/accounts', (req, res, next): void => {
+  try {
+    const payload = createAccountSchema.parse(req.body);
+    const existing = findUserByEmail(payload.email);
+    if (existing) {
+      res.status(409).json({ message: 'User already exists' });
+      return;
+    }
+
+    const result = createAccountWithDeposit(payload);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
   }
 });
 
